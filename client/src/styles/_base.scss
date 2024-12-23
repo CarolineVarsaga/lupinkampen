@@ -1,0 +1,12 @@
+body {
+  background-color: $primary-color;
+  color: $text-white-shell;
+  font-family: 'Inter';
+
+  .inter-#{$uniquifier} {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: #{$weight};
+    font-style: normal;
+  }
+}
