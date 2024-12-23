@@ -1,0 +1,15 @@
+.button {
+  width: $button-width;
+  height: $button-height;
+  border-radius: $button-radius;
+  background-color: $button-turquoise;
+  color: inherit;
+  font-family: inherit;
+  border: 1px solid $text-white-shell;
+  box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.250);
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hover-button-turquoise;
+  }
+}
