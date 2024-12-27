@@ -1,14 +1,11 @@
 .hero-section {
+  @include flex-center-start;
+  @include padding-left-right;
   background-image: url('src/assets/lupine-field-1280.webp');
   background-size: cover;
   height: 530px;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   gap: 4rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 
   &::after {
     content: '';
@@ -22,8 +19,7 @@
   }
 
   .hero-heading {
-    font-size: xx-large;
-    font-weight: 600;
+    @include heading;
     position: relative;
     z-index: 1;
 
@@ -33,11 +29,12 @@
   }
 
   .hero-text {
+    font-weight: 200;
     position: relative;
     z-index: 1;
   }
 
-  button {
+  .begin-button {
     align-self: center;
   }
 }
