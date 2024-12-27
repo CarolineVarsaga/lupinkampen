@@ -1,9 +1,8 @@
 .info-section {
   @include padding-left-right;
   @include flex-center-start;
-
   gap: 2rem;
-  height: 420px;
+  min-height: 420px;
 
   .info-text {
     max-width: 700px;
