@@ -30,9 +30,18 @@
   .hero-text {
     position: relative;
     z-index: 1;
+    max-width: 260px;
   }
 
   .begin-button {
     align-self: center;
+  }
+
+  @include md {
+    @include flex-center;
+  }
+
+  @include xl {
+    @include padding-left-right(4rem, 4rem);
   }
 }
