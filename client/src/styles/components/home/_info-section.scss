@@ -1,0 +1,18 @@
+.info-section {
+  @include flex-center-start;
+  @include padding-left-right;
+  gap: 2rem;
+  height: 420px;
+
+  .info-heading {
+    @include heading(x-large)
+  }
+
+  .info-text {
+    font-weight: 200;
+  }
+
+  .readmore-button {
+    align-self: center;
+  }
+}
