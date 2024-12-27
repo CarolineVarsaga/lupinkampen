@@ -1,10 +1,24 @@
 .info-section {
-  @include flex-center-start;
   @include padding-left-right;
+  @include flex-center-start;
+
   gap: 2rem;
   height: 420px;
 
+  .info-text {
+    max-width: 700px;
+  }
+
   .readmore-button {
     align-self: center;
+  }
+
+  @include lg {
+    @include padding-left-right(4rem, 4rem);
+
+    .readmore-button {
+      align-self: start;
+    }
+
   }
 }
