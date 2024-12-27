@@ -1,8 +1,12 @@
 @import 'vendor/normalize.css';
 @import 'settings/variables';
-@import 'settings/responsive';
+@import 'settings/mixins/responsive';
+@import 'settings/mixins/flexbox';
+@import 'settings/mixins/font-size';
+@import 'settings/mixins/padding';
 @import 'base';
 @import 'components/button';
 @import 'layout/home';
 @import 'components/header';
-@import 'components/hero-section';
+@import 'components/home/hero-section';
+@import 'components/home/info-section';
