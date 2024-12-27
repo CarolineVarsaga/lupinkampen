@@ -1,4 +1,5 @@
 import Button from "../Button";
+import SvgWave from "../SvgWave";
 
 const HeroSection = () => {
   return (
@@ -12,6 +13,7 @@ const HeroSection = () => {
           poäng och tävla mot andra! Helt kostnadsfritt.
         </p>
         <Button text="Börja här" className="begin-button" />
+        <SvgWave className="svg-wave-top" />
       </section>
     </>
   );
