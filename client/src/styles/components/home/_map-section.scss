@@ -2,9 +2,17 @@
   @include flex-center-start(column, start, start);
   @include padding-left-right;
   background: linear-gradient(180deg, rgb(187, 171, 199) 0%, rgba(72, 62, 115, 1) 100%);
-  height: 910px;
+  min-height: 910px;
   position: relative;
   overflow: hidden;
+
+  @include sm {
+    min-height: 1050px;
+  }
+
+  @include lg {
+    @include padding-left-right(4rem, 4rem);
+  }
 
   .round-image-container {
     height: 10rem;
@@ -12,13 +20,17 @@
     border: 1px solid $text-white-shell;
     border-radius: 50%;
     position: absolute;
-    right: -16%;
+    right: -3.5rem;
     background-image: url('src/assets/lupine-field-640.webp');
     background-size: cover;
+
+    @include md {
+      right: 8rem;
+    }
   }
 
   .background-polygon {
-    margin-left: -24px;
+    margin-left: -55px;
     position: absolute;
     top: 1rem;
   }
@@ -35,11 +47,24 @@
     top: 10.2rem;
     right: 1rem;
     z-index: 1;
+
+    @include sm {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 800px;
+      width: auto;
+    }
   }
 
   .highscore-button {
     align-self: center;
     position: absolute;
     bottom: 3rem;
+
+    @include sm {
+      bottom: 0;
+      margin-bottom: 2rem;
+    }
   }
 }
