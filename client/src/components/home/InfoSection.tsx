@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../Button";
 
 const InfoSection = () => {
@@ -12,7 +13,9 @@ const InfoSection = () => {
         auctor, ullamcorper nisl volutpat, lacinia risus. Sed vulputate nibh
         pellentesque odio consequat, non cursus ex fringilla.
       </p>
-      <Button text="Läs mer" className="readmore-button" />
+      <Link to="/information">
+        <Button text="Läs mer" className="readmore-button" />
+      </Link>
     </section>
   );
 };
