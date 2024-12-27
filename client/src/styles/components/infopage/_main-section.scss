@@ -1,0 +1,25 @@
+.main-section {
+  @include flex-center-start;
+  @include padding-left-right;
+  margin-top: 2rem;
+  gap: 2rem;
+  min-height: fit-content;
+  border: 1px solid hotpink;
+  position: relative;
+
+  .main-section-info {
+    @include flex-center-start;
+    gap: 1rem;
+
+    font-weight: 200;
+    min-height: fit-content;
+  }
+
+  .main-section-middle-wave {
+    position: absolute;
+    bottom: -3rem;
+    left: 0;
+    transform: rotateY(180deg);
+  }
+
+}
