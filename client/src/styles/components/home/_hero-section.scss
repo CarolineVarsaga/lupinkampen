@@ -18,6 +18,14 @@
     z-index: 0;
   }
 
+  .svg-wave-top {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+
   .hero-heading {
     position: relative;
     z-index: 1;
