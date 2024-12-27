@@ -6,6 +6,11 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 
+  @include lg {
+    @include padding-left-right(4rem, 4rem);
+
+  }
+
   .logo-container,
   .user-menu-container {
     @include flex-center(row);
