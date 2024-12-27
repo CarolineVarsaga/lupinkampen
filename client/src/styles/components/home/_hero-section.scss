@@ -19,7 +19,6 @@
   }
 
   .hero-heading {
-    @include heading;
     position: relative;
     z-index: 1;
 
@@ -29,7 +28,6 @@
   }
 
   .hero-text {
-    font-weight: 200;
     position: relative;
     z-index: 1;
   }
