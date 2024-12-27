@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../Button";
 
 const HeroSection = () => {
   return (
@@ -11,7 +11,7 @@ const HeroSection = () => {
           Var med i kampen du också! Registrera antal plockade lupiner. Tjäna
           poäng och tävla mot andra! Helt kostnadsfritt.
         </p>
-        <Button text="Börja här" />
+        <Button text="Börja här" className="begin-button" />
       </section>
     </>
   );
