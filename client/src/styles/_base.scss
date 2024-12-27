@@ -9,4 +9,16 @@ body {
     font-weight: #{$weight};
     font-style: normal;
   }
+
+  p {
+    font-weight: 200;
+  }
+
+  h2 {
+    @include heading;
+  }
+
+  h3 {
+    @include heading(x-large)
+  }
 }
