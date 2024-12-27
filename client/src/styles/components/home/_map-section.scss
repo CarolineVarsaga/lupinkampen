@@ -2,7 +2,7 @@
   @include flex-center-start(column, start, start);
   @include padding-left-right;
   background: linear-gradient(180deg, rgb(187, 171, 199) 0%, rgba(72, 62, 115, 1) 100%);
-  min-height: 910px;
+  min-height: 1000px;
   position: relative;
   overflow: hidden;
 
@@ -12,6 +12,17 @@
 
   @include lg {
     @include padding-left-right(4rem, 4rem);
+    margin-bottom: 4rem;
+  }
+
+  .svg-wave-bottom {
+    position: absolute;
+    top: -2rem;
+    left: 0;
+
+    @include md {
+      top: -4.7rem;
+    }
   }
 
   .round-image-container {
@@ -20,31 +31,53 @@
     border: 1px solid $text-white-shell;
     border-radius: 50%;
     position: absolute;
+    top: 5rem;
     right: -3.5rem;
     background-image: url('src/assets/lupine-field-640.webp');
     background-size: cover;
 
     @include md {
       right: 8rem;
+      top: 6rem;
+    }
+
+    @include lg {
+      top: 12rem;
     }
   }
 
   .background-polygon {
     margin-left: -55px;
     position: absolute;
-    top: 1rem;
+    top: 7rem;
+
+    @include lg {
+      top: 10rem;
+    }
+
+    @include xl {
+      top: 14rem;
+    }
   }
 
   .leading-municipality-container {
     position: absolute;
-    top: 4rem;
+    top: 10rem;
     @include flex-center-start;
     gap: 1rem;
+
+    @include lg {
+      top: 13rem;
+    }
+
+    @include xl {
+      top: 17rem;
+    }
   }
 
   .map {
     position: absolute;
-    top: 10.2rem;
+    top: 15.2rem;
     right: 1rem;
     z-index: 1;
 
@@ -55,6 +88,11 @@
       height: 800px;
       width: auto;
     }
+
+    @include lg {
+      top: 55%;
+    }
+
   }
 
   .highscore-button {
@@ -65,6 +103,10 @@
     @include sm {
       bottom: 0;
       margin-bottom: 2rem;
+    }
+
+    @include lg {
+      margin-bottom: 0;
     }
   }
 }
