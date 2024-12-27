@@ -1,0 +1,23 @@
+.footer {
+  @include padding-left-right;
+
+  .footer-container,
+  .copyright-text {
+    @include flex-center(column, top, center);
+    width: 100%;
+    border-top: 1px solid $text-white-shell;
+    border-bottom: 1px solid $text-white-shell;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-container {
+    height: 150px;
+  }
+
+  .copyright-text {
+    @include heading(x-small, 200);
+    border-top: none;
+    border-bottom: none;
+  }
+}
