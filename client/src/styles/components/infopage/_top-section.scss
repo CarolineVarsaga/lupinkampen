@@ -1,7 +1,7 @@
 .top-section {
   @include flex-center-start;
   @include padding-left-right;
-  background-image: url('public/assets/lupines-field-1280.webp');
+  background-image: url('/assets/lupines-field-1280.webp');
   background-size: cover;
   height: 530px;
   position: relative;
@@ -14,7 +14,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('public/assets/lupines-field-1280.webp');
+    background-image: url('/assets/lupines-field-1280.webp');
     background-size: cover;
     filter: blur(1px);
   }

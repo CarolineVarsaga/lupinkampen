@@ -1,9 +1,12 @@
 import Button from "../Button";
-import Map from "../../../public/assets/sweden.svg";
-import BackgroundPolygon from "../../../public/assets/leading-municipality-container-bg.svg";
+// import Map from "../../../public/assets/sweden.svg";
+// import BackgroundPolygon from "../../../public/assets/leading-municipality-container-bg.svg";
 import SvgWaveBottom from "../SvgWaveBottom";
 
 const MapSection = () => {
+  const Map = "/assets/sweden.svg";
+  const BackgroundPolygon = "/assets/leading-municipality-container-bg.svg";
+
   return (
     <section className="map-section">
       <SvgWaveBottom className="svg-wave-bottom" />
