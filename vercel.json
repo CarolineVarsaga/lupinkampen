@@ -21,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/index.html"
+      "dest": "/client/src/App.tsx"
     }
   ]
 }
