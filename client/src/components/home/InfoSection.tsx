@@ -6,12 +6,18 @@ const InfoSection = () => {
     <section className="info-section">
       <h3 className="info-heading">Invasiv art</h3>
       <p className="info-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero
-        felis, hendrerit ac dui quis, vestibulum dictum urna. Donec viverra
-        magna nec mauris sagittis, et tristique tellus tristique. Interdum et
-        malesuada fames ac ante ipsum primis in faucibus. Suspendisse quis lacus
-        auctor, ullamcorper nisl volutpat, lacinia risus. Sed vulputate nibh
-        pellentesque odio consequat, non cursus ex fringilla.
+        Lupiner är en invasiv art som utgör ett allvarligt hot mot den svenska
+        naturen. De tränger undan inhemska växter genom att konkurrera om
+        resurser som näring, vatten och ljus, vilket leder till att
+        biodiversiteten minskar. Lupiner sprider sig snabbt och kan etablera sig
+        i stora områden, vilket gör att de förändrar hela ekosystem och påverkar
+        både växt- och djurliv negativt.
+      </p>
+      <p className="info-text">
+        För att skydda den biologiska mångfalden och bevara våra ekosystem är
+        det viktigt att vi bekämpar lupiner. Genom att aktivt ta bort lupiner
+        från marker och naturreservat kan vi ge plats för inhemska växter att
+        återhämta sig och bidra till att återställa balansen i vår natur.
       </p>
       <Link to="/information">
         <Button text="Läs mer" className="readmore-button" />
