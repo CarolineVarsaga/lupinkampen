@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "deploy": "supabase functions deploy"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,8 +14,5 @@
     "express": "^4.21.2",
     "morgan": "~1.9.1",
     "mysql2": "^3.11.5"
-  },
-  "devDependencies": {
-    "supabase": "^2.2.1"
   }
 }
