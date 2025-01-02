@@ -1,13 +1,9 @@
-name: Deploy Vite App to Supabase
+name: Deploy to Supabase
 
 on:
   push:
     branches: ['main']
   workflow_dispatch:
-
-permissions:
-  contents: read
-  id-token: write
 
 jobs:
   deploy:
@@ -23,18 +19,34 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Change to client directory
+      - name: Install client dependencies
         working-directory: ./client
-        run: echo "Switched to client directory"
-
-      - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build client
+        working-directory: ./client
         run: npm run build
 
-      - name: Deploy to Supabase
+      - name: Deploy client to Supabase
+        working-directory: ./client
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: |
+          # Deploya frontend till Supabase Storage eller Functions (justera efter behov)
+          npx supabase storage upload --bucket your-bucket-name ./client/dist
+
+      - name: Install server dependencies
+        working-directory: ./server
+        run: npm ci
+
+      - name: Build server
+        working-directory: ./server
+        run: npm run build
+
+      - name: Deploy backend to Supabase
+        working-directory: ./server
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          # Deploya backend som Supabase Functions
           npx supabase functions deploy
