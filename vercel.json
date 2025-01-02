@@ -14,6 +14,14 @@
     {
       "src": "/api/(.*)",
       "dest": "/server/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/public/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/index.html"
     }
   ]
 }
