@@ -1,0 +1,22 @@
+{
+  "name": "lupinkampen",
+  "version": "1.0.0",
+  "description": "Lupinkampen - En app för att bekämpa invasiva lupiner",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+    "build": "npm run build --prefix client",
+    "start": "npm run build && npm run start --prefix server",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "concurrently": "^7.0.0" 
+  },
+  "devDependencies": {
+    "vercel": "^27.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "private": true
+}
