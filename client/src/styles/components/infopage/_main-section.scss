@@ -4,7 +4,6 @@
   margin-top: 2rem;
   gap: 2rem;
   min-height: fit-content;
-  border: 1px solid hotpink;
   position: relative;
 
   .main-section-info {
@@ -14,12 +13,18 @@
     font-weight: 200;
     min-height: fit-content;
   }
-
-  .main-section-middle-wave {
-    position: absolute;
-    bottom: -3rem;
-    left: 0;
-    transform: rotateY(180deg);
-  }
-
 }
+
+.main-section-middle-wave {
+  z-index: 2;
+  position: relative;
+}
+
+.main-section-lupine-image {
+  width: 100vw;
+  height: auto;
+  position: absolute;
+  top: 77rem;
+}
+
+.main-section-middle-wave {}
