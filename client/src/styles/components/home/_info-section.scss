@@ -4,6 +4,7 @@
   gap: 2rem;
   min-height: 420px;
 
+
   .info-text {
     max-width: 700px;
   }
@@ -13,7 +14,7 @@
   }
 
   @include lg {
-    @include padding-left-right(4rem, 4rem);
+    @include padding-left-right(10rem, 10rem);
 
     .readmore-button {
       align-self: start;
