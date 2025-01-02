@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "client/package.json",
@@ -17,10 +16,6 @@
     {
       "src": "/api/(.*)",
       "dest": "/server/$1"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/public/assets/$1"
     },
     {
       "src": "/(.*)",
