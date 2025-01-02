@@ -30,9 +30,18 @@
     z-index: 0;
   }
 
+  @include lg {
+    height: 90vh;
+    @include padding-left-right(10rem, 10rem);
+  }
+
   .top-section-heading {
     position: relative;
     z-index: 1;
+
+    @include lg {
+      @include heading(4rem)
+    }
   }
 
   .top-section-text,
@@ -40,6 +49,16 @@
   .top-section-wave {
     position: relative;
     z-index: 1;
+  }
+
+  .top-section-text {
+    max-width: 400px;
+    font-weight: 300;
+
+    @include lg {
+      @include heading(1.2rem, 300);
+      max-width: 500px;
+    }
   }
 
   .link-back {
