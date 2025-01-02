@@ -1,6 +1,6 @@
 import Button from "../Button";
-import Map from "../../assets/sweden.svg";
-import BackgroundPolygon from "../../assets/leading-municipality-container-bg.svg";
+import Map from "../../../public/assets/sweden.svg";
+import BackgroundPolygon from "../../../public/assets/leading-municipality-container-bg.svg";
 import SvgWaveBottom from "../SvgWaveBottom";
 
 const MapSection = () => {

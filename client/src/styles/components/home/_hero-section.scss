@@ -1,7 +1,7 @@
 .hero-section {
   @include flex-center-start;
   @include padding-left-right;
-  background-image: url('src/assets/lupine-field-1280.webp');
+  background-image: url('public/assets/lupine-field-1280.webp');
   background-size: cover;
   height: 530px;
   position: relative;

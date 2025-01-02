@@ -1,4 +1,4 @@
-import Logo from "../assets/lupine-logo.svg";
+import Logo from "../../public/assets/lupine-logo.svg";
 import { FaUser } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 
