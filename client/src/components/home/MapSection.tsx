@@ -1,6 +1,4 @@
 import Button from "../Button";
-// import Map from "../../../public/assets/sweden.svg";
-// import BackgroundPolygon from "../../../public/assets/leading-municipality-container-bg.svg";
 import SvgWaveBottom from "../SvgWaveBottom";
 
 const MapSection = () => {
