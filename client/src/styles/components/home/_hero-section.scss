@@ -26,19 +26,35 @@
     z-index: 1;
   }
 
-  .hero-heading {
-    position: relative;
-    z-index: 1;
+  .hero-texts-container {
+    @include flex-center-start;
+    gap: 2rem;
 
-    .word-to-uppercase {
-      text-transform: uppercase;
+    .hero-heading {
+      position: relative;
+      z-index: 1;
+
+      .word-to-uppercase {
+        text-transform: uppercase;
+      }
+
+      @include lg {
+        @include heading(4rem)
+      }
     }
-  }
 
-  .hero-text {
-    position: relative;
-    z-index: 1;
-    max-width: 260px;
+    .hero-text {
+      position: relative;
+      z-index: 1;
+      max-width: 260px;
+      font-weight: 300;
+
+      @include lg {
+        @include heading(1.2rem, 300);
+        max-width: 300px;
+      }
+
+    }
   }
 
   .begin-button {
@@ -47,9 +63,10 @@
 
   @include md {
     @include flex-center;
+    min-height: 85vh;
   }
 
   @include xl {
-    @include padding-left-right(4rem, 4rem);
+    @include padding-left-right(10rem, 10rem);
   }
 }
