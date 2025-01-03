@@ -59,6 +59,7 @@
 
   .begin-button {
     align-self: center;
+    z-index: 2;
   }
 
   @include md {
