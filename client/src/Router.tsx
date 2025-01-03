@@ -2,6 +2,7 @@ import { createHashRouter } from "react-router-dom";
 import Home from "./views/Home";
 import Layout from "./views/Layout";
 import InfoPage from "./views/InfoPage";
+import LogInRegisterPage from "./views/LogInRegisterPage";
 
 export const router = createHashRouter([
   {
@@ -16,6 +17,10 @@ export const router = createHashRouter([
       {
         path: "/information",
         element: <InfoPage />,
+      },
+      {
+        path: "/logga-in",
+        element: <LogInRegisterPage />,
       },
     ],
   },
