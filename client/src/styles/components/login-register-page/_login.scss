@@ -1,0 +1,87 @@
+.login-page {
+  @include flex-center(column, start, center);
+  @include padding-left-right;
+  font-weight: 200;
+  gap: 5rem;
+  background-image: url('/assets/lupine-field-1280.webp');
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/lupine-field-1280.webp');
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #38383887;
+    z-index: 0;
+  }
+
+  .link-back {
+    margin-top: 1.5rem;
+    align-self: flex-start;
+    @include heading(small, 200);
+    z-index: 1;
+  }
+
+  .log-in-form {
+    @include flex-center-start;
+    background-color: $secondary-color;
+    gap: 1rem;
+    border: 1px solid white;
+    border-radius: 12px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    padding: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    width: 305px;
+    z-index: 1;
+
+    .login-form {
+      @include flex-center-start;
+      gap: 1.5rem;
+      width: 100%;
+
+      label {
+        @include flex-center-start;
+
+        input {
+          min-width: 265px;
+          width: 100%;
+          height: 32px;
+          border-radius: 7px;
+          border: none;
+          padding-left: 0.5rem;
+          margin-top: 0.5rem;
+        }
+      }
+
+      .login-button {
+        align-self: center;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .register-link {
+      align-self: center;
+      text-decoration: underline;
+      @include heading(small, 200);
+    }
+  }
+}
