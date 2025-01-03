@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../Button";
 import SvgWave from "../SvgWave";
 
@@ -14,7 +15,9 @@ const HeroSection = () => {
             poäng och tävla mot andra! Helt kostnadsfritt.
           </p>
         </div>
-        <Button text="Börja här" className="begin-button" />
+        <Link to="/logga-in">
+          <Button text="Börja här" className="begin-button" />
+        </Link>
         <SvgWave className="svg-wave-top" />
       </section>
     </>
