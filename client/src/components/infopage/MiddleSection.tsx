@@ -51,7 +51,7 @@ const MiddleSection = () => {
           felis, hendrerit ac dui quis, vestibulum dictum urna. Donec viverra
           magna nec mauris sagittis, et tristique tellus tristique.
         </p>
-        <Link to="/logga-in">
+        <Link to="/logga-in" className="infopage-begin-button">
           <Button text="Börja här" className="infopage-begin-button" />
         </Link>
       </section>
