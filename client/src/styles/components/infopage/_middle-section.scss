@@ -1,0 +1,72 @@
+.infopage-middle-section {
+  @include flex-center-start;
+  @include padding-left-right;
+  margin-top: 2rem;
+  gap: 2rem;
+  min-height: fit-content;
+
+  @include lg {
+    @include padding-left-right(10rem, 10rem);
+  }
+
+  @include xl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .infopage-middle-section-info {
+    @include flex-center-start;
+    gap: 1rem;
+    font-weight: 200;
+    min-height: fit-content;
+
+    @include xl {
+      justify-self: start;
+    }
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    @include xl {
+      width: auto;
+      height: auto;
+      justify-self: end;
+    }
+
+    .middle-section-lupine-image {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border: 1px solid white;
+      border-radius: 50px;
+
+      @include xl {
+        width: 32rem;
+      }
+    }
+  }
+}
+
+.infopage-middle-lower-section-info {
+  @include flex-center-start;
+  @include padding-left-right;
+  gap: 1rem;
+  font-weight: 200;
+  min-height: 200px;
+  padding-bottom: 2rem;
+  margin-top: 1rem;
+
+  @include lg {
+    @include padding-left-right(10rem, 10rem);
+  }
+
+  .infopage-begin-button {
+    align-self: center;
+    margin-top: 4rem;
+  }
+}
