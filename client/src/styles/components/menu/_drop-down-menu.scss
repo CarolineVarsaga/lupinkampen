@@ -1,0 +1,98 @@
+.dropdown {
+  position: relative;
+  z-index: 2;
+
+  .dropdown-button {
+    width: 50px;
+    height: 45px;
+    background-color: $secondary-color;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: none;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+
+  .dropdown-menu {
+    width: 350px;
+    position: absolute;
+    top: 3.2rem;
+    right: 0;
+    background-color: $button-turquoise;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    border-radius: 5px;
+    border: 1px solid $text-white-shell;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 1;
+    padding: 2rem;
+
+    .heading-and-close {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $text-white-shell;
+
+      .close-x {
+        cursor: pointer;
+
+        &:hover {
+          color: grey;
+        }
+      }
+    }
+
+    ul {
+      margin-top: 1rem;
+
+      .dropdown-item {
+        padding: 12px 16px;
+        cursor: pointer;
+        color: $text-white-shell;
+
+        &:hover {
+          background-color: $hover-button-turquoise;
+        }
+      }
+
+      .log-out {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .close-button {
+      background-color: $button-red;
+
+      &:hover {
+        background-color: $hover-button-red;
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .dropdown-menu {
+    width: 97vw;
+    height: 100vh;
+    background-color: $button-turquoise;
+    border-radius: 0;
+    @include flex-center-start(column, start, start);
+    gap: 0.5rem;
+    z-index: 2;
+
+    .heading-and-close {
+      width: 100%;
+      padding-bottom: 1.5rem;
+      font-size: 1.2rem;
+      border-bottom: 1px solid $text-white-shell;
+    }
+  }
+}
