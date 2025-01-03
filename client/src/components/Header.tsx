@@ -1,6 +1,6 @@
 import Logo from "../../public/assets/lupine-logo.svg";
 import { FaUser } from "react-icons/fa";
-import { IoIosMenu } from "react-icons/io";
+import DropDownMenu from "./menu/DropDownMenu";
 
 const Header = () => {
   return (
@@ -11,7 +11,7 @@ const Header = () => {
       </div>
       <div className="user-menu-container">
         <FaUser size={32} className="user-icon" />
-        <IoIosMenu size={40} className="menu" />
+        <DropDownMenu />
       </div>
     </header>
   );
