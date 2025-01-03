@@ -38,6 +38,7 @@
   .top-section-heading {
     position: relative;
     z-index: 1;
+    @include heading;
 
     @include lg {
       @include heading(4rem)
@@ -66,11 +67,15 @@
     top: 1.5rem;
     @include heading(small, 200)
   }
+}
 
-  .top-section-wave {
-    position: absolute;
-    bottom: -0.1rem;
-    left: 0;
-    transform: rotateY(180deg);
+.top-section-wave {
+  position: absolute;
+  bottom: 7.3rem;
+  left: 0;
+  transform: rotateY(180deg);
+
+  @include lg {
+    bottom: 0;
   }
 }
