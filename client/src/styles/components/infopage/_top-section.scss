@@ -64,6 +64,7 @@
 
   .link-back {
     position: absolute;
+    width: 150px;
     top: 1.5rem;
     @include heading(small, 200)
   }
