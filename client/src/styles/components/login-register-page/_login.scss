@@ -9,6 +9,10 @@
   position: relative;
   min-height: 100vh;
 
+  @include lg {
+    @include padding-left-right(10rem, 10rem);
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -49,6 +53,7 @@
     border-radius: 12px;
     margin-right: 1rem;
     margin-left: 1rem;
+    margin-bottom: 4rem;
     padding: 1rem;
     padding-top: 2rem;
     padding-bottom: 1.5rem;
@@ -88,6 +93,8 @@
           min-width: auto;
           width: 32px;
           margin: 0;
+          accent-color: $hover-button-turquoise;
+          cursor: pointer;
         }
       }
 
