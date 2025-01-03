@@ -3,6 +3,7 @@ import Home from "./views/Home";
 import Layout from "./views/Layout";
 import InfoPage from "./views/InfoPage";
 import LogInRegisterPage from "./views/LogInRegisterPage";
+import RegisterPage from "./components/login-register-page/RegisterPage";
 
 export const router = createHashRouter([
   {
@@ -21,6 +22,10 @@ export const router = createHashRouter([
       {
         path: "/logga-in",
         element: <LogInRegisterPage />,
+      },
+      {
+        path: "/registrera",
+        element: <RegisterPage />,
       },
     ],
   },
