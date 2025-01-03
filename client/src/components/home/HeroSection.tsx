@@ -15,7 +15,7 @@ const HeroSection = () => {
             poäng och tävla mot andra! Helt kostnadsfritt.
           </p>
         </div>
-        <Link to="/logga-in">
+        <Link to="/logga-in" className="begin-button">
           <Button text="Börja här" className="begin-button" />
         </Link>
         <SvgWave className="svg-wave-top" />
