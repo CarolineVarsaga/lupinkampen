@@ -4,7 +4,7 @@ interface ISvg {
 
 const SvgWaveBottom = ({ className }: ISvg) => {
   return (
-    <div>
+    <>
       <svg
         viewBox="0 0 500 150"
         preserveAspectRatio="none"
@@ -22,7 +22,7 @@ const SvgWaveBottom = ({ className }: ISvg) => {
           stroke-width="1"
         ></path>
       </svg>
-    </div>
+    </>
   );
 };
 
