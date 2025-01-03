@@ -1,11 +1,11 @@
-import MainSection from "../components/infopage/MainSection";
+import MiddleSection from "../components/infopage/MiddleSection";
 import TopSection from "../components/infopage/TopSection";
 
 const InfoPage = () => {
   return (
     <>
       <TopSection />
-      <MainSection />
+      <MiddleSection />
     </>
   );
 };
