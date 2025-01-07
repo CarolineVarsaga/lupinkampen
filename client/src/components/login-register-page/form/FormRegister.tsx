@@ -25,10 +25,18 @@ const FormRegister = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(e.target.value);
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
+    setFormData({
+      ...formData,
+      municipality: selectedValue,
+    });
   };
 
-  const options = municipalities.municipality;
+  const options = municipalities.map((muni) => ({
+    value: muni.municipalityId,
+    label: muni.municipality,
+  }));
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);

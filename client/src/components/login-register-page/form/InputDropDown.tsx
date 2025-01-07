@@ -1,9 +1,13 @@
+interface IDropdownOption {
+  value: string | number;
+  label: string;
+}
 interface IDropdownProps {
   label: string;
   className: string;
-  value: string;
+  value: string | number;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  options: string[];
+  options: IDropdownOption[];
 }
 
 const Dropdown = ({
@@ -24,9 +28,9 @@ const Dropdown = ({
         onChange={onChange}
         required
       >
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>
