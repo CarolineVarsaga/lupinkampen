@@ -1,5 +1,3 @@
-import React from "react";
-
 interface IDropdownProps {
   label: string;
   className: string;
