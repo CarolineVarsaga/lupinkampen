@@ -3,6 +3,7 @@ import InputField from "./InputField";
 import Dropdown from "./InputDropDown";
 import Checkbox from "./Checkbox";
 import { municipalities } from "../../../models/IMunicipalities";
+import axios from "axios";
 
 interface IFormData {
   username: string;
@@ -23,6 +24,7 @@ const FormRegister = () => {
 
   const [selectedOption, setSelectedOption] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
@@ -50,12 +52,53 @@ const FormRegister = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (
+      !formData.username ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmpassword ||
+      !formData.municipality
+    ) {
+      setErrorMessage("Alla fält måste fyllas i.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmpassword) {
+      setErrorMessage("Lösenorden matchar inte.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/users/create", {
+        userName: formData.username,
+        email: formData.email,
+        password: formData.password,
+        userMunicipality: selectedOption,
+      });
+
+      console.log("User created successfully:", response.data);
+      setFormData({
+        username: "",
+        password: "",
+        email: "",
+        confirmpassword: "",
+        municipality: "",
+      });
+      setSelectedOption("");
+      alert("Användare skapad!");
+    } catch (error) {
+      console.error("Error creating user:", error);
+      setErrorMessage("Det gick inte att skapa användaren. Försök igen.");
+    }
   };
 
   return (
     <form className="register-form" onSubmit={handleSubmit}>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <InputField
         label="E-post"
         type="text"
@@ -68,13 +111,13 @@ const FormRegister = () => {
         label="Användarnamn"
         type="text"
         id="username"
-        name="usernamne"
+        name="username"
         value={formData.username}
         onChange={handleChange}
       />
       <InputField
         label="Lösenord"
-        type="text"
+        type="password"
         id="password"
         name="password"
         value={formData.password}
@@ -82,9 +125,9 @@ const FormRegister = () => {
       />
       <InputField
         label="Bekräfta lösenord"
-        type="text"
+        type="password"
         id="confirmPassword"
-        name="confirmPassword"
+        name="confirmpassword"
         value={formData.confirmpassword}
         onChange={handleChange}
       />
