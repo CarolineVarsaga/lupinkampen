@@ -1,12 +1,15 @@
 export interface ISpeciesData {
-  redlistInfo: IRedlistInfo[];
-  speciesFactText: ISpeciesFactText;
-  taxonRelatedInformation: ITaxonRelatedInformation;
-  natureConservation: INatureConservation;
-  landscapeTypes: ILandscapeType[];
-  biotopes: IBiotope[];
-  substrateInformation: ISubstrateInformation[];
-  ecologicalGroups: IEcologicalGroup[];
+  swedishName: string;
+  speciesData: {
+    redlistInfo: IRedlistInfo[];
+    speciesFactText: ISpeciesFactText;
+    taxonRelatedInformation: ITaxonRelatedInformation;
+    // natureConservation: INatureConservation;
+    landscapeTypes: ILandscapeType[];
+    // biotopes: IBiotope[];
+    substrateInformation: ISubstrateInformation[];
+    ecologicalGroups: IEcologicalGroup[];
+  };
 }
 
 export interface IRedlistInfo {
@@ -41,10 +44,10 @@ export interface ITaxonRelatedInformation {
   immigrationHistory: string;
 }
 
-export interface INatureConservation {
-  protectedByWorkProtectionConstitution: string | null;
-  protectedBirds: string | null;
-}
+// export interface INatureConservation {
+//   protectedByWorkProtectionConstitution: string | null;
+//   protectedBirds: string | null;
+// }
 
 export interface ILandscapeType {
   id: number;
@@ -52,11 +55,11 @@ export interface ILandscapeType {
   status: string;
 }
 
-export interface IBiotope {
-  id: number;
-  name: string;
-  significance: string;
-}
+// export interface IBiotope {
+//   id: number;
+//   name: string;
+//   significance: string;
+// }
 
 export interface ISubstrateInformation {
   id: number;
