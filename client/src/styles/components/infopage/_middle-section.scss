@@ -5,6 +5,7 @@
   gap: 2rem;
   min-height: fit-content;
   margin-top: 2rem;
+  padding-top: 1rem;
 
   @include lg {
     @include padding-left-right(10rem, 10rem);
@@ -36,20 +37,15 @@
 }
 
 .button-container {
-  @include flex-center-start;
+  @include flex-center;
   @include padding-left-right;
   gap: 1rem;
   font-weight: 200;
-  min-height: 200px;
-  padding-bottom: 2rem;
+  height: 150px;
+  padding-bottom: 1rem;
   margin-top: 1rem;
 
   @include lg {
     @include padding-left-right(10rem, 10rem);
-  }
-
-  .infopage-begin-button {
-    align-self: center;
-    margin-top: 4rem;
   }
 }
