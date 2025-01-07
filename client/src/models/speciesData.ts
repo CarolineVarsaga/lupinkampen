@@ -1,59 +1,59 @@
 export interface ISpeciesData {
   swedishName: string;
   speciesData: {
-    redlistInfo: IRedlistInfo[];
+    // redlistInfo: IRedlistInfo[];
     speciesFactText: ISpeciesFactText;
-    taxonRelatedInformation: ITaxonRelatedInformation;
+    // taxonRelatedInformation: ITaxonRelatedInformation;
     // natureConservation: INatureConservation;
-    landscapeTypes: ILandscapeType[];
+    // landscapeTypes: ILandscapeType[];
     // biotopes: IBiotope[];
-    substrateInformation: ISubstrateInformation[];
-    ecologicalGroups: IEcologicalGroup[];
+    // substrateInformation: ISubstrateInformation[];
+    // ecologicalGroups: IEcologicalGroup[];
   };
 }
 
-export interface IRedlistInfo {
-  period: IPeriod;
-  category: string | null;
-  criterion: string | null;
-  criterionText: string | null;
-}
-
-export interface IPeriod {
-  id: string;
-  name: string;
-  description: string;
-  current: boolean;
-}
-
 export interface ISpeciesFactText {
-  characteristic: string;
+  // characteristic: string;
   characteristicAsHtml: string;
-  spreadAndStatus: string;
+  // spreadAndStatus: string;
   spreadAndStatusAsHtml: string;
-  ecology: string;
+  // ecology: string;
   ecologyAsHtml: string;
-  threat: string;
+  // threat: string;
   threatAsHtml: string;
-  conservationMeasures: string;
+  // conservationMeasures: string;
   conservationMeasuresAsHtml: string;
 }
 
-export interface ITaxonRelatedInformation {
-  swedishPresence: string;
-  immigrationHistory: string;
-}
+// export interface IRedlistInfo {
+//   period: IPeriod;
+//   category: string | null;
+//   criterion: string | null;
+//   criterionText: string | null;
+// }
+
+// export interface IPeriod {
+//   id: string;
+//   name: string;
+//   description: string;
+//   current: boolean;
+// }
+
+// export interface ITaxonRelatedInformation {
+//   swedishPresence: string;
+//   immigrationHistory: string;
+// }
 
 // export interface INatureConservation {
 //   protectedByWorkProtectionConstitution: string | null;
 //   protectedBirds: string | null;
 // }
 
-export interface ILandscapeType {
-  id: number;
-  name: string;
-  status: string;
-}
+// export interface ILandscapeType {
+//   id: number;
+//   name: string;
+//   status: string;
+// }
 
 // export interface IBiotope {
 //   id: number;
@@ -61,15 +61,15 @@ export interface ILandscapeType {
 //   significance: string;
 // }
 
-export interface ISubstrateInformation {
-  id: number;
-  name: string;
-  significance: string;
-  use: string;
-}
+// export interface ISubstrateInformation {
+//   id: number;
+//   name: string;
+//   significance: string;
+//   use: string;
+// }
 
-export interface IEcologicalGroup {
-  id: number;
-  name: string;
-  active: boolean;
-}
+// export interface IEcologicalGroup {
+//   id: number;
+//   name: string;
+//   active: boolean;
+// }
