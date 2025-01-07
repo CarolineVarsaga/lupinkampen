@@ -3,7 +3,7 @@
   @include padding-left-right;
   background-image: url('/assets/lupines-field-1280.webp');
   background-size: cover;
-  height: 90vh;
+  height: 90svh;
   position: relative;
   gap: 2rem;
 
@@ -31,7 +31,6 @@
   }
 
   @include lg {
-    height: 90vh;
     @include padding-left-right(10rem, 10rem);
   }
 
