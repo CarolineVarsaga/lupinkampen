@@ -3,7 +3,9 @@
   @include flex-center-start;
   gap: 2rem;
   min-height: 420px;
-
+  position: relative;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 
   .info-text {
     max-width: 700px;
@@ -19,6 +21,5 @@
     .readmore-button {
       align-self: start;
     }
-
   }
 }

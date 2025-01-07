@@ -3,7 +3,7 @@
   @include padding-left-right;
   background-image: url('/assets/lupines-field-1280.webp');
   background-size: cover;
-  height: 530px;
+  height: 90vh;
   position: relative;
   gap: 2rem;
 
@@ -72,11 +72,7 @@
 
 .top-section-wave {
   position: absolute;
-  bottom: 7.3rem;
+  bottom: 1.3rem;
   left: 0;
   transform: rotateY(180deg);
-
-  @include lg {
-    bottom: 0;
-  }
 }

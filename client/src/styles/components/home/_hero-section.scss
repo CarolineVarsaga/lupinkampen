@@ -3,7 +3,7 @@
   @include padding-left-right;
   background-image: url('/assets/lupine-field-1280.webp');
   background-size: cover;
-  height: 530px;
+  height: 90vh;
   position: relative;
   gap: 4rem;
 
@@ -16,14 +16,6 @@
     height: 100%;
     background-color: #3D3D3D66;
     z-index: 0;
-  }
-
-  .svg-wave-top {
-    position: absolute;
-    bottom: -0.1rem;
-    left: 0;
-    overflow: hidden;
-    z-index: 1;
   }
 
   .hero-texts-container {
@@ -70,4 +62,12 @@
   @include xl {
     @include padding-left-right(10rem, 10rem);
   }
+}
+
+.svg-wave-top {
+  position: absolute;
+  bottom: 1.3rem;
+  left: 0;
+  overflow: hidden;
+  z-index: 1;
 }
