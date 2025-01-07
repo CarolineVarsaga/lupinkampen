@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import InputField from "./InputField";
 import Dropdown from "./InputDropDown";
 import Checkbox from "./Checkbox";
+import { municipalities } from "../../../models/IMunicipalities";
 
 interface IFormData {
   username: string;
@@ -27,7 +28,7 @@ const FormRegister = () => {
     setSelectedOption(e.target.value);
   };
 
-  const options = ["Option 1", "Option 2", "Option 3"];
+  const options = municipalities.municipality;
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
