@@ -18,8 +18,8 @@ const HeroSection = () => {
         <Link to="/logga-in" className="begin-button">
           <Button text="Börja här" className="begin-button" />
         </Link>
-        <SvgWave className="svg-wave-top" />
       </section>
+      <SvgWave className="svg-wave-top" />
     </>
   );
 };
