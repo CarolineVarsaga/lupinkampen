@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import FormLogIn from "../components/login-register-page/form/FormLogIn";
 
-const LogInRegisterPage = () => {
+const LogInPage = () => {
   return (
     <section className="login-page">
       <Link to="/" className="link-back">
@@ -18,4 +18,4 @@ const LogInRegisterPage = () => {
   );
 };
 
-export default LogInRegisterPage;
+export default LogInPage;
