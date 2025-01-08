@@ -7,6 +7,7 @@ import ConfirmDetails from "../ConfirmDetails";
 import { useFormContext } from "../../../hooks/useFormContext";
 import { submitForm } from "./submitForm";
 import SuccessModal from "../SuccessModal";
+import { emailRegex, passwordRegex, validateUsername } from "./validationForm";
 
 const FormRegister = () => {
   const {
@@ -66,6 +67,24 @@ const FormRegister = () => {
       return;
     }
 
+    if (!emailRegex.test(formData.email)) {
+      setErrorMessage("Ogiltig e-postadress.");
+      return;
+    }
+
+    const usernameError = validateUsername(formData.username);
+    if (usernameError) {
+      setErrorMessage(usernameError);
+      return;
+    }
+
+    if (!passwordRegex.test(formData.password)) {
+      setErrorMessage(
+        "Lösenordet måste innehålla minst en gemen, en siffra och 8 tecken långt."
+      );
+      return;
+    }
+
     if (formData.password !== formData.confirmpassword) {
       setErrorMessage("Lösenorden matchar inte.");
       return;
@@ -77,6 +96,11 @@ const FormRegister = () => {
 
     if (!selectedOptionDetails) {
       setErrorMessage("Ogiltig kommun.");
+      return;
+    }
+
+    if (!isChecked) {
+      setErrorMessage("Du behöver godkänna villkoren för att fortsätta.");
       return;
     }
 
