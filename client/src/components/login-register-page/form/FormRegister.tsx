@@ -7,7 +7,7 @@ import ConfirmDetails from "../ConfirmDetails";
 import { useFormContext } from "../../../hooks/useFormContext";
 import { submitForm } from "./submitForm";
 import SuccessModal from "../SuccessModal";
-import { emailRegex, passwordRegex, validateUsername } from "./validationForm";
+import { validateFormData } from "../../../utils/validationsUtils";
 
 const FormRegister = () => {
   const {
@@ -23,7 +23,7 @@ const FormRegister = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const options = municipalities.map((muni) => ({
-    value: muni.municipalityId,
+    value: muni.municipalityId.toString(),
     label: muni.municipality,
   }));
 
@@ -56,51 +56,14 @@ const FormRegister = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (
-      !formData.username ||
-      !formData.email ||
-      !formData.password ||
-      !formData.confirmpassword ||
-      !formData.municipality
-    ) {
-      setErrorMessage("Alla fält måste fyllas i.");
-      return;
-    }
-
-    if (!emailRegex.test(formData.email)) {
-      setErrorMessage("Ogiltig e-postadress.");
-      return;
-    }
-
-    const usernameError = validateUsername(formData.username);
-    if (usernameError) {
-      setErrorMessage(usernameError);
-      return;
-    }
-
-    if (!passwordRegex.test(formData.password)) {
-      setErrorMessage(
-        "Lösenordet måste innehålla minst en gemen, en siffra och 8 tecken långt."
-      );
-      return;
-    }
-
-    if (formData.password !== formData.confirmpassword) {
-      setErrorMessage("Lösenorden matchar inte.");
-      return;
-    }
-
-    const selectedOptionDetails = options.find(
-      (option) => option.value === Number(selectedOption)
+    const validationError = validateFormData(
+      formData,
+      selectedOption,
+      options,
+      isChecked
     );
-
-    if (!selectedOptionDetails) {
-      setErrorMessage("Ogiltig kommun.");
-      return;
-    }
-
-    if (!isChecked) {
-      setErrorMessage("Du behöver godkänna villkoren för att fortsätta.");
+    if (validationError) {
+      setErrorMessage(validationError);
       return;
     }
 
@@ -129,8 +92,7 @@ const FormRegister = () => {
   };
 
   const selectedMunicipalityName =
-    options.find((option) => option.value === Number(selectedOption))?.label ||
-    "";
+    options.find((option) => option.value === selectedOption)?.label || "";
 
   return (
     <>
