@@ -26,6 +26,11 @@ const FormRegister = () => {
     label: muni.municipality,
   }));
 
+  const defaultOption = {
+    value: "",
+    label: "Välj kommun",
+  };
+
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
@@ -156,7 +161,7 @@ const FormRegister = () => {
             className="drop-down"
             value={selectedOption}
             onChange={handleDropdownChange}
-            options={options}
+            options={[defaultOption, ...options]}
           />
           <Checkbox
             className="checkbox"
