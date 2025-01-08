@@ -1,8 +1,8 @@
 import { createHashRouter } from "react-router-dom";
-import Home from "./views/Home";
+import Home from "./views/HomePage";
 import Layout from "./views/Layout";
-import InfoPage from "./views/InfoPage";
-import LogInRegisterPage from "./views/LogInRegisterPage";
+import LupinesInformation from "./views/LupinesInformation";
+import LogInPage from "./views/LogInPage";
 import RegisterPage from "./components/login-register-page/RegisterPage";
 
 export const router = createHashRouter([
@@ -17,11 +17,11 @@ export const router = createHashRouter([
       },
       {
         path: "/information",
-        element: <InfoPage />,
+        element: <LupinesInformation />,
       },
       {
         path: "/logga-in",
-        element: <LogInRegisterPage />,
+        element: <LogInPage />,
       },
       {
         path: "/registrera",
