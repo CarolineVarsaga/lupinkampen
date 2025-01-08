@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../../lib/conn");
+const CryptoJS = require("crypto-js");
 require("dotenv").config();
 
 router.post("/", (req, res) => {
