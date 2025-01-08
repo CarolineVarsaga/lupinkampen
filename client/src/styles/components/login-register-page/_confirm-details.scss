@@ -1,0 +1,40 @@
+  .confirm-details-container {
+    align-self: center;
+    @include flex-center-start;
+    background-color: $tertiary-color;
+    gap: 1rem;
+    border: 1px solid $text-white-shell;
+    border-radius: 12px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 4rem;
+    padding: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    width: 325px;
+    z-index: 1;
+
+    h3 {
+      padding-bottom: 1rem;
+    }
+
+    .confirm-details-important-text {
+      font-style: italic;
+      padding-bottom: 1rem;
+    }
+
+    .confirm-details-buttons {
+      @include flex-center;
+      width: 100%;
+      margin-top: 2rem;
+      gap: 1.2rem;
+
+      .confirm-details-close-button {
+        background-color: $button-red;
+
+        &:hover {
+          background-color: $hover-button-red;
+        }
+      }
+    }
+  }

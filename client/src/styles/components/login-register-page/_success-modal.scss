@@ -1,0 +1,29 @@
+.success-modal-container {
+  align-self: center;
+  @include flex-center-start;
+  background-color: $tertiary-color;
+  gap: 1.5rem;
+  border: 1px solid $text-white-shell;
+  border-radius: 12px;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 4rem;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  width: 325px;
+
+  .success-modal-button-container {
+    align-self: center;
+    padding-top: 4rem;
+
+    .success-modal-close-button {
+      background-color: $button-red;
+
+      &:hover {
+        background-color: $hover-button-red;
+      }
+    }
+  }
+
+}

@@ -1,7 +1,7 @@
 import MiddleSection from "../components/infopage/MiddleSection";
 import TopSection from "../components/infopage/TopSection";
 
-const InfoPage = () => {
+const LupinesInformation = () => {
   return (
     <>
       <TopSection />
@@ -10,4 +10,4 @@ const InfoPage = () => {
   );
 };
 
-export default InfoPage;
+export default LupinesInformation;

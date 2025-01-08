@@ -1,11 +1,12 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router";
+import { FormProvider } from "./contexts/FormContext";
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router}></RouterProvider>
-    </>
+    <FormProvider>
+      <RouterProvider router={router} />
+    </FormProvider>
   );
 }
 
