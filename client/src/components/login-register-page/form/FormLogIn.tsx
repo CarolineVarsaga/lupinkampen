@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import InputField from "./InputField";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface IFormData {
   username: string;
@@ -14,6 +15,7 @@ const FormLogIn = () => {
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,9 +35,17 @@ const FormLogIn = () => {
       });
 
       if (response.status === 200) {
+        const token = response.data.token;
+        const userId = response.data.user;
+
         setSuccessMessage("Inloggad!");
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
         setErrorMessage(null);
         console.log("User ID:", response.data.user);
+
+        console.log("Navigating to:", `/profil/${response.data.user}`);
+        navigate(`/profil/${response.data.user}`);
       }
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

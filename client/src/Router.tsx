@@ -4,6 +4,7 @@ import Layout from "./views/Layout";
 import LupinesInformation from "./views/LupinesInformation";
 import LogInPage from "./views/LogInPage";
 import RegisterPage from "./components/login-register-page/RegisterPage";
+import UserPage from "./views/UserPage";
 
 export const router = createHashRouter([
   {
@@ -26,6 +27,10 @@ export const router = createHashRouter([
       {
         path: "/registrera",
         element: <RegisterPage />,
+      },
+      {
+        path: "/profil/:userId",
+        element: <UserPage />,
       },
     ],
   },
