@@ -20,6 +20,7 @@ const UserProfile = () => {
   const [recentPickedLupins, setRecentPickedLupins] = useState<number | null>(
     null
   );
+  const [userPlacement, setUserPlacement] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const loggedInUserId = localStorage.getItem("userId");
@@ -70,6 +71,23 @@ const UserProfile = () => {
           );
           setTotalLupins(lupinsResponse.data.totalPickedLupins);
           setRecentPickedLupins(lupinsResponse.data.recentlyPickedLupins);
+
+          const fetchUserPlacement = async () => {
+            try {
+              const response = await axios.get(
+                `http://localhost:3001/users/score/${userId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+              setUserPlacement(response.data.userPlacement);
+            } catch (error) {
+              console.error("Error fetching user placement:", error);
+            }
+          };
+          fetchUserPlacement();
         } catch (error) {
           console.error("Error fetching user data", error);
         }
@@ -122,7 +140,9 @@ const UserProfile = () => {
                 />
               </div>
               <hr className="userpage-activity-line" />
-              <p>Placering i kommunen:</p>
+              {userPlacement !== null && (
+                <p>Placering i kommunen: {userPlacement}</p>
+              )}
               <p>Placering i Sverige:</p>
               <Button
                 text="Topplista"
