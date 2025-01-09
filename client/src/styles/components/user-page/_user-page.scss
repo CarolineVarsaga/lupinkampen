@@ -4,15 +4,24 @@
   gap: 1rem;
   padding-top: 4rem;
   padding-bottom: 4rem;
+  position: relative;
 
   @include lg {
     @include padding-left-right(10rem, 10rem);
+  }
+
+  .link-back {
+    position: absolute;
+    width: 150px;
+    top: 1.5rem;
+    @include heading(small, 200)
   }
 
   .userpage-username-pic-container {
     @include flex-center-start(row, flex-start, center);
     gap: 1rem;
     width: 100%;
+    padding-top: 2rem;
 
     .userpage-username-container {
       @include flex-center-start;
