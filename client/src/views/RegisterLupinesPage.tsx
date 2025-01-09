@@ -1,9 +1,30 @@
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import Button from "../components/Button";
+import axios from "axios";
 
 const RegisterLupinesPage = () => {
-  const { userId } = useParams<{ userId: string }>();
-  console.log("AnvändarID från URL:", userId);
+  const [lupinsPicked, setLupinsPicked] = useState<number>(0);
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  const handleRegisterLupins = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/users/registerLupins/${userId}`,
+        { lupinsPicked },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Registrering lyckades:", response.data);
+      alert("Lupiner registrerade!");
+    } catch (error) {
+      console.error("Fel vid registrering av lupiner:", error);
+      alert("Kunde inte registrera lupiner.");
+    }
+  };
 
   return (
     <section className="register-lupines">
@@ -36,7 +57,13 @@ const RegisterLupinesPage = () => {
           </div>
           <div className="register-lupines-add-container">
             <p>Plockade lupiner</p>
-            <p>- 0 +</p>
+            <input
+              type="number"
+              value={lupinsPicked}
+              onChange={(e) => setLupinsPicked(Number(e.target.value))}
+              min="1"
+            />
+            <button onClick={handleRegisterLupins}>Registrera</button>
           </div>
         </div>
 
