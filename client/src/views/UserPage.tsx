@@ -70,12 +70,20 @@ const UserProfile = () => {
     <div>
       {userData ? (
         <section className="userpage">
-          <div className="userpage-username-container">
-            <h3>{userData.userName}</h3>
-            <p className="userpage-member-number">
-              Medlemsnummer: {userData.userId}
-            </p>
-            <p>Kommun: {municipalityName}</p>
+          <div className="userpage-username-pic-container">
+            <img
+              src="/assets/profile-pic.png"
+              width={96}
+              height={96}
+              alt="profilbild lila med vit blomma"
+            />
+            <div className="userpage-username-container">
+              <h3>{userData.userName}</h3>
+              <p className="userpage-member-number">
+                Medlemsnummer: {userData.userId}
+              </p>
+              <p>Kommun: {municipalityName}</p>
+            </div>
           </div>
 
           <div className="userpage-activity-container">
