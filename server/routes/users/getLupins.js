@@ -5,7 +5,7 @@ const { verifyToken } = require("../../middleware/authMiddleware.js");
 
 router.get("/:userId", verifyToken, (req, res) => {
   const { userId } = req.params;
-  const query = "SELECT totalPickedLupins FROM users WHERE userId = ?";
+  const query = "SELECT totalPickedLupins, recentlyPickedLupins FROM users WHERE userId = ?";
 
   connection.query(query, [userId], (err, result) => {
     if (err) {
@@ -19,6 +19,7 @@ router.get("/:userId", verifyToken, (req, res) => {
 
     res.status(200).json({
       totalPickedLupins: result[0].totalPickedLupins,
+      recentlyPickedLupins: result[0].recentlyPickedLupins,
     });
   });
 });
