@@ -34,7 +34,50 @@
     }
 
     .register-lupines-add-container {
-      height: 40px;
+      height: fit-content;
+      @include flex-center-start(row, space-between, center);
+
+      .lupins-picker-container {
+        display: flex;
+
+        .lupins-input {
+          width: 50px;
+          text-align: center;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          font-size: 18px;
+          color: $text-white-shell;
+          padding: 5px;
+
+          &:focus {
+            border: none;
+            outline: none;
+          }
+        }
+
+        .lupins-input::-webkit-outer-spin-button,
+        .lupins-input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        .amount-button {
+          width: 32px;
+          height: 32px;
+          background-color: transparent;
+
+          &:hover {
+            background-color: $hover-button-turquoise;
+          }
+        }
+
+        .lupins-button-decrease {
+          &:hover {
+            background-color: $hover-button-red;
+          }
+        }
+      }
     }
   }
 
