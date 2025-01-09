@@ -1,0 +1,72 @@
+.register-lupines {
+  @include padding-left-right;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  @include lg {
+    @include padding-left-right(10rem, 10rem);
+    @include flex-center;
+  }
+
+  .register-lupines-container {
+    @include flex-center-start;
+    background-color: $secondary-color;
+    gap: 2rem;
+    border: 1px solid white;
+    border-radius: 12px;
+    padding: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    min-width: 325px;
+    width: 100%;
+
+    @include lg {
+      @include flex-center;
+      width: 720px;
+    }
+
+    .register-lupines-container-top,
+    .register-lupines-container-bottom {
+      @include flex-center-start;
+      gap: 1rem;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .register-lupines-add-container {
+      height: 40px;
+    }
+  }
+
+  .register-lupines-add-container,
+  .register-lupines-total-container {
+    @include flex-center-start(row, space-between, flex-start);
+    @include padding-left-right;
+    background-color: $tertiary-color;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid white;
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  .register-lupines-total-container {
+    @include flex-center-start(column, space-between, flex-start);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    min-height: 175px;
+
+    div {
+      width: 100%;
+
+      hr {
+        width: 100%;
+        margin-top: 1.5rem;
+      }
+    }
+  }
+
+  .register-lupines-button-save {
+    align-self: center;
+  }
+}
