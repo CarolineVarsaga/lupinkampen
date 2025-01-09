@@ -9,19 +9,26 @@
     @include padding-left-right(10rem, 10rem);
   }
 
-  .userpage-username-container {
-    @include flex-center-start;
-    gap: 0.5rem;
+  .userpage-username-pic-container {
+    @include flex-center-start(row, flex-start, center);
+    gap: 1rem;
+    width: 100%;
 
-    h3 {
-      @include heading;
-    }
+    .userpage-username-container {
+      @include flex-center-start;
+      gap: 0.5rem;
 
-    .userpage-member-number {
-      @include heading(small, 200);
-      font-style: italic;
+      h3 {
+        @include heading;
+      }
+
+      .userpage-member-number {
+        @include heading(small, 200);
+        font-style: italic;
+      }
     }
   }
+
 
   .userpage-activity-container,
   .userpage-medals-container,
@@ -35,7 +42,7 @@
     padding-top: 2rem;
     padding-bottom: 1.5rem;
     min-width: 325px;
-    width: 95%;
+    width: 100%;
   }
 
   .userpage-activity-container {
