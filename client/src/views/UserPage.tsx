@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { municipalities } from "../models/IMunicipality";
 import Button from "../components/Button";
@@ -16,6 +16,7 @@ const UserProfile = () => {
   const { userId } = useParams<{ userId: string }>();
   const [userData, setUserData] = useState<IUserData | null>(null);
   const [municipalityName, setMunicipalityName] = useState<string | null>(null);
+  const [totalLupins, setTotalLupins] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const loggedInUserId = localStorage.getItem("userId");
@@ -55,6 +56,16 @@ const UserProfile = () => {
           } else {
             setMunicipalityName("Okänd kommun");
           }
+
+          const lupinsResponse = await axios.get(
+            `http://localhost:3001/users/getLupins/${userId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setTotalLupins(lupinsResponse.data.totalPickedLupins);
         } catch (error) {
           console.error("Error fetching user data", error);
         }
@@ -74,54 +85,60 @@ const UserProfile = () => {
     <div>
       {userData ? (
         <section className="userpage">
-          <Link to="/" className="link-back">
+          {/* <Link to="/" className="link-back">
             <a className="link-back">Startsidan</a>
-          </Link>
-          <div className="userpage-username-pic-container">
-            <img
-              src="/assets/profile-pic.png"
-              width={96}
-              height={96}
-              alt="profilbild lila med vit blomma"
-            />
-            <div className="userpage-username-container">
-              <h3>{userData.userName}</h3>
-              <p className="userpage-member-number">
-                Medlemsnummer: {userData.userId}
-              </p>
-              <p>Kommun: {municipalityName}</p>
+          </Link> */}
+          <div className="userpage-container">
+            <div className="userpage-username-pic-container">
+              <img
+                src="/assets/profile-pic.png"
+                width={96}
+                height={96}
+                alt="profilbild lila med vit blomma"
+              />
+              <div className="userpage-username-container">
+                <h3>{userData.userName}</h3>
+                <p className="userpage-member-number">
+                  Medlemsnummer: {userData.userId}
+                </p>
+                <p>Kommun: {municipalityName}</p>
+              </div>
             </div>
-          </div>
 
-          <div className="userpage-activity-container">
-            <h4>Aktivitet</h4>
-            <p>Antal plockade lupiner:</p>
-            <p>Senast plockade:</p>
-            <div className="userpage-activity-buttons-container">
-              <Button text="Visa alla" />
+            <div className="userpage-activity-container">
+              <h4>Aktivitet</h4>
+              <p>Antal plockade lupiner: {totalLupins} st</p>
+
+              <p>Senast plockade:</p>
+              <div className="userpage-activity-buttons-container">
+                <Button text="Visa alla" />
+                <Button
+                  text="Registrera lupiner"
+                  onClick={handleClickRegisterLupines}
+                />
+              </div>
+              <hr className="userpage-activity-line" />
+              <p>Placering i kommunen:</p>
+              <p>Placering i Sverige:</p>
               <Button
-                text="Registrera lupiner"
-                onClick={handleClickRegisterLupines}
+                text="Topplista"
+                className="userpage-activity-button-leaderboard"
               />
             </div>
-            <hr className="userpage-activity-line" />
-            <p>Placering i kommunen:</p>
-            <p>Placering i Sverige:</p>
-            <Button
-              text="Topplista"
-              className="userpage-activity-button-leaderboard"
-            />
-          </div>
 
-          <div className="userpage-medals-container">
-            <h4>Medaljer</h4>
-            <p>Plocka lupiner och vinn medaljer!</p>
-          </div>
+            <div className="userpage-medals-container">
+              <h4>Medaljer</h4>
+              <p>Plocka lupiner och vinn medaljer!</p>
+            </div>
 
-          <div className="userpage-information-container">
-            <h4>Information</h4>
-            <p>Fyll endast i dessa om du behöver ändra dina uppgifter.</p>
-            <Button text="Ändra" className="userpage-information-button-edit" />
+            <div className="userpage-information-container">
+              <h4>Information</h4>
+              <p>Fyll endast i dessa om du behöver ändra dina uppgifter.</p>
+              <Button
+                text="Ändra"
+                className="userpage-information-button-edit"
+              />
+            </div>
           </div>
         </section>
       ) : (
