@@ -70,10 +70,6 @@
         gap: 1rem;
         padding-bottom: 0.5rem;
         padding-top: 0.5rem;
-
-        @include lg {
-          align-self: flex-start;
-        }
       }
 
       .userpage-activity-line {
@@ -90,10 +86,6 @@
       align-self: center;
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
-
-      @include lg {
-        align-self: flex-start;
-      }
     }
   }
 }
