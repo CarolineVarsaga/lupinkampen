@@ -1,7 +1,6 @@
 .userpage {
-  @include flex-center-start;
   @include padding-left-right;
-  gap: 1rem;
+  @include flex-center-start;
   padding-top: 4rem;
   padding-bottom: 4rem;
   position: relative;
@@ -17,73 +16,84 @@
     @include heading(small, 200)
   }
 
-  .userpage-username-pic-container {
-    @include flex-center-start(row, flex-start, center);
-    gap: 1rem;
+  .userpage-container {
     width: 100%;
-    padding-top: 2rem;
+    @include flex-center-start;
+    gap: 1rem;
 
-    .userpage-username-container {
-      @include flex-center-start;
-      gap: 0.5rem;
+    @include lg {
+      align-self: center;
+      width: 720px;
+    }
 
-      h3 {
-        @include heading;
-      }
+    .userpage-username-pic-container {
+      @include flex-center-start(row, flex-start, center);
+      gap: 1rem;
+      width: 100%;
+      padding-top: 2rem;
 
-      .userpage-member-number {
-        @include heading(small, 200);
-        font-style: italic;
+      .userpage-username-container {
+        @include flex-center-start;
+        gap: 0.5rem;
+
+        h3 {
+          @include heading;
+        }
+
+        .userpage-member-number {
+          @include heading(small, 200);
+          font-style: italic;
+        }
       }
     }
-  }
 
 
-  .userpage-activity-container,
-  .userpage-medals-container,
-  .userpage-information-container {
-    @include flex-center-start;
-    background-color: $secondary-color;
-    gap: 1rem;
-    border: 1px solid white;
-    border-radius: 12px;
-    padding: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 1.5rem;
-    min-width: 325px;
-    width: 100%;
-  }
-
-  .userpage-activity-container {
-    .userpage-activity-buttons-container {
-      align-self: center;
-      @include flex-center;
+    .userpage-activity-container,
+    .userpage-medals-container,
+    .userpage-information-container {
+      @include flex-center-start;
+      background-color: $secondary-color;
       gap: 1rem;
-      padding-bottom: 0.5rem;
-      padding-top: 0.5rem;
+      border: 1px solid white;
+      border-radius: 12px;
+      padding: 1rem;
+      padding-top: 2rem;
+      padding-bottom: 1.5rem;
+      min-width: 325px;
+      width: 100%;
+    }
+
+    .userpage-activity-container {
+      .userpage-activity-buttons-container {
+        align-self: center;
+        @include flex-center;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+
+        @include lg {
+          align-self: flex-start;
+        }
+      }
+
+      .userpage-activity-line {
+        width: 90%;
+      }
+    }
+
+    .userpage-information-container {
+      @include flex-center-start;
+    }
+
+    .userpage-activity-button-leaderboard,
+    .userpage-information-button-edit {
+      align-self: center;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
 
       @include lg {
         align-self: flex-start;
       }
-    }
-
-    .userpage-activity-line {
-      width: 90%;
-    }
-  }
-
-  .userpage-information-container {
-    @include flex-center-start;
-  }
-
-  .userpage-activity-button-leaderboard,
-  .userpage-information-button-edit {
-    align-self: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-
-    @include lg {
-      align-self: flex-start;
     }
   }
 }
