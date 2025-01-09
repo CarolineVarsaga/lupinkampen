@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { municipalities } from "../models/IMunicipality";
 import Button from "../components/Button";
@@ -66,10 +66,17 @@ const UserProfile = () => {
     fetchUserData();
   }, [userId, navigate, loggedInUserId]);
 
+  const handleClickRegisterLupines = () => {
+    navigate(`/profil/${userId}/registrera-lupiner`);
+  };
+
   return (
     <div>
       {userData ? (
         <section className="userpage">
+          <Link to="/" className="link-back">
+            <a className="link-back">Startsidan</a>
+          </Link>
           <div className="userpage-username-pic-container">
             <img
               src="/assets/profile-pic.png"
@@ -92,7 +99,10 @@ const UserProfile = () => {
             <p>Senast plockade:</p>
             <div className="userpage-activity-buttons-container">
               <Button text="Visa alla" />
-              <Button text="Registrera lupiner" />
+              <Button
+                text="Registrera lupiner"
+                onClick={handleClickRegisterLupines}
+              />
             </div>
             <hr className="userpage-activity-line" />
             <p>Placering i kommunen:</p>
