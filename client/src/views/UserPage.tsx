@@ -17,6 +17,9 @@ const UserProfile = () => {
   const [userData, setUserData] = useState<IUserData | null>(null);
   const [municipalityName, setMunicipalityName] = useState<string | null>(null);
   const [totalLupins, setTotalLupins] = useState<number | null>(null);
+  const [recentPickedLupins, setRecentPickedLupins] = useState<number | null>(
+    null
+  );
   const navigate = useNavigate();
 
   const loggedInUserId = localStorage.getItem("userId");
@@ -66,6 +69,7 @@ const UserProfile = () => {
             }
           );
           setTotalLupins(lupinsResponse.data.totalPickedLupins);
+          setRecentPickedLupins(lupinsResponse.data.recentlyPickedLupins);
         } catch (error) {
           console.error("Error fetching user data", error);
         }
@@ -109,9 +113,9 @@ const UserProfile = () => {
               <h4>Aktivitet</h4>
               <p>Antal plockade lupiner: {totalLupins} st</p>
 
-              <p>Senast plockade:</p>
+              <p>Senast plockade: {recentPickedLupins} st</p>
               <div className="userpage-activity-buttons-container">
-                <Button text="Visa alla" />
+                {/* <Button text="Visa alla" /> */}
                 <Button
                   text="Registrera lupiner"
                   onClick={handleClickRegisterLupines}
