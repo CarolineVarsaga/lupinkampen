@@ -4,12 +4,12 @@ const connection = require("../../lib/conn");
 
 router.get("/", (req, res) => {
   const topMunicipalitiesQuery = `
-    SELECT m.municipalityName, 
+    SELECT m.municipalityId, m.municipalityName, 
       COALESCE(m.municipalityTotalPickedLupins, 0) AS municipalityTotalPickedLupins, 
       SUM(u.totalPickedLupins) AS totalLupins
     FROM municipalities m
     LEFT JOIN users u ON u.userMunicipality = m.municipalityId
-    GROUP BY m.municipalityName, m.municipalityTotalPickedLupins
+    GROUP BY m.municipalityId, m.municipalityName, m.municipalityTotalPickedLupins
     ORDER BY totalLupins DESC
     LIMIT 10;
   `;
