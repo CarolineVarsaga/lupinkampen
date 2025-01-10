@@ -5,10 +5,10 @@ const password = process.env.CONNECTION_PASSWORD;
 const username = process.env.CONNECTION_USERNAME; 
 const database = process.env.CONNECTION_DATABASE;
 const port = process.env.CONNECTION_PORT;
-//const host = process.env.HOST;
+const host = process.env.HOST;
 
 connection = mysql.createConnection({
-  host: 'localhost',
+  host: host,
   port: port,
   user: username,
   password: password,
