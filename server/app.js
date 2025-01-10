@@ -6,7 +6,7 @@ const cors = require("cors");
 
 const usersRouter = require("./routes/users");
 // const associationsRouter = require("./routes/associations");
-// const municipalitiesRouter = require("./routes/municipalities");
+const municipalitiesRouter = require("./routes/municipalities");
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", usersRouter);
 // app.use("/associations", associationsRouter); 
-// app.use("/municipalities", municipalitiesRouter);
+app.use("/municipalities", municipalitiesRouter);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
