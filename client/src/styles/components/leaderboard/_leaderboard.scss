@@ -25,6 +25,29 @@
     .leaderboard-container-top {
       @include flex-center-start;
       gap: 1rem;
+      width: 100%;
+
+      .result-list {
+        @include flex-center-start(column, space-between, flex-start);
+        width: inherit;
+        // gap: 0.5rem;
+
+        .result-list-line {
+          width: inherit;
+          @include flex-center-start(row, space-between, flex-start);
+          @include padding-left-right(0.3rem, 0.3rem);
+          padding-top: 0.3rem;
+          padding-bottom: 0.3rem;
+
+          &:nth-child(odd) {
+            background-color: $primary-color;
+          }
+
+          // span {
+          //   align-self: flex-end;
+          // }
+        }
+      }
     }
 
     hr {
