@@ -6,6 +6,7 @@ import LogInPage from "./views/LogInPage";
 import RegisterPage from "./components/login-register-page/RegisterPage";
 import UserPage from "./views/UserPage";
 import RegisterLupinesPage from "./views/RegisterLupinesPage";
+import LeaderBoard from "./views/LeaderBoard";
 
 export const router = createHashRouter([
   {
@@ -36,6 +37,10 @@ export const router = createHashRouter([
       {
         path: "/profil/:userId/registrera-lupiner",
         element: <RegisterLupinesPage />,
+      },
+      {
+        path: "/topplista",
+        element: <LeaderBoard />,
       },
     ],
   },
