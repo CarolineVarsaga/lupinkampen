@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import axios from "axios";
+import SwedenMap from "../components/SwedenMap";
 
 interface IMunicipality {
   municipalityName: string;
@@ -84,11 +85,11 @@ const LeaderBoard = () => {
         <div className="leaderboard-container">
           <div className="leaderboard-container-top">
             <h4>Kommuner</h4>
-            <div>
+            <div className="result-list">
               {topMunicipalities.map((municipality, index) => (
-                <p key={index}>
-                  {index + 1}. {municipality.municipalityName} -{" "}
-                  {municipality.municipalityTotalPickedLupins} st
+                <p key={index} className="result-list-line">
+                  {index + 1}. {municipality.municipalityName}
+                  <span>{municipality.municipalityTotalPickedLupins} st</span>
                 </p>
               ))}
             </div>
@@ -97,10 +98,11 @@ const LeaderBoard = () => {
           <div className="leaderboard-container-top">
             <h4>Användare</h4>
             <p>Totalt antal plockade lupiner: {totalLupins} st</p>
-            <div>
+            <div className="result-list">
               {topUsers.map((user, index) => (
-                <p key={index}>
-                  {index + 1}. {user.userName} - {user.totalLupins} st
+                <p key={index} className="result-list-line">
+                  {index + 1}. {user.userName}{" "}
+                  <span>{user.totalLupins} st</span>
                 </p>
               ))}
             </div>
@@ -108,6 +110,7 @@ const LeaderBoard = () => {
         </div>
       )}
       <Button text="Registrera lupiner" className="register-lupins-button" />
+      <SwedenMap />
     </section>
   );
 };
