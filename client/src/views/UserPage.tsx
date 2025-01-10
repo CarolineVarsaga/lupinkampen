@@ -20,7 +20,12 @@ const UserProfile = () => {
   const [recentPickedLupins, setRecentPickedLupins] = useState<number | null>(
     null
   );
-  const [userPlacement, setUserPlacement] = useState<number | null>(null);
+  const [userPlacementMunicipality, setUserPlacementMunicipality] = useState<
+    number | null
+  >(null);
+  const [userPlacementSweden, setUserPlacementSweden] = useState<number | null>(
+    null
+  );
   const navigate = useNavigate();
 
   const loggedInUserId = localStorage.getItem("userId");
@@ -72,22 +77,33 @@ const UserProfile = () => {
           setTotalLupins(lupinsResponse.data.totalPickedLupins);
           setRecentPickedLupins(lupinsResponse.data.recentlyPickedLupins);
 
-          const fetchUserPlacement = async () => {
+          const fetchUserPlacement = async (
+            scope: "municipality" | "sweden"
+          ) => {
             try {
-              const response = await axios.get(
-                `http://localhost:3001/users/score/${userId}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              );
-              setUserPlacement(response.data.userPlacement);
+              const endpoint =
+                scope === "municipality"
+                  ? `http://localhost:3001/users/score/${userId}`
+                  : `http://localhost:3001/users/scoreSweden/${userId}`;
+
+              const response = await axios.get(endpoint, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+
+              if (scope === "municipality") {
+                setUserPlacementMunicipality(response.data.userPlacement);
+              } else if (scope === "sweden") {
+                setUserPlacementSweden(response.data.userPlacement);
+              }
             } catch (error) {
-              console.error("Error fetching user placement:", error);
+              console.error(`Error fetching user placement (${scope}):`, error);
             }
           };
-          fetchUserPlacement();
+
+          await fetchUserPlacement("municipality");
+          await fetchUserPlacement("sweden");
         } catch (error) {
           console.error("Error fetching user data", error);
         }
@@ -103,13 +119,14 @@ const UserProfile = () => {
     navigate(`/profil/${userId}/registrera-lupiner`);
   };
 
+  const handleLeaderboard = () => {
+    navigate(`/topplista`);
+  };
+
   return (
     <div>
       {userData ? (
         <section className="userpage">
-          {/* <Link to="/" className="link-back">
-            <a className="link-back">Startsidan</a>
-          </Link> */}
           <div className="userpage-container">
             <div className="userpage-username-pic-container">
               <img
@@ -130,23 +147,24 @@ const UserProfile = () => {
             <div className="userpage-activity-container">
               <h4>Aktivitet</h4>
               <p>Antal plockade lupiner: {totalLupins} st</p>
-
               <p>Senast plockade: {recentPickedLupins} st</p>
               <div className="userpage-activity-buttons-container">
-                {/* <Button text="Visa alla" /> */}
                 <Button
                   text="Registrera lupiner"
                   onClick={handleClickRegisterLupines}
                 />
               </div>
               <hr className="userpage-activity-line" />
-              {userPlacement !== null && (
-                <p>Placering i kommunen: {userPlacement}</p>
+              {userPlacementMunicipality !== null && (
+                <p>Placering i kommunen: {userPlacementMunicipality}</p>
               )}
-              <p>Placering i Sverige:</p>
+              {userPlacementSweden !== null && (
+                <p>Placering i Sverige: {userPlacementSweden}</p>
+              )}
               <Button
                 text="Topplista"
                 className="userpage-activity-button-leaderboard"
+                onClick={handleLeaderboard}
               />
             </div>
 
