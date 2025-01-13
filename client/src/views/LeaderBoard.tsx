@@ -76,40 +76,42 @@ const LeaderBoard = () => {
 
   return (
     <section className="leaderboard">
-      <h3>Topplista</h3>
-      {loading ? (
-        <p>Laddar...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        <div className="leaderboard-container">
-          <div className="leaderboard-container-top">
-            <h4>Kommuner</h4>
-            <div className="result-list">
-              {topMunicipalities.map((municipality, index) => (
-                <p key={index} className="result-list-line">
-                  {index + 1}. {municipality.municipalityName}
-                  <span>{municipality.municipalityTotalPickedLupins} st</span>
-                </p>
-              ))}
+      <div className="leaderboard-left-column">
+        <h3>Topplista</h3>
+        {loading ? (
+          <p>Laddar...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <div className="leaderboard-container">
+            <div className="leaderboard-container-top">
+              <h4>Kommuner</h4>
+              <div className="result-list">
+                {topMunicipalities.map((municipality, index) => (
+                  <p key={index} className="result-list-line">
+                    {index + 1}. {municipality.municipalityName}
+                    <span>{municipality.municipalityTotalPickedLupins} st</span>
+                  </p>
+                ))}
+              </div>
+            </div>
+            <hr />
+            <div className="leaderboard-container-top">
+              <h4>Användare</h4>
+              <p>Totalt antal plockade lupiner: {totalLupins} st</p>
+              <div className="result-list">
+                {topUsers.map((user, index) => (
+                  <p key={index} className="result-list-line">
+                    {index + 1}. {user.userName}{" "}
+                    <span>{user.totalLupins} st</span>
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
-          <hr />
-          <div className="leaderboard-container-top">
-            <h4>Användare</h4>
-            <p>Totalt antal plockade lupiner: {totalLupins} st</p>
-            <div className="result-list">
-              {topUsers.map((user, index) => (
-                <p key={index} className="result-list-line">
-                  {index + 1}. {user.userName}{" "}
-                  <span>{user.totalLupins} st</span>
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-      <Button text="Registrera lupiner" className="register-lupins-button" />
+        )}
+        <Button text="Registrera lupiner" className="register-lupins-button" />
+      </div>
       <SwedenMap />
     </section>
   );
