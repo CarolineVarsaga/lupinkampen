@@ -64,7 +64,7 @@ const SwedenMap = () => {
     }
   }, [leadingMunicipalityId, svgContent]);
   return (
-    <div>
+    <div className="sweden-map">
       <div dangerouslySetInnerHTML={{ __html: svgContent || "" }} />
     </div>
   );
