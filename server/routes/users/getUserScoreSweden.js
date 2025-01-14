@@ -43,6 +43,7 @@ router.get("/:userId", verifyToken, async (req, res) => {
     if (userPlacement === 0) {
       return res.status(404).json({ message: "Användaren finns inte på rankningen. Kontrollera om du har registrerat några plockade lupiner." });
     }
+
     res.status(200).json({
       userPlacement,
       totalPickedLupins,
