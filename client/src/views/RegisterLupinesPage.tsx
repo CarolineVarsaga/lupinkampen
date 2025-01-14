@@ -27,7 +27,7 @@ const RegisterLupinesPage = () => {
   const handleRegisterLupins = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3001/users/registerLupins/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/users/registerLupins/${userId}`,
         { lupinsPicked },
         {
           headers: {

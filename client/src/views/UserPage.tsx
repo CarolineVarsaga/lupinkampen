@@ -47,7 +47,7 @@ const UserProfile = () => {
       if (token) {
         try {
           const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/users/getuser/${userId}`,
+            `${import.meta.env.VITE_API_URL}/api/users/getuser/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ const UserProfile = () => {
           }
 
           const lupinsResponse = await axios.get(
-            `${import.meta.env.VITE_API_URL}/users/getLupins/${userId}`,
+            `${import.meta.env.VITE_API_URL}/api/users/getLupins/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -83,10 +83,10 @@ const UserProfile = () => {
             try {
               const endpoint =
                 scope === "municipality"
-                  ? `${import.meta.env.VITE_API_URL}/users/score/${userId}`
+                  ? `${import.meta.env.VITE_API_URL}/api/users/score/${userId}`
                   : `${
                       import.meta.env.VITE_API_URL
-                    }/users/scoreSweden/${userId}`;
+                    }/api/users/scoreSweden/${userId}`;
 
               const response = await axios.get(endpoint, {
                 headers: {

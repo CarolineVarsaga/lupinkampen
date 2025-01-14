@@ -31,7 +31,7 @@ const LeaderBoard = () => {
     const fetchTopCommunities = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/municipalities/topMunicipalities`
+          `${import.meta.env.VITE_API_URL}/api/municipalities/topMunicipalities`
         );
         setTopMunicipalities(response.data);
       } catch (error) {
@@ -43,7 +43,7 @@ const LeaderBoard = () => {
     const fetchTopUsers = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/users/topUsers`
+          `${import.meta.env.VITE_API_URL}/api/users/topUsers`
         );
         setTopUsers(response.data);
         console.log("Topplista användare:", response.data);
@@ -56,7 +56,7 @@ const LeaderBoard = () => {
     const fetchTotalLupins = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/users/getTotalLupins`
+          `${import.meta.env.VITE_API_URL}/api/users/getTotalLupins`
         );
         setTotalLupins(response.data.totalLupins);
         console.log("Totalt plockade lupiner:", response.data.totalLupins);
