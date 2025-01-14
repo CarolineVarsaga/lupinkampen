@@ -25,17 +25,16 @@ const FormLogIn = () => {
     });
   };
 
+  const baseURL = import.meta.env.VITE_VERCEL_URL || "http://localhost:3001";
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_VERCEL_URL}/api/users/login`,
-        {
-          userName: formData.username,
-          password: formData.password,
-        }
-      );
+      const response = await axios.post(`${baseURL}/api/users/login`, {
+        userName: formData.username,
+        password: formData.password,
+      });
 
       if (response.status === 200) {
         const token = response.data.token;
