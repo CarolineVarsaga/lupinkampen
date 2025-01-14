@@ -10,7 +10,13 @@ const municipalitiesRouter = require("./routes/municipalities");
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://your-production-domain.com'],
+  methods: 'GET,POST,UPDATE,DELETE',
+  allowedHeaders: 'Content-Type,Authorization'
+};
+
+app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
