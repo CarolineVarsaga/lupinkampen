@@ -30,6 +30,13 @@ const FormLogIn = () => {
     e.preventDefault();
 
     try {
+      console.log("Attempting to log in...");
+      console.log("Base URL:", baseURL);
+      console.log("Login payload:", {
+        userName: formData.username,
+        password: formData.password,
+      });
+
       const response = await axios.post(`${baseURL}/api/users/login`, {
         userName: formData.username,
         password: formData.password,
