@@ -30,7 +30,7 @@ const FormLogIn = () => {
 
     try {
       const response = await axios.post(
-        "https://lupinkampen.vercel.app/api/users/login",
+        `${import.meta.env.VITE_URL}/api/users/login`,
         {
           userName: formData.username,
           password: formData.password,
