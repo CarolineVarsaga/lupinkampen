@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { baseURL } from "../utils/baseUrl";
 
 interface IMunicipality {
   municipalityId: number;
@@ -28,7 +29,7 @@ const SwedenMap = () => {
     const fetchLeadingMunicipality = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/municipalities/topMunicipalities"
+          `${baseURL}/api/municipalities/topMunicipalities`
         );
         const data = await response.json();
         console.log("Fetched leading municipality data:", data);

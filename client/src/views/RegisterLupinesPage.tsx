@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import axios from "axios";
+import { baseURL } from "../utils/baseUrl";
 
 const RegisterLupinesPage = () => {
   const [lupinsPicked, setLupinsPicked] = useState<number>(0);
@@ -27,7 +28,7 @@ const RegisterLupinesPage = () => {
   const handleRegisterLupins = async () => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/users/registerLupins/${userId}`,
+        `${baseURL}/api/users/registerLupins/${userId}`,
         { lupinsPicked },
         {
           headers: {

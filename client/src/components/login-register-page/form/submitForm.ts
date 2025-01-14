@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IForm } from "../../../models/formModels";
+import { baseURL } from "../../../utils/baseUrl";
 
 export const submitForm = async ({
   formData,
@@ -9,15 +10,12 @@ export const submitForm = async ({
   setErrorMessage,
 }: IForm) => {
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/users/create`,
-      {
-        userName: formData.username,
-        email: formData.email,
-        password: formData.password,
-        userMunicipality: selectedOption,
-      }
-    );
+    const response = await axios.post(`${baseURL}/api/users/create`, {
+      userName: formData.username,
+      email: formData.email,
+      password: formData.password,
+      userMunicipality: selectedOption,
+    });
 
     console.log("User created successfully:", response.data);
     setFormData({

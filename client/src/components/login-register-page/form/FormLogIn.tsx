@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import InputField from "./InputField";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../../../utils/baseUrl";
 
 interface IFormData {
   username: string;
@@ -24,8 +25,6 @@ const FormLogIn = () => {
       [name]: value,
     });
   };
-
-  const baseURL = import.meta.env.VITE_VERCEL_URL || "http://localhost:3001";
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

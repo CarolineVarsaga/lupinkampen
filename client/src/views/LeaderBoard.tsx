@@ -5,6 +5,7 @@ import SwedenMap from "../components/SwedenMap";
 import Dropdown from "../components/login-register-page/form/InputDropDown";
 import { useFormContext } from "../hooks/useFormContext";
 import { municipalities } from "../models/IMunicipality";
+import { baseURL } from "../utils/baseUrl";
 
 interface IMunicipality {
   municipalityName: string;
@@ -31,7 +32,7 @@ const LeaderBoard = () => {
     const fetchTopCommunities = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/municipalities/topMunicipalities`
+          `${baseURL}/api/municipalities/topMunicipalities`
         );
         setTopMunicipalities(response.data);
       } catch (error) {
@@ -42,9 +43,7 @@ const LeaderBoard = () => {
 
     const fetchTopUsers = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/users/topUsers`
-        );
+        const response = await axios.get(`${baseURL}/api/users/topUsers`);
         setTopUsers(response.data);
         console.log("Topplista användare:", response.data);
       } catch (error) {
@@ -55,9 +54,7 @@ const LeaderBoard = () => {
 
     const fetchTotalLupins = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/users/getTotalLupins`
-        );
+        const response = await axios.get(`${baseURL}/api/users/getTotalLupins`);
         setTotalLupins(response.data.totalLupins);
         console.log("Totalt plockade lupiner:", response.data.totalLupins);
       } catch (error) {
