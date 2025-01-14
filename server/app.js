@@ -11,7 +11,7 @@ const municipalitiesRouter = require("./routes/municipalities");
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://your-production-domain.com'],
+  origin: ['http://localhost:3000', 'https://lupinkampen.vercel.app'],
   methods: 'GET,POST,UPDATE,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
 };
