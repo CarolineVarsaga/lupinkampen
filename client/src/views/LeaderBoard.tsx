@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import axios from "axios";
 import SwedenMap from "../components/SwedenMap";
+import Dropdown from "../components/login-register-page/form/InputDropDown";
+import { useFormContext } from "../hooks/useFormContext";
+import { municipalities } from "../models/IMunicipality";
 
 interface IMunicipality {
   municipalityName: string;
@@ -21,12 +24,14 @@ const LeaderBoard = () => {
   const [totalLupins, setTotalLupins] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { selectedOption, setSelectedOption, formData, setFormData } =
+    useFormContext();
 
   useEffect(() => {
     const fetchTopCommunities = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/municipalities/topMunicipalities"
+          `${import.meta.env.VITE_API_URL}/municipalities/topMunicipalities`
         );
         setTopMunicipalities(response.data);
       } catch (error) {
@@ -38,7 +43,7 @@ const LeaderBoard = () => {
     const fetchTopUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/users/topUsers"
+          `${import.meta.env.VITE_API_URL}/users/topUsers`
         );
         setTopUsers(response.data);
         console.log("Topplista användare:", response.data);
@@ -51,7 +56,7 @@ const LeaderBoard = () => {
     const fetchTotalLupins = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/users/getTotalLupins"
+          `${import.meta.env.VITE_API_URL}/users/getTotalLupins`
         );
         setTotalLupins(response.data.totalLupins);
         console.log("Totalt plockade lupiner:", response.data.totalLupins);
@@ -73,6 +78,25 @@ const LeaderBoard = () => {
 
     fetchAllData();
   }, []);
+
+  const defaultOption = {
+    value: "",
+    label: "Hela Sverige",
+  };
+
+  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
+    setFormData({
+      ...formData,
+      municipality: selectedValue,
+    });
+  };
+
+  const options = municipalities.map((muni) => ({
+    value: muni.municipalityId.toString(),
+    label: muni.municipality,
+  }));
 
   return (
     <section className="leaderboard">
@@ -98,6 +122,13 @@ const LeaderBoard = () => {
             <hr />
             <div className="leaderboard-container-top">
               <h4>Användare</h4>
+              <Dropdown
+                label="Visa användare för:"
+                className="leaderboard-users-dropdown"
+                value={selectedOption}
+                onChange={handleDropdownChange}
+                options={[defaultOption, ...options]}
+              />
               <p>Totalt antal plockade lupiner: {totalLupins} st</p>
               <div className="result-list">
                 {topUsers.map((user, index) => (
