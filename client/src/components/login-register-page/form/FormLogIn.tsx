@@ -3,6 +3,9 @@ import InputField from "./InputField";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const DEPLOY_URL = "https://lupinkampen.vercel.app";
+//const DEV_URL = "http://localhost:3000";
+
 interface IFormData {
   username: string;
   password: string;
@@ -29,7 +32,7 @@ const FormLogIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3000/users/login", {
+      const response = await axios.post(`${DEPLOY_URL}/users/login`, {
         userName: formData.username,
         password: formData.password,
       });
