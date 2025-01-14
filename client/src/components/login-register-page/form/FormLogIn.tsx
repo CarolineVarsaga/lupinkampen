@@ -29,17 +29,8 @@ const FormLogIn = () => {
     e.preventDefault();
 
     try {
-      console.log(
-        "Making POST request to:",
-        `${import.meta.env.VITE_API_URL}/api/users/login`
-      );
-      console.log("Payload:", {
-        userName: formData.username,
-        password: formData.password,
-      });
-
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/users/login`,
+        "https://lupinkampen.vercel.app/api/users/login",
         {
           userName: formData.username,
           password: formData.password,
