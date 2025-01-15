@@ -29,6 +29,8 @@ router.use("/registerLupins", registerLupins);
 router.use("/getLupins", getLupins); 
 router.use("/getTotalLupins", getTotalLupins); 
 
-router.use("/test", testRoute);
+export default function handler(req, res) {
+  res.status(200).json({ message: "Test route fungerar!" });
+}
 
 module.exports = router;
