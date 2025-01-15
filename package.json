@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
     "build": "npm run build --prefix client",
-    "start": "node server.js",
+    "start": "npm run build && npm run start --prefix server",
     "deploy": "vercel --prod"
   },
   "dependencies": {
