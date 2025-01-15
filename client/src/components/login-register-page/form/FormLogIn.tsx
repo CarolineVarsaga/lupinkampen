@@ -37,8 +37,8 @@ const FormLogIn = () => {
         password: formData.password,
       });
 
-      const response = await axios.post(`${baseURL}/api/users/login`, {
-        //const response = await axios.post("/api/users/login", {
+      //const response = await axios.post(`${baseURL}/api/users/login`, {
+      const response = await axios.post("/api/users/login", {
         userName: formData.username,
         password: formData.password,
       });
