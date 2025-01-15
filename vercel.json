@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "client/package.json",
@@ -16,11 +15,15 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "server/app.js"
+      "dest": "/server/$1"
     },
     {
       "src": "/(.*)",
       "dest": "/client/dist/$1"
     }
-  ]  
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+   ]  
 }
+
