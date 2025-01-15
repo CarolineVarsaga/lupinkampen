@@ -14,6 +14,8 @@ const registerLupins = require("./registerLupins.js");
 const getLupins = require("./getLupins.js");
 const getTotalLupins = require("./getTotalLupins.js");
 
+const testRoute = require("./test.js"); 
+
 router.use("/create", createUser);
 router.use("/login", loginUser);
 router.use("/update", updateUser);
@@ -26,5 +28,7 @@ router.use("/topUsers", getTopUsers);
 router.use("/registerLupins", registerLupins); 
 router.use("/getLupins", getLupins); 
 router.use("/getTotalLupins", getTotalLupins); 
+
+router.use("/test", testRoute);
 
 module.exports = router;
