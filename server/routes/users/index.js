@@ -14,7 +14,6 @@ const registerLupins = require("./registerLupins.js");
 const getLupins = require("./getLupins.js");
 const getTotalLupins = require("./getTotalLupins.js");
 
-const testRoute = require("./test.js"); 
 
 router.use("/create", createUser);
 router.use("/login", loginUser);
@@ -29,8 +28,8 @@ router.use("/registerLupins", registerLupins);
 router.use("/getLupins", getLupins); 
 router.use("/getTotalLupins", getTotalLupins); 
 
-export default function handler(req, res) {
+router.get("/", (req, res) => {
   res.status(200).json({ message: "Test route fungerar!" });
-}
+});
 
 module.exports = router;
