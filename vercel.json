@@ -5,7 +5,7 @@
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "lupinkampen/client/dist"
+        "distDir": "/client/dist"
       }
     },
     {
