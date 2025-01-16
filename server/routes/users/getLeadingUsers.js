@@ -5,7 +5,7 @@ const supabase = require("../../config/supabase.js");
 router.get("/", async (req, res) => {
   try {
     const { data, error } = await supabase
-      .rpc("fetch_top_users");
+      .rpc("fetch_top_users_leaderboard");
 
     if (error) {
       console.error("Error fetching top users:", error);
