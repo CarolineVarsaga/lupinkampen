@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { municipalities } from "../models/IMunicipality";
 import Button from "../components/Button";
-
-interface IUserData {
-  userId: string;
-  userName: string;
-  email: string;
-  userMunicipality: number;
-  profilePicture?: string;
-}
+import { IUser } from "../models/IUser";
+import { fetchMunicipalityName } from "../services/municipalityService";
+import {
+  fetchTotalLupins,
+  fetchUserData,
+  fetchUserPlacement,
+} from "../services/userService";
+import { useAuth } from "../hooks/useAuth";
 
 const UserProfile = () => {
   const { userId } = useParams<{ userId: string }>();
-  const [userData, setUserData] = useState<IUserData | null>(null);
+  const [userData, setUserData] = useState<IUser | null>(null);
   const [municipalityName, setMunicipalityName] = useState<string | null>(null);
   const [totalLupins, setTotalLupins] = useState<number | null>(null);
   const [recentPickedLupins, setRecentPickedLupins] = useState<number | null>(
@@ -27,11 +25,10 @@ const UserProfile = () => {
     null
   );
   const navigate = useNavigate();
-  const baseURL = import.meta.env.VITE_VERCEL_URL || "http://localhost:3001";
-  const loggedInUserId = localStorage.getItem("userId");
+  const { isAuthenticated, userId: loggedInUserId } = useAuth();
 
   useEffect(() => {
-    if (!loggedInUserId) {
+    if (!isAuthenticated) {
       navigate("/logga-in");
       return;
     }
@@ -41,79 +38,46 @@ const UserProfile = () => {
       return;
     }
 
-    const fetchUserData = async () => {
+    const fetchUserDataDetails = async () => {
       const token = localStorage.getItem("token");
 
       if (token) {
         try {
-          const response = await axios.get(
-            `${baseURL}/api/users/getuser/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
+          const userDataResponse = await fetchUserData(userId);
+          setUserData(userDataResponse);
+
+          const municipalityNameResponse = fetchMunicipalityName(
+            userDataResponse.userMunicipality
           );
-          setUserData(response.data);
+          setMunicipalityName(municipalityNameResponse);
 
-          const municipality = municipalities.find(
-            (m) => m.municipalityId === response.data.userMunicipality
+          const lupinsResponse = await fetchTotalLupins(userId);
+          setTotalLupins(lupinsResponse.totalPickedLupins);
+          setRecentPickedLupins(lupinsResponse.recentlyPickedLupins);
+
+          const municipalityPlacementResponse = await fetchUserPlacement(
+            userId,
+            "municipality"
+          );
+          setUserPlacementMunicipality(
+            municipalityPlacementResponse.userPlacement
           );
 
-          if (municipality) {
-            setMunicipalityName(municipality.municipality);
-          } else {
-            setMunicipalityName("Okänd kommun");
-          }
-
-          const lupinsResponse = await axios.get(
-            `${baseURL}/api/users/getLupins/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
+          const swedenPlacementResponse = await fetchUserPlacement(
+            userId,
+            "sweden"
           );
-          setTotalLupins(lupinsResponse.data.totalPickedLupins);
-          setRecentPickedLupins(lupinsResponse.data.recentlyPickedLupins);
-
-          const fetchUserPlacement = async (
-            scope: "municipality" | "sweden"
-          ) => {
-            try {
-              const endpoint =
-                scope === "municipality"
-                  ? `${baseURL}/api/users/score/${userId}`
-                  : `${baseURL}/api/users/scoreSweden/${userId}`;
-
-              const response = await axios.get(endpoint, {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              });
-
-              if (scope === "municipality") {
-                setUserPlacementMunicipality(response.data.userPlacement);
-              } else if (scope === "sweden") {
-                setUserPlacementSweden(response.data.userPlacement);
-              }
-            } catch (error) {
-              console.error(`Error fetching user placement (${scope}):`, error);
-            }
-          };
-
-          await fetchUserPlacement("municipality");
-          await fetchUserPlacement("sweden");
+          setUserPlacementSweden(swedenPlacementResponse.userPlacement);
         } catch (error) {
-          console.error("Error fetching user data", error);
+          console.error("Error fetching user profile data:", error);
         }
       } else {
-        console.log("Inget token hittades");
+        console.log("No token found");
       }
     };
 
-    fetchUserData();
-  }, [userId, navigate, loggedInUserId, baseURL]);
+    fetchUserDataDetails();
+  }, [userId, navigate, loggedInUserId, isAuthenticated]);
 
   const handleClickRegisterLupines = () => {
     navigate(`/profil/${userId}/registrera-lupiner`);
