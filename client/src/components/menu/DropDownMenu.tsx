@@ -1,13 +1,32 @@
 import { useState } from "react";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import Button from "../Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import ConfirmationModal from "../ConfirmationModal";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const { logout, isAuthenticated } = useAuth();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmLogout = () => {
+    logout();
+    navigate("/logga-in");
+    setIsModalOpen(false);
+  };
+
+  const handleCancelLogout = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -34,24 +53,26 @@ const DropDownMenu = () => {
               <Link to="/information">
                 <li className="dropdown-item">Information om lupiner</li>
               </Link>
-              <Link to="/">
+              <Link to="/topplista">
                 <li className="dropdown-item">Topplista</li>
               </Link>
-              <Link to="/">
+              <Link to="/registrera-lupiner">
                 <li className="dropdown-item">Registrera lupiner</li>
               </Link>
-              <Link to="/">
+              <Link to="/om-lupinkampen">
                 <li className="dropdown-item">Om Lupinkampen</li>
               </Link>
-              <Link to="/">
+              <Link to="/faq">
                 <li className="dropdown-item">FAQ - Frågor och svar</li>
               </Link>
-              <Link to="/">
+              <Link to="/anvandningsvillkor">
                 <li className="dropdown-item">Användarvillkor</li>
               </Link>
-              <Link to="/">
-                <li className="dropdown-item log-out">Logga ut</li>
-              </Link>
+              {isAuthenticated && (
+                <li className="dropdown-item log-out" onClick={handleLogout}>
+                  Logga ut
+                </li>
+              )}
             </ul>
             <Button
               text="Stäng"
@@ -60,6 +81,14 @@ const DropDownMenu = () => {
             />
           </div>
         </>
+      )}
+
+      {isModalOpen && (
+        <ConfirmationModal
+          message="Vill du logga ut?"
+          onConfirm={handleConfirmLogout}
+          onCancel={handleCancelLogout}
+        />
       )}
     </div>
   );
