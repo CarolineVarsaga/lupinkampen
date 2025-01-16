@@ -21,9 +21,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const login = (userId: string) => {
+  // const login = (userId: string) => {
+  //   localStorage.setItem("userId", userId);
+  //   setUserId(userId);
+  // };
+
+  const login = (userId: string, callback?: () => void) => {
     localStorage.setItem("userId", userId);
     setUserId(userId);
+
+    if (callback) {
+      callback();
+    }
   };
 
   const logout = () => {
