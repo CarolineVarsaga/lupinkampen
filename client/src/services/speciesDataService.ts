@@ -4,7 +4,7 @@ import { ISpeciesData } from "../models/speciesData";
 const API_URL =
   "https://api.artdatabanken.se/information/v1/speciesdataservice/v1";
 
-const SUBSCRIPTION_KEY = import.meta.env.VITE_SUBSCRIPTION_KEY;
+const SUBSCRIPTION_KEY = import.meta.env.VITE_APP_SUBSCRIPTION_KEY;
 
 const apiClient = axios.create({
   baseURL: API_URL,
