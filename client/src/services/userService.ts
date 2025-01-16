@@ -20,6 +20,7 @@ export const fetchUserAvatar = async (userId: string) => {
       `/api/users/avatar/${userId}`,
       true
     );
+    console.log("avatar, userService:", response.avatar);
     return response.avatar;
   } catch (error) {
     console.error("Error fetching user data:", error);
