@@ -1,0 +1,10 @@
+.user-icon-container {
+  cursor: pointer;
+  display: inline-block;
+
+  .user-icon-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}
