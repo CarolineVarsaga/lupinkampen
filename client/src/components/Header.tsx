@@ -1,6 +1,6 @@
 import Logo from "../../public/assets/lupine-logo.svg";
-import { FaUser } from "react-icons/fa";
 import DropDownMenu from "./menu/DropDownMenu";
+import UserIcon from "./UserIcon";
 
 const Header = () => {
   return (
@@ -10,7 +10,7 @@ const Header = () => {
         <h1 className="logo-name">Lupinkampen</h1>
       </div>
       <div className="user-menu-container">
-        <FaUser size={32} className="user-icon" />
+        <UserIcon />
         <DropDownMenu />
       </div>
     </header>
