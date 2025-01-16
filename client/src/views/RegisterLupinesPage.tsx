@@ -1,13 +1,12 @@
 import { useState } from "react";
 import Button from "../components/Button";
-import axios from "axios";
+import { registerLupins } from "../services/registerLupinService";
 
 const RegisterLupinesPage = () => {
   const [lupinsPicked, setLupinsPicked] = useState<number>(0);
   const [selectedLupins, setSelectedLupins] =
     useState<string>("Plockade lupiner");
   const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = Number(e.target.value);
@@ -25,22 +24,12 @@ const RegisterLupinesPage = () => {
   };
 
   const handleRegisterLupins = async () => {
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/users/registerLupins/${userId}`,
-        { lupinsPicked },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log("Registrering lyckades:", response.data);
-      alert("Lupiner registrerade!");
-    } catch (error) {
-      console.error("Fel vid registrering av lupiner:", error);
-      alert("Kunde inte registrera lupiner.");
+    if (!userId) {
+      alert("Användaren är inte inloggad.");
+      return;
     }
+
+    await registerLupins(userId, lupinsPicked);
   };
 
   const handleIncrease = (lupin: string) => {

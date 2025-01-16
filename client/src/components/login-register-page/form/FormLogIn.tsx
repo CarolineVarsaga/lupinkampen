@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import InputField from "./InputField";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../../services/auth";
 
 interface IFormData {
   username: string;
@@ -17,6 +17,28 @@ const FormLogIn = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const loginUser = async () => {
+    try {
+      const { token, user } = (await login(
+        formData.username,
+        formData.password
+      )) as { token: string; user: string };
+
+      setSuccessMessage("Inloggad!");
+      setErrorMessage(null);
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", user);
+      console.log("User ID:", user);
+      console.log("Navigating to profile...");
+      navigate(`/profil/${user}`);
+    } catch (error) {
+      setSuccessMessage(null);
+      setErrorMessage(
+        error instanceof Error ? error.message : "Ett okänt fel inträffade"
+      );
+    }
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -27,40 +49,7 @@ const FormLogIn = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post("http://localhost:3000/users/login", {
-        userName: formData.username,
-        password: formData.password,
-      });
-
-      if (response.status === 200) {
-        const token = response.data.token;
-        const userId = response.data.user;
-
-        setSuccessMessage("Inloggad!");
-        localStorage.setItem("token", token);
-        localStorage.setItem("userId", userId);
-        setErrorMessage(null);
-        console.log("User ID:", response.data.user);
-
-        console.log("Navigating to:", `/profil/${response.data.user}`);
-        navigate(`/profil/${response.data.user}`);
-      }
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        if (error.response && error.response.status === 401) {
-          setErrorMessage("Fel användarnamn eller lösenord.");
-        } else {
-          setErrorMessage("Något gick fel. Försök igen senare.");
-        }
-      } else if (error instanceof Error) {
-        setErrorMessage(error.message || "Ett okänt fel inträffade.");
-      } else {
-        setErrorMessage("Ett okänt fel inträffade.");
-      }
-      setSuccessMessage(null);
-    }
+    loginUser();
   };
 
   return (

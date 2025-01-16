@@ -1,31 +1,34 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { municipalities } from "../models/IMunicipality";
 import Button from "../components/Button";
-
-interface IUserData {
-  userId: string;
-  userName: string;
-  email: string;
-  userMunicipality: number;
-  profilePicture?: string;
-}
+import { IUser } from "../models/IUser";
+import { fetchMunicipalityName } from "../services/municipalityService";
+import {
+  fetchTotalLupins,
+  fetchUserData,
+  fetchUserPlacement,
+} from "../services/userService";
+import { useAuth } from "../hooks/useAuth";
 
 const UserProfile = () => {
   const { userId } = useParams<{ userId: string }>();
-  const [userData, setUserData] = useState<IUserData | null>(null);
+  const [userData, setUserData] = useState<IUser | null>(null);
   const [municipalityName, setMunicipalityName] = useState<string | null>(null);
   const [totalLupins, setTotalLupins] = useState<number | null>(null);
   const [recentPickedLupins, setRecentPickedLupins] = useState<number | null>(
     null
   );
+  const [userPlacementMunicipality, setUserPlacementMunicipality] = useState<
+    number | null
+  >(null);
+  const [userPlacementSweden, setUserPlacementSweden] = useState<number | null>(
+    null
+  );
   const navigate = useNavigate();
-
-  const loggedInUserId = localStorage.getItem("userId");
+  const { isAuthenticated, userId: loggedInUserId } = useAuth();
 
   useEffect(() => {
-    if (!loggedInUserId) {
+    if (!isAuthenticated) {
       navigate("/logga-in");
       return;
     }
@@ -35,63 +38,59 @@ const UserProfile = () => {
       return;
     }
 
-    const fetchUserData = async () => {
+    const fetchUserDataDetails = async () => {
       const token = localStorage.getItem("token");
 
       if (token) {
         try {
-          const response = await axios.get(
-            `http://localhost:3001/users/getuser/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setUserData(response.data);
+          const userDataResponse = await fetchUserData(userId);
+          setUserData(userDataResponse);
 
-          const municipality = municipalities.find(
-            (m) => m.municipalityId === response.data.userMunicipality
+          const municipalityNameResponse = fetchMunicipalityName(
+            userDataResponse.userMunicipality
+          );
+          setMunicipalityName(municipalityNameResponse);
+
+          const lupinsResponse = await fetchTotalLupins(userId);
+          setTotalLupins(lupinsResponse.totalPickedLupins);
+          setRecentPickedLupins(lupinsResponse.recentlyPickedLupins);
+
+          const municipalityPlacementResponse = await fetchUserPlacement(
+            userId,
+            "municipality"
+          );
+          setUserPlacementMunicipality(
+            municipalityPlacementResponse.userPlacement
           );
 
-          if (municipality) {
-            setMunicipalityName(municipality.municipality);
-          } else {
-            setMunicipalityName("Okänd kommun");
-          }
-
-          const lupinsResponse = await axios.get(
-            `http://localhost:3001/users/getLupins/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
+          const swedenPlacementResponse = await fetchUserPlacement(
+            userId,
+            "sweden"
           );
-          setTotalLupins(lupinsResponse.data.totalPickedLupins);
-          setRecentPickedLupins(lupinsResponse.data.recentlyPickedLupins);
+          setUserPlacementSweden(swedenPlacementResponse.userPlacement);
         } catch (error) {
-          console.error("Error fetching user data", error);
+          console.error("Error fetching user profile data:", error);
         }
       } else {
-        console.log("Inget token hittades");
+        console.log("No token found");
       }
     };
 
-    fetchUserData();
-  }, [userId, navigate, loggedInUserId]);
+    fetchUserDataDetails();
+  }, [userId, navigate, loggedInUserId, isAuthenticated]);
 
   const handleClickRegisterLupines = () => {
     navigate(`/profil/${userId}/registrera-lupiner`);
+  };
+
+  const handleLeaderboard = () => {
+    navigate(`/topplista`);
   };
 
   return (
     <div>
       {userData ? (
         <section className="userpage">
-          {/* <Link to="/" className="link-back">
-            <a className="link-back">Startsidan</a>
-          </Link> */}
           <div className="userpage-container">
             <div className="userpage-username-pic-container">
               <img
@@ -112,21 +111,24 @@ const UserProfile = () => {
             <div className="userpage-activity-container">
               <h4>Aktivitet</h4>
               <p>Antal plockade lupiner: {totalLupins} st</p>
-
               <p>Senast plockade: {recentPickedLupins} st</p>
               <div className="userpage-activity-buttons-container">
-                {/* <Button text="Visa alla" /> */}
                 <Button
                   text="Registrera lupiner"
                   onClick={handleClickRegisterLupines}
                 />
               </div>
               <hr className="userpage-activity-line" />
-              <p>Placering i kommunen:</p>
-              <p>Placering i Sverige:</p>
+              {userPlacementMunicipality !== null && (
+                <p>Placering i kommunen: {userPlacementMunicipality}</p>
+              )}
+              {userPlacementSweden !== null && (
+                <p>Placering i Sverige: {userPlacementSweden}</p>
+              )}
               <Button
                 text="Topplista"
                 className="userpage-activity-button-leaderboard"
+                onClick={handleLeaderboard}
               />
             </div>
 

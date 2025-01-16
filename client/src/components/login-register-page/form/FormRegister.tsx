@@ -5,7 +5,7 @@ import Checkbox from "./Checkbox";
 import { municipalities } from "../../../models/IMunicipality";
 import ConfirmDetails from "../ConfirmDetails";
 import { useFormContext } from "../../../hooks/useFormContext";
-import { submitForm } from "./submitForm";
+import { submitForm } from "../../../services/submitForm";
 import SuccessModal from "../SuccessModal";
 import { validateFormData } from "../../../utils/validationsUtils";
 
@@ -24,7 +24,7 @@ const FormRegister = () => {
 
   const options = municipalities.map((muni) => ({
     value: muni.municipalityId.toString(),
-    label: muni.municipality,
+    label: muni.municipalityName,
   }));
 
   const defaultOption = {

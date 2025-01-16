@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node ./bin/www",  
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.12",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
@@ -15,6 +16,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "morgan": "~1.9.1",
-    "mysql2": "^3.11.5"
+    "mysql2": "^3.11.5",
+    "postgres": "^3.4.5"
   }
 }
