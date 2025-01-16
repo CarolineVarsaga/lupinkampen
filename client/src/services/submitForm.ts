@@ -1,6 +1,5 @@
-import axios from "axios";
-import { IForm } from "../../../models/formModels";
-import { baseURL } from "../../../utils/baseUrl";
+import { postRequest } from "./baseService";
+import { IForm } from "../models/formModels";
 
 export const submitForm = async ({
   formData,
@@ -10,14 +9,14 @@ export const submitForm = async ({
   setErrorMessage,
 }: IForm) => {
   try {
-    const response = await axios.post(`${baseURL}/api/users/create`, {
+    const response = await postRequest<
+      { userName: string; password: string; userMunicipality: string },
+      { message: string }
+    >("/api/users/create", {
       userName: formData.username,
-      email: formData.email,
       password: formData.password,
       userMunicipality: selectedOption,
     });
-
-    console.log("User created successfully:", response.data);
     setFormData({
       username: "",
       password: "",
@@ -26,6 +25,8 @@ export const submitForm = async ({
       municipality: "",
     });
     setSelectedOption("");
+
+    console.log("User created successfully:", response.message);
   } catch (error) {
     console.error("Error creating user:", error);
     setErrorMessage("Det gick inte att skapa användaren. Försök igen.");
