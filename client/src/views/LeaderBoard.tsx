@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import axios from "axios";
 import SwedenMap from "../components/SwedenMap";
 import Dropdown from "../components/login-register-page/form/InputDropDown";
 import { useFormContext } from "../hooks/useFormContext";
 import { municipalities } from "../models/IMunicipality";
-import { baseURL } from "../utils/baseUrl";
+import {
+  fetchTopMunicipalities,
+  fetchTopUsers,
+  fetchTotalLupins,
+} from "../services/leaderboardService";
+import { IUser } from "../models/IUser";
 
 interface IMunicipality {
   municipalityName: string;
   municipalityTotalPickedLupins: number;
 }
-
-interface IUser {
-  userName: string;
-  totalLupins: number;
-}
-
 const LeaderBoard = () => {
   const [topMunicipalities, setTopMunicipalities] = useState<IMunicipality[]>(
     []
@@ -29,46 +27,71 @@ const LeaderBoard = () => {
     useFormContext();
 
   useEffect(() => {
-    const fetchTopCommunities = async () => {
+    const getTopMunicipalities = async () => {
       try {
-        const response = await axios.get(
-          `${baseURL}/api/municipalities/topMunicipalities`
-        );
-        setTopMunicipalities(response.data);
-      } catch (error) {
+        const data = await fetchTopMunicipalities();
+        const transformedData = data.map((municipality) => ({
+          ...municipality,
+          municipalityTotalPickedLupins:
+            municipality.municipalityTotalPickedLupins ?? 0,
+        }));
+        setTopMunicipalities(transformedData);
+      } catch (err: unknown) {
         setError("Kunde inte hämta topplistan över kommuner.");
-        console.error("Error fetching top municipalities:", error);
+        console.error("Error fetching top municipalities:", err);
       }
     };
 
-    const fetchTopUsers = async () => {
+    const getTopUsers = async () => {
       try {
-        const response = await axios.get(`${baseURL}/api/users/topUsers`);
-        setTopUsers(response.data);
-        console.log("Topplista användare:", response.data);
-      } catch (error) {
+        const data = await fetchTopUsers();
+        setTopUsers(data);
+        console.log("Topplista användare:", data);
+      } catch (err: unknown) {
         setError("Kunde inte hämta topplistan över användare.");
-        console.error("Error fetching top users:", error);
+        console.error("Error fetching top users:", err);
       }
     };
 
-    const fetchTotalLupins = async () => {
+    // const fetchTopUsers = async () => {
+    //   try {
+    //     const response = await axios.get(`${baseURL}/api/users/topUsers`);
+    //     setTopUsers(response.data);
+    //     console.log("Topplista användare:", response.data);
+    //   } catch (error) {
+    //     setError("Kunde inte hämta topplistan över användare.");
+    //     console.error("Error fetching top users:", error);
+    //   }
+    // };
+
+    // const fetchTotalLupins = async () => {
+    //   try {
+    //     const response = await axios.get(`${baseURL}/api/users/getTotalLupins`);
+    //     setTotalLupins(response.data.totalLupins);
+    //     console.log("Totalt plockade lupiner:", response.data.totalLupins);
+    //   } catch (error) {
+    //     setError("Kunde inte hämta totalt antal plockade lupiner.");
+    //     console.error("Error fetching total lupins:", error);
+    //   }
+    // };
+
+    const getTotalLupins = async () => {
       try {
-        const response = await axios.get(`${baseURL}/api/users/getTotalLupins`);
-        setTotalLupins(response.data.totalLupins);
-        console.log("Totalt plockade lupiner:", response.data.totalLupins);
-      } catch (error) {
+        const data = await fetchTotalLupins();
+        setTotalLupins(data.totalLupins);
+        console.log("Totalt plockade lupiner:", data.totalLupins);
+      } catch (err: unknown) {
         setError("Kunde inte hämta totalt antal plockade lupiner.");
-        console.error("Error fetching total lupins:", error);
+        console.error("Error fetching total lupins:", err);
       }
     };
 
     const fetchAllData = async () => {
       setLoading(true);
       await Promise.all([
-        fetchTopCommunities(),
-        fetchTopUsers(),
-        fetchTotalLupins(),
+        getTopMunicipalities(),
+        getTopUsers(),
+        getTotalLupins(),
       ]);
       setLoading(false);
     };
@@ -92,7 +115,7 @@ const LeaderBoard = () => {
 
   const options = municipalities.map((muni) => ({
     value: muni.municipalityId.toString(),
-    label: muni.municipality,
+    label: muni.municipalityName,
   }));
 
   return (
@@ -131,7 +154,7 @@ const LeaderBoard = () => {
                 {topUsers.map((user, index) => (
                   <p key={index} className="result-list-line">
                     {index + 1}. {user.userName}{" "}
-                    <span>{user.totalLupins} st</span>
+                    <span>{user.totalPickedLupins} st</span>
                   </p>
                 ))}
               </div>
