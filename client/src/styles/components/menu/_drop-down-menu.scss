@@ -64,12 +64,12 @@
 
       .log-out {
         margin-top: 2rem;
-        margin-bottom: 2rem;
       }
     }
 
     .close-button {
       background-color: $button-red;
+      margin-top: 2rem;
 
       &:hover {
         background-color: $hover-button-red;
