@@ -1,12 +1,15 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router";
 import { FormProvider } from "./contexts/FormContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <FormProvider>
-      <RouterProvider router={router} />
-    </FormProvider>
+    <AuthProvider>
+      <FormProvider>
+        <RouterProvider router={router} />
+      </FormProvider>
+    </AuthProvider>
   );
 }
 
