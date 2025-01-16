@@ -18,9 +18,6 @@ export const login = async (username: string, password: string) => {
     if (response.status === 200) {
       const { token, user } = response.data;
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("userId", user);
-
       return { token, user };
     }
   } catch (error) {
