@@ -28,7 +28,7 @@ const UserProfile = () => {
   const { isAuthenticated, userId: loggedInUserId } = useAuth();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || userId !== loggedInUserId) {
       navigate("/logga-in");
       return;
     }
