@@ -4,8 +4,6 @@ const { verifyToken } = require("../../middleware/authMiddleware.js");
 const supabase = require("../../config/supabase.js"); 
 
 router.get("/:userId", verifyToken, async (req, res) => {
-  console.log("Inside /users/:userId route");
-
   const userIdFromToken = String(req.user.id);
   const userIdFromParams = String(req.params.userId);
 
