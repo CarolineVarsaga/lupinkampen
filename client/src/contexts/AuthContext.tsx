@@ -30,21 +30,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(token);
   };
 
-  // const login = (userId: string, callback?: () => void) => {
-  //   localStorage.setItem("userId", userId);
-  //   setUserId(userId);
-
-  //   if (callback) {
-  //     callback();
-  //   }
-  // };
-
-  // const login = (userId: string) => {
-  //   localStorage.setItem("userId", userId);
-  //   setUserId(userId);
-  //   //  navigate(`/profil/${userId}`);
-  // };
-
   const logout = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
