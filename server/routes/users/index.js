@@ -9,6 +9,7 @@ const getUser = require("./getUser.js");
 const getUserScore = require("./getUserScore.js");
 const getUserScoreSweden = require("./getUserScoreSweden.js");
 const getTopUsers = require("./getLeadingUsers.js");
+const getUsersScoreMunicipality = require("./getUsersScoreMunicipality.js");
 
 const getUserImage = require("./getUserImage.js");
  
@@ -25,6 +26,7 @@ router.use("/getuser", getUser);
 router.use("/score", getUserScore); 
 router.use("/scoreSweden", getUserScoreSweden); 
 router.use("/topUsers", getTopUsers); 
+router.use("/getUsersScoreMunicipality", getUsersScoreMunicipality);
 
 router.use("/avatar", getUserImage)
 

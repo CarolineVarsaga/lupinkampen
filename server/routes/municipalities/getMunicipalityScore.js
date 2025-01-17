@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const supabase = require("../../config/supabase.js"); 
-const { verifyToken } = require("../../middleware/authMiddleware.js");
+//const { verifyToken } = require("../../middleware/authMiddleware.js");
 
-router.get("/:municipalityId", verifyToken, async (req, res) => {
+router.get("/:municipalityId", async (req, res) => {
   const { municipalityId } = req.params;
 
   try {
