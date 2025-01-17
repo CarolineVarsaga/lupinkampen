@@ -6,6 +6,7 @@ import { useFormContext } from "../hooks/useFormContext";
 import { municipalities } from "../models/IMunicipality";
 import {
   fetchTopMunicipalities,
+  fetchTopMunicipalityUsers,
   fetchTopUsers,
   fetchTotalLupins,
 } from "../services/leaderboardService";
@@ -36,7 +37,7 @@ const LeaderBoard = () => {
             municipality.municipalityTotalPickedLupins ?? 0,
         }));
         setTopMunicipalities(transformedData);
-      } catch (err: unknown) {
+      } catch (err) {
         setError("Kunde inte hämta topplistan över kommuner.");
         console.error("Error fetching top municipalities:", err);
       }
@@ -46,41 +47,17 @@ const LeaderBoard = () => {
       try {
         const data = await fetchTopUsers();
         setTopUsers(data);
-        console.log("Topplista användare:", data);
-      } catch (err: unknown) {
+      } catch (err) {
         setError("Kunde inte hämta topplistan över användare.");
         console.error("Error fetching top users:", err);
       }
     };
 
-    // const fetchTopUsers = async () => {
-    //   try {
-    //     const response = await axios.get(`${baseURL}/api/users/topUsers`);
-    //     setTopUsers(response.data);
-    //     console.log("Topplista användare:", response.data);
-    //   } catch (error) {
-    //     setError("Kunde inte hämta topplistan över användare.");
-    //     console.error("Error fetching top users:", error);
-    //   }
-    // };
-
-    // const fetchTotalLupins = async () => {
-    //   try {
-    //     const response = await axios.get(`${baseURL}/api/users/getTotalLupins`);
-    //     setTotalLupins(response.data.totalLupins);
-    //     console.log("Totalt plockade lupiner:", response.data.totalLupins);
-    //   } catch (error) {
-    //     setError("Kunde inte hämta totalt antal plockade lupiner.");
-    //     console.error("Error fetching total lupins:", error);
-    //   }
-    // };
-
     const getTotalLupins = async () => {
       try {
         const data = await fetchTotalLupins();
         setTotalLupins(data.totalLupins);
-        console.log("Totalt plockade lupiner:", data.totalLupins);
-      } catch (err: unknown) {
+      } catch (err) {
         setError("Kunde inte hämta totalt antal plockade lupiner.");
         console.error("Error fetching total lupins:", err);
       }
@@ -99,18 +76,36 @@ const LeaderBoard = () => {
     fetchAllData();
   }, []);
 
-  const defaultOption = {
-    value: "",
-    label: "Hela Sverige",
-  };
-
-  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDropdownChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
     setFormData({
       ...formData,
       municipality: selectedValue,
     });
+
+    try {
+      if (selectedValue) {
+        const users = await fetchTopMunicipalityUsers(selectedValue);
+        if (users.length === 0) {
+          setTopUsers([]);
+          setError("Inga användare finns för den valda kommunen.");
+        } else {
+          setTopUsers(users);
+          setError(null);
+        }
+      } else {
+        const users = await fetchTopUsers();
+        setTopUsers(users);
+        setError(null);
+      }
+    } catch (err) {
+      setError("Kunde inte hämta användare för den valda kommunen.");
+      setTopUsers([]);
+      console.error("Error fetching top users for municipality:", err);
+    }
   };
 
   const options = municipalities.map((muni) => ({
@@ -124,8 +119,6 @@ const LeaderBoard = () => {
         <h3>Topplista</h3>
         {loading ? (
           <p>Laddar...</p>
-        ) : error ? (
-          <p>{error}</p>
         ) : (
           <div className="leaderboard-container">
             <div className="leaderboard-container-top">
@@ -147,16 +140,20 @@ const LeaderBoard = () => {
                 className="leaderboard-users-dropdown"
                 value={selectedOption}
                 onChange={handleDropdownChange}
-                options={[defaultOption, ...options]}
+                options={[{ value: "", label: "Hela Sverige" }, ...options]}
               />
               <p>Totalt antal plockade lupiner: {totalLupins} st</p>
               <div className="result-list">
-                {topUsers.map((user, index) => (
-                  <p key={index} className="result-list-line">
-                    {index + 1}. {user.userName}{" "}
-                    <span>{user.totalPickedLupins} st</span>
-                  </p>
-                ))}
+                {error && topUsers.length === 0 ? (
+                  <p>{error}</p>
+                ) : (
+                  topUsers.map((user, index) => (
+                    <p key={index} className="result-list-line">
+                      {index + 1}. {user.userName}{" "}
+                      <span>{user.totalPickedLupins} st</span>
+                    </p>
+                  ))
+                )}
               </div>
             </div>
           </div>
