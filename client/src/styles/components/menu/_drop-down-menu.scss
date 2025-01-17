@@ -1,7 +1,4 @@
 .dropdown {
-  position: relative;
-  z-index: 3;
-
   .dropdown-button {
     width: 50px;
     height: 45px;
@@ -17,82 +14,117 @@
     }
   }
 
-  .dropdown-menu {
-    width: 350px;
-    position: absolute;
-    top: 3.2rem;
-    right: 0;
-    background-color: $button-turquoise;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    min-width: 160px;
-    border-radius: 5px;
-    border: 1px solid $text-white-shell;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    z-index: 1;
-    padding: 2rem;
+  .dropdown-menu-overlay {
+    @include flex-center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 
-    .heading-and-close {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid $text-white-shell;
-
-      .close-x {
-        cursor: pointer;
-
-        &:hover {
-          color: grey;
-        }
-      }
-    }
-
-    ul {
-      margin-top: 1rem;
-
-      .dropdown-item {
-        padding: 12px 16px;
-        cursor: pointer;
-        color: $text-white-shell;
-
-        &:hover {
-          background-color: $hover-button-turquoise;
-        }
-      }
-
-      .log-out {
-        margin-top: 2rem;
-      }
-    }
-
-    .close-button {
-      background-color: $button-red;
-      margin-top: 2rem;
-
-      &:hover {
-        background-color: $hover-button-red;
-      }
-    }
-  }
-}
-
-@media (max-width: 575px) {
-  .dropdown-menu {
-    width: 97vw;
-    height: 100vh;
-    background-color: $button-turquoise;
-    border-radius: 0;
-    @include flex-center-start(column, start, start);
-    gap: 0.5rem;
-    z-index: 2;
-
-    .heading-and-close {
+    .dropdown-menu-relative-parent {
+      position: relative;
       width: 100%;
-      padding-bottom: 1.5rem;
-      font-size: 1.2rem;
-      border-bottom: 1px solid $text-white-shell;
+      height: 100svh;
+
+      .dropdown-menu {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: $button-turquoise;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border: 1px solid $text-white-shell;
+        margin: 0;
+        list-style: none;
+        z-index: 1;
+        padding: 2rem;
+
+        @include sm {
+          width: 330px;
+        }
+
+        @include md {
+          width: 350px;
+        }
+
+        .heading-and-close {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid $text-white-shell;
+
+          .close-x {
+            cursor: pointer;
+
+            &:hover {
+              color: grey;
+            }
+          }
+        }
+
+        .dropdown-navigation-container {
+          @include flex-center-start(column, space-between, start);
+          height: inherit;
+          width: 100%;
+          min-height: 500px;
+
+          @include sm {
+            padding-bottom: 5rem;
+          }
+
+          ul {
+            margin-top: 1rem;
+            width: 100%;
+
+            .dropdown-item {
+              padding: 12px 16px;
+              cursor: pointer;
+              color: $text-white-shell;
+
+              &:hover {
+                background-color: $hover-button-turquoise;
+              }
+            }
+
+            .log-out {
+              margin-top: 2rem;
+            }
+          }
+
+          .close-button {
+            background-color: $button-red;
+            width: 100%;
+
+            &:hover {
+              background-color: $hover-button-red;
+            }
+          }
+        }
+      }
+    }
+
+    @media (max-width: 575px) {
+      .dropdown-menu {
+        width: 97vw;
+        height: 100vh;
+        background-color: $button-turquoise;
+        border-radius: 0;
+        @include flex-center-start(column, start, start);
+        gap: 0.5rem;
+        z-index: 2;
+
+        .heading-and-close {
+          width: 100%;
+          padding-bottom: 1.5rem;
+          font-size: 1.2rem;
+          border-bottom: 1px solid $text-white-shell;
+        }
+      }
     }
   }
 }
