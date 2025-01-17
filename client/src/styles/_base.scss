@@ -10,20 +10,25 @@ body {
     font-style: normal;
   }
 
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+  .main-content {
+    padding-top: 60px;
+    min-height: calc(100vh - 110px);
 
-  p {
-    font-weight: 200;
-  }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-  h2 {
-    @include heading;
-  }
+    p {
+      font-weight: 200;
+    }
 
-  h3 {
-    @include heading(x-large)
+    h2 {
+      @include heading;
+    }
+
+    h3 {
+      @include heading(x-large)
+    }
   }
 }
