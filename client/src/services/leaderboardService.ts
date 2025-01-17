@@ -27,17 +27,3 @@ export const fetchTopMunicipalityUsers = async (
 export const fetchTotalLupins = async (): Promise<ITotalLupins> => {
   return await getRequest<ITotalLupins>("api/users/getTotalLupins");
 };
-
-export const fetchTotalMunicipalityLupins = async (municipalityId: string) => {
-  try {
-    const response = await fetch(`/api/lupins/${municipalityId}`);
-    const data = await response.json();
-
-    console.log("API-svar:", data);
-
-    return data;
-  } catch (err) {
-    console.error("Error fetching total lupins for municipality:", err);
-    return { totalLupins: 0 };
-  }
-};
