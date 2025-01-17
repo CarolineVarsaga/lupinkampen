@@ -1,3 +1,7 @@
+hmtl {
+  overflow: hidden;
+}
+
 body {
   background-color: $primary-color;
   color: $text-white-shell;
@@ -8,6 +12,11 @@ body {
     font-optical-sizing: auto;
     font-weight: #{$weight};
     font-style: normal;
+  }
+
+  .main-content {
+    padding-top: 60px;
+    min-height: calc(100vh - 110px);
   }
 
   a {

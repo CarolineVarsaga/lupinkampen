@@ -1,0 +1,41 @@
+.modal-overlay {
+  @include flex-center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  .modal-content {
+    background-color: $secondary-color;
+    padding: 2rem;
+    border: 1px solid $text-white-shell;
+    border-radius: 8px;
+    text-align: center;
+    width: 320px;
+    max-width: 100%;
+
+    .modal-actions {
+      @include flex-center;
+      gap: 0.5rem;
+      margin-top: 20px;
+
+      .modal-button-cancel,
+      .modal-button-confirm {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+
+      .modal-button-confirm {
+        background-color: $button-red;
+
+        &:hover {
+          background-color: $hover-button-red;
+        }
+      }
+    }
+  }
+}

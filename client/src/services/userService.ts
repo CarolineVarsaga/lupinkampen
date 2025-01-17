@@ -14,6 +14,20 @@ export const fetchUserData = async (userId: string) => {
   }
 };
 
+export const fetchUserAvatar = async (userId: string) => {
+  try {
+    const response = await getRequest<IUser>(
+      `/api/users/avatar/${userId}`,
+      true
+    );
+    console.log("avatar, userService:", response.avatar);
+    return response.avatar;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
 export const fetchTotalLupins = async (userId: string) => {
   try {
     const response = await getRequest<IUser>(

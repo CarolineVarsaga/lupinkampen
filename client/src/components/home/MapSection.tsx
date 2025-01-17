@@ -1,8 +1,9 @@
 import Button from "../Button";
 import SvgWaveBottom from "../SvgWaveBottom";
+import SwedenMap from "../SwedenMap";
 
 const MapSection = () => {
-  const Map = "/assets/sweden.svg";
+  // const Map = "/assets/sweden.svg";
   const BackgroundPolygon = "/assets/leading-municipality-container-bg.svg";
 
   return (
@@ -23,7 +24,7 @@ const MapSection = () => {
           <p>2753 st</p>
         </div>
       </div>
-      <img src={Map} alt="Sverigekarta" className="map" />
+      <SwedenMap />
       <Button text="Topplista" className="highscore-button" />
     </section>
   );
