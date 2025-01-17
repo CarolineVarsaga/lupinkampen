@@ -5,12 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import ConfirmationModal from "../ConfirmationModal";
 import { AnimatePresence, motion } from "framer-motion";
+import useLockScroll from "../../hooks/useLockScroll";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { logout, isAuthenticated } = useAuth();
+
+  useLockScroll(isOpen);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
