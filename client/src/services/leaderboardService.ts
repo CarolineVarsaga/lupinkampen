@@ -16,6 +16,14 @@ export const fetchTopUsers = async (): Promise<IUser[]> => {
   return await getRequest<IUser[]>("api/users/topUsers");
 };
 
+export const fetchTopMunicipalityUsers = async (
+  municipalityId: string
+): Promise<IUser[]> => {
+  return await getRequest<IUser[]>(
+    `api/users/getUsersScoreMunicipality/${municipalityId}`
+  );
+};
+
 export const fetchTotalLupins = async (): Promise<ITotalLupins> => {
   return await getRequest<ITotalLupins>("api/users/getTotalLupins");
 };
