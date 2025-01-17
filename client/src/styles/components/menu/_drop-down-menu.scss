@@ -52,9 +52,7 @@
         }
 
         .heading-and-close {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+          @include flex-center(row, space-between, center);
           padding-bottom: 1rem;
           border-bottom: 1px solid $text-white-shell;
 
@@ -68,8 +66,9 @@
         }
 
         .dropdown-navigation-container {
-          @include flex-center-start(column, space-between, start);
+          @include flex-center-start(column, space-around, start);
           height: inherit;
+          gap: 5rem;
           width: 100%;
           min-height: 500px;
 
@@ -78,6 +77,8 @@
           }
 
           ul {
+            gap: 0.5rem;
+            height: 70%;
             margin-top: 1rem;
             width: 100%;
 
@@ -85,6 +86,7 @@
               padding: 12px 16px;
               cursor: pointer;
               color: $text-white-shell;
+              margin-top: 0.5rem;
 
               &:hover {
                 background-color: $hover-button-turquoise;
