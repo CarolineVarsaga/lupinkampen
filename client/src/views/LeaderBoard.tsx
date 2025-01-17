@@ -9,19 +9,23 @@ import {
   fetchTopMunicipalityUsers,
   fetchTopUsers,
   fetchTotalLupins,
+  fetchTotalMunicipalityLupins,
 } from "../services/leaderboardService";
 import { IUser } from "../models/IUser";
 
 interface IMunicipality {
+  municipalityId: number;
   municipalityName: string;
   municipalityTotalPickedLupins: number;
 }
+
 const LeaderBoard = () => {
   const [topMunicipalities, setTopMunicipalities] = useState<IMunicipality[]>(
     []
   );
   const [topUsers, setTopUsers] = useState<IUser[]>([]);
   const [totalLupins, setTotalLupins] = useState<number>(0);
+  const [municipalityLupins, setMunicipalityLupins] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { selectedOption, setSelectedOption, formData, setFormData } =
@@ -96,15 +100,26 @@ const LeaderBoard = () => {
           setTopUsers(users);
           setError(null);
         }
+
+        const municipalityLupinsData = await fetchTotalMunicipalityLupins(
+          selectedValue
+        );
+
+        setMunicipalityLupins(municipalityLupinsData.totalLupins);
       } else {
         const users = await fetchTopUsers();
         setTopUsers(users);
         setError(null);
+
+        const totalLupinsData = await fetchTotalLupins();
+        setTotalLupins(totalLupinsData.totalLupins);
+        setMunicipalityLupins(0);
       }
     } catch (err) {
-      setError("Kunde inte hämta användare för den valda kommunen.");
-      setTopUsers([]);
-      console.error("Error fetching top users for municipality:", err);
+      setError(
+        "Kunde inte hämta användare eller lupiner för den valda kommunen."
+      );
+      console.error("Error fetching data for selected municipality:", err);
     }
   };
 
@@ -142,7 +157,13 @@ const LeaderBoard = () => {
                 onChange={handleDropdownChange}
                 options={[{ value: "", label: "Hela Sverige" }, ...options]}
               />
-              <p>Totalt antal plockade lupiner: {totalLupins} st</p>
+              <p>
+                Totalt antal plockade lupiner för den valda kommunen:{" "}
+                {municipalityLupins} st
+              </p>
+              <p>
+                Totalt antal plockade lupiner för hela Sverige: {totalLupins} st
+              </p>
               <div className="result-list">
                 {error && topUsers.length === 0 ? (
                   <p>{error}</p>
