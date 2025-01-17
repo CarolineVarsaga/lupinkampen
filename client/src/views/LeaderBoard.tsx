@@ -9,12 +9,11 @@ import {
   fetchTopMunicipalityUsers,
   fetchTopUsers,
   fetchTotalLupins,
-  fetchTotalMunicipalityLupins,
 } from "../services/leaderboardService";
 import { IUser } from "../models/IUser";
+import { fetchMunicipalityLupins } from "../services/municipalityService";
 
 interface IMunicipality {
-  municipalityId: number;
   municipalityName: string;
   municipalityTotalPickedLupins: number;
 }
@@ -26,6 +25,7 @@ const LeaderBoard = () => {
   const [topUsers, setTopUsers] = useState<IUser[]>([]);
   const [totalLupins, setTotalLupins] = useState<number>(0);
   const [municipalityLupins, setMunicipalityLupins] = useState<number>(0);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { selectedOption, setSelectedOption, formData, setFormData } =
@@ -92,33 +92,29 @@ const LeaderBoard = () => {
 
     try {
       if (selectedValue) {
+        const municipalityId = parseInt(selectedValue, 10);
         const users = await fetchTopMunicipalityUsers(selectedValue);
-        if (users.length === 0) {
-          setTopUsers([]);
-          setError("Inga användare finns för den valda kommunen.");
-        } else {
-          setTopUsers(users);
-          setError(null);
-        }
 
-        const municipalityLupinsData = await fetchTotalMunicipalityLupins(
-          selectedValue
+        setTopUsers(users.length > 0 ? users : []);
+        setError(
+          users.length === 0
+            ? "Inga användare finns för den valda kommunen."
+            : null
         );
 
-        setMunicipalityLupins(municipalityLupinsData.totalLupins);
+        const lupinsCount = await fetchMunicipalityLupins(municipalityId);
+        setMunicipalityLupins(lupinsCount);
       } else {
         const users = await fetchTopUsers();
         setTopUsers(users);
-        setError(null);
 
         const totalLupinsData = await fetchTotalLupins();
         setTotalLupins(totalLupinsData.totalLupins);
         setMunicipalityLupins(0);
+        setError(null);
       }
     } catch (err) {
-      setError(
-        "Kunde inte hämta användare eller lupiner för den valda kommunen."
-      );
+      setError("Kunde inte hämta data för den valda kommunen.");
       console.error("Error fetching data for selected municipality:", err);
     }
   };
@@ -158,12 +154,14 @@ const LeaderBoard = () => {
                 options={[{ value: "", label: "Hela Sverige" }, ...options]}
               />
               <p>
-                Totalt antal plockade lupiner för den valda kommunen:{" "}
-                {municipalityLupins} st
+                {selectedOption === ""
+                  ? `Totalt antal plockade lupiner för hela Sverige: ${totalLupins} st`
+                  : `Totalt antal plockade lupiner för ${
+                      options.find((option) => option.value === selectedOption)
+                        ?.label
+                    }: ${municipalityLupins} st`}
               </p>
-              <p>
-                Totalt antal plockade lupiner för hela Sverige: {totalLupins} st
-              </p>
+
               <div className="result-list">
                 {error && topUsers.length === 0 ? (
                   <p>{error}</p>
