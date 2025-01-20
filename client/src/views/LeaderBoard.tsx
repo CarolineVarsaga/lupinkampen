@@ -32,6 +32,8 @@ const LeaderBoard = () => {
     useFormContext();
 
   useEffect(() => {
+    setSelectedOption("");
+
     const getTopMunicipalities = async () => {
       try {
         const data = await fetchTopMunicipalities();
@@ -78,7 +80,7 @@ const LeaderBoard = () => {
     };
 
     fetchAllData();
-  }, []);
+  }, [setSelectedOption]);
 
   const handleDropdownChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
