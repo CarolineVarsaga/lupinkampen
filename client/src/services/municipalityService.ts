@@ -13,22 +13,27 @@ export const fetchMunicipalityLupins = async (
 ): Promise<number> => {
   try {
     const response = await getRequest<{
-      leaderboard: Array<{ totalPickedLupins: number }>;
+      leaderboard?: Array<{ totalPickedLupins: number }>;
+      message?: string;
     }>(`api/municipalities/score/${userMunicipalityId}`);
 
-    const totalLupins = response?.leaderboard?.reduce(
+    if (response?.message) {
+      return 0;
+    }
+
+    const leaderboard = response?.leaderboard || [];
+
+    const totalLupins = leaderboard.reduce(
       (sum, user) => sum + (user.totalPickedLupins || 0),
       0
     );
 
-    if (totalLupins != null) {
-      return totalLupins;
-    } else {
-      console.warn("Invalid data format or no users in leaderboard", response);
-      return 0;
-    }
+    return totalLupins;
   } catch (error) {
-    console.error("Error fetching lupins for municipality:", error);
+    console.error(
+      `Error fetching lupins for municipality ID: ${userMunicipalityId}`,
+      error
+    );
     return 0;
   }
 };

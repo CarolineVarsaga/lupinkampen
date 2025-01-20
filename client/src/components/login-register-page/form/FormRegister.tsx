@@ -111,36 +111,44 @@ const FormRegister = () => {
           {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <InputField
+            forLabel="email"
             label="E-post"
             type="text"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            required={true}
           />
           <InputField
+            forLabel="username"
             label="Användarnamn"
             type="text"
             id="username"
             name="username"
             value={formData.username}
             onChange={handleChange}
+            required={true}
           />
           <InputField
+            forLabel="password"
             label="Lösenord"
             type="password"
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            required={true}
           />
           <InputField
+            forLabel="confirm password"
             label="Bekräfta lösenord"
             type="password"
             id="confirmPassword"
             name="confirmpassword"
             value={formData.confirmpassword}
             onChange={handleChange}
+            required={true}
           />
           <Dropdown
             label="Kommun"

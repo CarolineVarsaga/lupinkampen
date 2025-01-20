@@ -32,6 +32,8 @@ const LeaderBoard = () => {
     useFormContext();
 
   useEffect(() => {
+    setSelectedOption("");
+
     const getTopMunicipalities = async () => {
       try {
         const data = await fetchTopMunicipalities();
@@ -78,7 +80,7 @@ const LeaderBoard = () => {
     };
 
     fetchAllData();
-  }, []);
+  }, [setSelectedOption]);
 
   const handleDropdownChange = async (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -92,16 +94,17 @@ const LeaderBoard = () => {
 
     try {
       if (selectedValue) {
+        const usersOrMessage = await fetchTopMunicipalityUsers(selectedValue);
+
+        if ("message" in usersOrMessage) {
+          setError(usersOrMessage.message);
+          setTopUsers([]);
+        } else {
+          setTopUsers(usersOrMessage);
+          setError(null);
+        }
+
         const municipalityId = parseInt(selectedValue, 10);
-        const users = await fetchTopMunicipalityUsers(selectedValue);
-
-        setTopUsers(users.length > 0 ? users : []);
-        setError(
-          users.length === 0
-            ? "Inga användare finns för den valda kommunen."
-            : null
-        );
-
         const lupinsCount = await fetchMunicipalityLupins(municipalityId);
         setMunicipalityLupins(lupinsCount);
       } else {
