@@ -74,19 +74,21 @@ const RegisterLupinesPage = () => {
         <div className="register-lupines-container-bottom">
           <h3>Antal plockade lupiner</h3>
           <div className="register-lupines-total-container">
-            {Object.entries(lupinesPerOption)
-              .filter(([, count]) => count > 0)
-              .map(([optionId, count]) => {
-                const option = lupinesValue.find(
-                  (s) => s.id === Number(optionId)
-                );
-                return (
-                  <p key={optionId}>
-                    {count}x {option?.name}
-                  </p>
-                );
-              })}
-            <div>
+            <div className="lupines-list">
+              {Object.entries(lupinesPerOption)
+                .filter(([, count]) => count > 0)
+                .map(([optionId, count]) => {
+                  const option = lupinesValue.find(
+                    (s) => s.id === Number(optionId)
+                  );
+                  return (
+                    <p key={optionId}>
+                      {count}x {option?.name}
+                    </p>
+                  );
+                })}
+            </div>
+            <div className="lupines-total">
               <hr />
               <p>
                 Totalt:{" "}
