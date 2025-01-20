@@ -1,5 +1,7 @@
 import { IUser, IUserWithPlacement } from "../models/IUser";
-import { getRequest } from "./baseService";
+import { getRequest, postRequest } from "./baseService";
+
+//================================================================
 
 export const fetchUserData = async (userId: string) => {
   try {
@@ -13,6 +15,8 @@ export const fetchUserData = async (userId: string) => {
     throw error;
   }
 };
+
+//================================================================
 
 export const fetchUserAvatar = async (userId: string) => {
   try {
@@ -28,6 +32,8 @@ export const fetchUserAvatar = async (userId: string) => {
   }
 };
 
+//================================================================
+
 export const fetchTotalLupins = async (userId: string) => {
   try {
     const response = await getRequest<IUser>(
@@ -40,6 +46,8 @@ export const fetchTotalLupins = async (userId: string) => {
     throw error;
   }
 };
+
+//================================================================
 
 export const fetchUserPlacement = async (
   userId: string,
@@ -58,3 +66,37 @@ export const fetchUserPlacement = async (
     throw error;
   }
 };
+
+//================================================================
+//=======================   UPDATE USER   ========================
+//================================================================
+
+export const updateUser = async (
+  userId: string,
+  updates: {
+    email?: string;
+    password?: string;
+    userMunicipality?: string;
+    associationId?: string;
+  }
+) => {
+  try {
+    const response = await postRequest<
+      {
+        email?: string;
+        password?: string;
+        userMunicipality?: string;
+        associationId?: string;
+      },
+      IUser
+    >(`/api/users/update/${userId}`, updates, true);
+    console.log("update user response:", response);
+
+    return response;
+  } catch (error) {
+    console.error("Error updating user information", error);
+    throw error;
+  }
+};
+
+//================================================================
