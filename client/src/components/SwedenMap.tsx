@@ -56,14 +56,20 @@ const SwedenMap = () => {
 
       if (leadingPath) {
         leadingPath.setAttribute("fill", "orange");
-      } else if (leadingPathClass.length > 0) {
-        leadingPathClass[0].setAttribute("fill", "orange");
-      } else {
+      }
+      if (leadingPathClass.length > 0) {
+        Array.from(leadingPathClass).forEach((pathElement) => {
+          pathElement.setAttribute("fill", "orange");
+        });
+      }
+
+      if (!leadingPath && leadingPathClass.length === 0) {
         console.log(`Path with ID or Class ${leadingMunicipalityId} not found`);
       }
       setSvgContent(svgDoc.documentElement.outerHTML);
     }
   }, [leadingMunicipalityId, svgContent]);
+
   return (
     <div className="sweden-map map">
       <div dangerouslySetInnerHTML={{ __html: svgContent || "" }} />
