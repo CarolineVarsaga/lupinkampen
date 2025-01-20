@@ -18,10 +18,17 @@ export const fetchTopUsers = async (): Promise<IUser[]> => {
 
 export const fetchTopMunicipalityUsers = async (
   municipalityId: string
-): Promise<IUser[]> => {
-  return await getRequest<IUser[]>(
-    `api/users/getUsersScoreMunicipality/${municipalityId}`
-  );
+): Promise<IUser[] | { message: string }> => {
+  try {
+    const users = await getRequest<IUser[]>(
+      `api/users/getUsersScoreMunicipality/${municipalityId}`
+    );
+
+    return users;
+  } catch (error) {
+    console.error("Error fetching users for municipality:", error);
+    return { message: "Kunde inte hämta användare för denna kommun." };
+  }
 };
 
 export const fetchTotalLupins = async (): Promise<ITotalLupins> => {
