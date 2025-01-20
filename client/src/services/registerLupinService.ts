@@ -17,7 +17,7 @@ export const registerLupins = async (userId: string, lupinsPicked: number) => {
       IRegisterLupinsResponse
     >(`/api/users/registerLupins/${userId}`, data, true);
 
-    console.log("Registrering lyckades:", response.message);
+    console.log("Meddelande:", response.message);
     alert("Lupiner registrerade!");
   } catch (error) {
     console.error("Fel vid registrering av lupiner:", error);
