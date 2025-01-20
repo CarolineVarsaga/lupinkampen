@@ -79,6 +79,10 @@
 
     .userpage-information-container {
       @include flex-center-start;
+
+      &>p {
+        font-style: italic;
+      }
     }
 
     .userpage-activity-button-leaderboard,

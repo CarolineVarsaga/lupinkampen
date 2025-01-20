@@ -1,0 +1,25 @@
+.edit-form {
+  @include flex-center-start;
+  gap: 1.5rem;
+  width: 100%;
+
+  .success-message {
+    font-weight: 500;
+  }
+
+  label {
+    @include flex-center-start;
+    width: 100%;
+
+    input,
+    .edit-municipality {
+      align-self: flex-start;
+      min-width: 290px;
+      height: 32px;
+      border-radius: 7px;
+      border: none;
+      padding-left: 0.5rem;
+      margin-top: 0.5rem;
+    }
+  }
+}
