@@ -94,18 +94,27 @@
   }
 
   .register-lupines-total-container {
-    @include flex-center-start(column, space-between, flex-start);
+    @include flex-center-start(column, space-between, start);
+    width: 100%;
     padding-bottom: 1rem;
     padding-top: 1rem;
-    min-height: 175px;
+    min-height: 220px;
 
-    div {
+    .lupines-list {
+      width: inherit;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+    }
+
+    .lupines-total {
+      width: inherit;
+      margin-top: auto;
+    }
+
+    hr {
       width: 100%;
-
-      hr {
-        width: 100%;
-        margin-top: 1.5rem;
-      }
+      margin-top: 1.5rem;
     }
   }
 
