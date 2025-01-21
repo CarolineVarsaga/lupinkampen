@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
 import { useCookies } from "../hooks/useCookieBar";
 import Button from "./Button";
 import { motion, AnimatePresence } from "framer-motion";
+import { LiaCookieBiteSolid } from "react-icons/lia";
 
 const CookieBar: React.FC = () => {
-  const { cookiesAccepted, acceptCookies, declineCookies } = useCookies();
+  const { cookiesAccepted, acceptCookies } = useCookies();
 
   const animationVariants = {
     hidden: { y: "100%", opacity: 0 },
@@ -22,18 +24,17 @@ const CookieBar: React.FC = () => {
           variants={animationVariants}
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          <p>
-            Vi använder cookies för att förbättra din upplevelse.{" "}
-            <a href="/policy">Läs mer</a>.
-          </p>
+          <div className="cookiebar-text-container">
+            <LiaCookieBiteSolid size={70} />
+            <p>
+              Vi använder cookies och lokal lagring för att förbättra din
+              upplevelse. Ingen spårning eller marknadsföring sker.{" "}
+              <Link to="/policy">Läs mer</Link>.
+            </p>
+          </div>
           <div className="cookiebar-buttons-container">
             <Button
-              text="Neka"
-              onClick={declineCookies}
-              className="cookiebar-decline-button"
-            />
-            <Button
-              text="Acceptera"
+              text="Okej, då vet jag!"
               onClick={acceptCookies}
               className="cookiebar-accept-button"
             />
