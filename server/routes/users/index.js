@@ -12,6 +12,7 @@ const getTopUsers = require("./getLeadingUsers.js");
 const getUsersScoreMunicipality = require("./getUsersScoreMunicipality.js");
 
 const getUserImage = require("./getUserImage.js");
+const medals = require("./medals.js");
  
 const registerLupins = require("./registerLupins.js");
 const getLupins = require("./getLupins.js");
@@ -29,6 +30,7 @@ router.use("/topUsers", getTopUsers);
 router.use("/getUsersScoreMunicipality", getUsersScoreMunicipality);
 
 router.use("/avatar", getUserImage)
+router.use("/medals", medals);
 
 router.use("/registerLupins", registerLupins); 
 router.use("/getLupins", getLupins); 
