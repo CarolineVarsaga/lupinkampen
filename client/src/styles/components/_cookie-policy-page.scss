@@ -37,7 +37,7 @@
   }
 
   .cookie-policy-container {
-    @include padding-left-right(4rem, 4rem);
+    @include padding-left-right;
     @include flex-center-start;
     background-color: $secondary-color;
     gap: 1rem;
@@ -51,6 +51,7 @@
 
     @include md {
       max-width: 800px;
+      @include padding-left-right(4rem, 4rem);
     }
 
     .cookie-policy-heading {

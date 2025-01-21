@@ -22,6 +22,9 @@ const Footer = () => {
             <Link to="/villkor" className="footer-user-terms">
               Användarvillkor
             </Link>
+            <Link to="/integritetspolicy" className="footer-user-terms">
+              Integritetspolicy
+            </Link>
             <Link to="/policy" className="footer-cookie-policy">
               Cookie-policy
             </Link>
@@ -30,7 +33,15 @@ const Footer = () => {
       </div>
 
       <p className="copyright-text">
-        &copy; 2025 Lupinkampen | Caroline Vårsaga | Examensprojekt
+        &copy; 2025 Lupinkampen |
+        <a
+          href="https://github.com/CarolineVarsaga"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Caroline Vårsaga
+        </a>
+        | Examensprojekt
       </p>
     </footer>
   );
