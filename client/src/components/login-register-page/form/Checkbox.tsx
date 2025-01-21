@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface ICheckboxProps {
   className: string;
   checked: boolean;
@@ -7,18 +9,26 @@ interface ICheckboxProps {
 
 const Checkbox = ({ className, checked, onChange, value }: ICheckboxProps) => {
   return (
-    <label htmlFor="checkbox" className="checkbox-label">
-      <input
-        type="checkbox"
-        id="checkbox"
-        name="checkbox"
-        className={className}
-        value={value}
-        checked={checked}
-        onChange={onChange}
-      />
-      Jag godkänner användarvillkoren*
-    </label>
+    <>
+      <label htmlFor="checkbox" className="checkbox-label">
+        <input
+          type="checkbox"
+          id="checkbox"
+          name="checkbox"
+          className={className}
+          value={value}
+          checked={checked}
+          onChange={onChange}
+        />
+        <span>
+          Jag godkänner{" "}
+          <Link to="/villkor" className="terms">
+            användarvillkoren
+          </Link>
+          *
+        </span>
+      </label>
+    </>
   );
 };
 
