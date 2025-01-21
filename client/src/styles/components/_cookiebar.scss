@@ -20,9 +20,14 @@
     flex-direction: column;
   }
 
-  & a {
-    font-weight: 500;
-    text-decoration: underline;
+  .cookiebar-text-container {
+    @include flex-center-start(column, center, center);
+    gap: 1rem;
+
+    & a {
+      font-weight: 500;
+      text-decoration: underline;
+    }
   }
 
   .cookiebar-buttons-container {
