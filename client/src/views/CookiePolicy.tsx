@@ -12,7 +12,8 @@ const CookiePolicy = () => {
           <p>
             Vi använder cookies och lokal lagring för att förbättra din
             upplevelse. Ingen spårning eller marknadsföring sker. De cookies som
-            används kräver inget samtycke, men har valt att redogöra dem ändå.
+            används kräver inget samtycke, men vi har valt att redogöra dem
+            ändå.
           </p>
         </div>
 
