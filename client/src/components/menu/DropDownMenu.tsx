@@ -86,7 +86,7 @@ const DropDownMenu = () => {
                       <Link to="/faq" onClick={toggleMenu}>
                         <li className="dropdown-item">FAQ - Frågor och svar</li>
                       </Link>
-                      <Link to="/anvandningsvillkor" onClick={toggleMenu}>
+                      <Link to="/villkor" onClick={toggleMenu}>
                         <li className="dropdown-item">Användarvillkor</li>
                       </Link>
                       {isAuthenticated && (
