@@ -1,10 +1,17 @@
 import { useState } from "react";
 import Button from "../components/Button";
-import { registerLupins } from "../services/registerLupinService";
+import {
+  assignMedalToUser,
+  registerLupins,
+} from "../services/registerLupinService";
 import LupinPicker from "../components/register-lupins/LupinPicker";
 import { lupinesValue } from "../models/lupinesValue";
+import { medals } from "../models/Medals";
+import { useMedalContext } from "../hooks/useMedalContext";
 
 const RegisterLupinesPage = () => {
+  const { addNotifiedMedal, hasNotifiedMedal } = useMedalContext();
+
   const lupinesAmountPerOption: { [key: number]: number } = {};
   lupinesValue.forEach((option) => {
     lupinesAmountPerOption[option.id] = 0;
@@ -37,9 +44,27 @@ const RegisterLupinesPage = () => {
     );
 
     try {
-      await registerLupins(userId, totalLupinesPicked);
+      const newTotal = await registerLupins(userId, totalLupinesPicked);
+      const earnedMedals = medals.filter(
+        (medal) => newTotal >= medal.threshold
+      );
+
+      const sortedEarnedMedals = earnedMedals.sort(
+        (a, b) => b.threshold - a.threshold
+      );
+
+      const latestMedal = sortedEarnedMedals[0];
+
+      if (latestMedal && !hasNotifiedMedal(latestMedal.name)) {
+        await assignMedalToUser(userId, latestMedal.name);
+
+        alert(`Grattis! Du har just fått medaljen ${latestMedal.name}!`);
+
+        addNotifiedMedal(latestMedal.name);
+      }
     } catch (error) {
       console.error("Det gick inte att registrera lupiner:", error);
+      alert("Ett fel inträffade vid registrering av lupiner.");
     }
   };
 
