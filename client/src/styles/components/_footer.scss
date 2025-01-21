@@ -9,14 +9,49 @@
     border-bottom: 1px solid $text-white-shell;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .logo-container {
+    @include sm {
+      align-self: start;
+    }
   }
 
   .footer-container {
-    height: 150px;
+    min-height: 150px;
+    padding-bottom: 2rem;
+    width: 100%;
+
+    @include lg {
+      @include padding-left-right(10rem, 10rem);
+    }
+
+    .footer-page-links-container {
+      @include flex-center-start;
+      gap: 2rem;
+      width: 100%;
+
+      @include sm {
+        flex-direction: row;
+      }
+
+      .footer-terms-policy,
+      .footer-page-links {
+        @include flex-center-start;
+        gap: 1rem;
+        width: inherit;
+      }
+    }
+  }
+
+  a {
+    text-decoration: underline;
+    font-weight: 200
   }
 
   .copyright-text {
-    @include heading(x-small, 200);
+    @include heading(small, 200);
     border-top: none;
     border-bottom: none;
   }
