@@ -22,6 +22,9 @@ const Footer = () => {
             <Link to="/villkor" className="footer-user-terms">
               Användarvillkor
             </Link>
+            <Link to="/integritetspolicy" className="footer-user-terms">
+              Integritetspolicy
+            </Link>
             <Link to="/policy" className="footer-cookie-policy">
               Cookie-policy
             </Link>
