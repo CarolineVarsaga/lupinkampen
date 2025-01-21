@@ -110,7 +110,7 @@ const PrivacyPolicyPage = () => {
                 personliga information, med vissa undantag (t.ex. lagliga krav).
               </li>
               <li>
-                <span>• Återkalla ditt samtycke: </span>Om vi behandlar dina
+                <span>Återkalla ditt samtycke: </span>Om vi behandlar dina
                 uppgifter baserat på ditt samtycke kan du när som helst
                 återkalla det genom att kontakta oss.
               </li>
