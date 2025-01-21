@@ -1,5 +1,5 @@
 .cookie-policy {
-  @include flex-center-start;
+  @include flex-center;
   @include padding-left-right;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -37,17 +37,21 @@
   }
 
   .cookie-policy-container {
+    @include padding-left-right(4rem, 4rem);
     @include flex-center-start;
     background-color: $secondary-color;
     gap: 1rem;
     border: 1px solid white;
     border-radius: 12px;
-    padding: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 1.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
     min-width: 325px;
     width: 100%;
     z-index: 1;
+
+    @include md {
+      max-width: 800px;
+    }
 
     .cookie-policy-heading {
       @include flex-center-start(row, start, center);

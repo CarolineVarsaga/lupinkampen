@@ -96,6 +96,12 @@
           accent-color: $hover-button-turquoise;
           cursor: pointer;
         }
+
+        .terms {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
 
       .login-button,
