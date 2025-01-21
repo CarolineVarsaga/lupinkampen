@@ -8,7 +8,7 @@ import UserPage from "./views/UserPage";
 import RegisterLupinesPage from "./views/RegisterLupinesPage";
 import LeaderBoard from "./views/LeaderBoard";
 import CookiePolicy from "./views/CookiePolicy";
-import PrivacyPolicyPage from "./views/PrivacyPolicyPage";
+import TermsOfServicePage from "./views/TermsOfServicePage";
 
 export const router = createHashRouter([
   {
@@ -50,7 +50,7 @@ export const router = createHashRouter([
       },
       {
         path: "/villkor",
-        element: <PrivacyPolicyPage />,
+        element: <TermsOfServicePage />,
       },
     ],
   },

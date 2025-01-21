@@ -1,4 +1,4 @@
-const PrivacyPolicyPage = () => {
+const TermsOfServicePage = () => {
   return (
     <section className="user-terms">
       <div className="user-terms-container">
@@ -177,4 +177,4 @@ const PrivacyPolicyPage = () => {
   );
 };
 
-export default PrivacyPolicyPage;
+export default TermsOfServicePage;
