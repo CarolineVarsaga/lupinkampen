@@ -11,7 +11,7 @@
   .user-terms-container {
     background-color: $secondary-color;
     border: 1px solid white;
-    @include padding-left-right(4rem, 4rem);
+    @include padding-left-right;
     padding-top: 2rem;
     padding-bottom: 2rem;
     border-radius: 12px;
@@ -20,6 +20,7 @@
 
     @include md {
       max-width: 800px;
+      @include padding-left-right(4rem, 4rem);
     }
 
     .user-terms-info {
@@ -38,6 +39,10 @@
         gap: 1rem;
         padding-bottom: 1rem;
 
+        span {
+          font-weight: 500;
+        }
+
         .terms-ul {
           @include padding-left-right(2.5rem, 2.5rem);
           @include flex-center-start;
@@ -51,6 +56,4 @@
       }
     }
   }
-
-
 }
