@@ -17,8 +17,6 @@ const getMedalColorClass = (threshold: number) => {
 };
 
 const UserMedals = ({ userLupinsPicked }: IUserMedals) => {
-  console.log("User Lupins Picked:", userLupinsPicked);
-
   const userMedals = medals.filter(
     (medal) => (userLupinsPicked || 0) >= medal.threshold
   );
