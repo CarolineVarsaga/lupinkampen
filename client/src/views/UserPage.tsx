@@ -55,9 +55,6 @@ const UserProfile = () => {
             fetchUserAvatar(userId),
           ]);
 
-          console.log("User Data Response:", userDataResponse);
-          console.log("Avatar URL:", avatarUrl);
-
           setUserData(userDataResponse);
           setProfileImage(avatarUrl);
 
