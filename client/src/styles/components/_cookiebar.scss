@@ -1,0 +1,44 @@
+.cookiebar {
+  @include flex-center;
+  @include padding-left-right;
+  gap: 2rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #372f3d;
+  border-top: 1px solid $text-white-shell;
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-height: 25%;
+
+  @include lg {
+    @include padding-left-right(10rem, 10rem);
+    flex-direction: column;
+  }
+
+  & a {
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+  .cookiebar-buttons-container {
+    @include flex-center-start;
+    gap: 1rem;
+
+    @include sm {
+      flex-direction: row;
+    }
+
+    .cookiebar-decline-button {
+      background-color: $button-red;
+
+      &:hover {
+        background-color: $hover-button-red;
+      }
+    }
+  }
+}
