@@ -9,6 +9,7 @@ import RegisterLupinesPage from "./views/RegisterLupinesPage";
 import LeaderBoard from "./views/LeaderBoard";
 import CookiePolicy from "./views/CookiePolicy";
 import TermsOfServicePage from "./views/TermsOfServicePage";
+import PrivacyPolicyPage from "./views/PrivacyPolicyPage";
 
 export const router = createHashRouter([
   {
@@ -51,6 +52,10 @@ export const router = createHashRouter([
       {
         path: "/villkor",
         element: <TermsOfServicePage />,
+      },
+      {
+        path: "/integritetspolicy",
+        element: <PrivacyPolicyPage />,
       },
     ],
   },
