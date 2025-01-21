@@ -1,0 +1,78 @@
+.medals-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+
+
+  .medal {
+    cursor: pointer;
+    position: relative;
+    color: #f43afe;
+
+    &.newbee {
+      color: white;
+    }
+
+    &.beginner {
+      color: yellow;
+    }
+
+    &.small {
+      color: orange;
+    }
+
+    &.medium {
+      color: #00ff51;
+    }
+
+    &.large {
+      color: #bbbbff;
+    }
+
+    &.expert {
+      color: #d9267a;
+    }
+
+    &.intermediate {
+      color: rgb(108, 230, 230);
+    }
+
+    &.queen-bee {
+      color: #15010b;
+    }
+
+    &:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .tooltip {
+      display: flex;
+      flex-direction: column;
+      visibility: hidden;
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px;
+      width: 250px;
+      max-width: 200px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+
+      .tooltip-text {
+        font-size: 14px;
+
+        &.amount {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

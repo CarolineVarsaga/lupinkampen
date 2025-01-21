@@ -1,19 +1,17 @@
 import { useState } from "react";
 import Button from "../components/Button";
-import { registerLupins } from "../services/registerLupinService";
+import {
+  assignMedalToUser,
+  registerLupins,
+} from "../services/registerLupinService";
 import LupinPicker from "../components/register-lupins/LupinPicker";
-
-const lupinesValue = [
-  { id: 1001, name: "Full säck 125L", lupinesAmount: 50 },
-  { id: 1002, name: "Halv säck 125L", lupinesAmount: 25 },
-  { id: 1003, name: "Full säck 160L", lupinesAmount: 65 },
-  { id: 1004, name: "Halv säck 160L", lupinesAmount: 33 },
-  { id: 1005, name: "Full säck 240L", lupinesAmount: 96 },
-  { id: 1006, name: "Halv säck 240L", lupinesAmount: 48 },
-  { id: 1000, name: "Plockade lupiner", lupinesAmount: 1 },
-];
+import { lupinesValue } from "../models/lupinesValue";
+import { medals } from "../models/Medals";
+import { useMedalContext } from "../hooks/useMedalContext";
 
 const RegisterLupinesPage = () => {
+  const { addNotifiedMedal, hasNotifiedMedal } = useMedalContext();
+
   const lupinesAmountPerOption: { [key: number]: number } = {};
   lupinesValue.forEach((option) => {
     lupinesAmountPerOption[option.id] = 0;
@@ -46,9 +44,27 @@ const RegisterLupinesPage = () => {
     );
 
     try {
-      await registerLupins(userId, totalLupinesPicked);
+      const newTotal = await registerLupins(userId, totalLupinesPicked);
+      const earnedMedals = medals.filter(
+        (medal) => newTotal >= medal.threshold
+      );
+
+      const sortedEarnedMedals = earnedMedals.sort(
+        (a, b) => b.threshold - a.threshold
+      );
+
+      const latestMedal = sortedEarnedMedals[0];
+
+      if (latestMedal && !hasNotifiedMedal(latestMedal.name)) {
+        await assignMedalToUser(userId, latestMedal.name);
+
+        alert(`Grattis! Du har just fått medaljen ${latestMedal.name}!`);
+
+        addNotifiedMedal(latestMedal.name);
+      }
     } catch (error) {
       console.error("Det gick inte att registrera lupiner:", error);
+      alert("Ett fel inträffade vid registrering av lupiner.");
     }
   };
 

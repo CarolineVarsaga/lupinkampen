@@ -47,16 +47,7 @@ const EditInformation = ({
       municipality: userData.userMunicipality.toString(),
       username: userData.userName || "",
     });
-    console.log("Form data after setting:", {
-      email: userData.email,
-      username: userData.userName,
-      municipality: userData.userMunicipality,
-    });
   }, [userData, setFormData]);
-
-  useEffect(() => {
-    console.log("Form data after setting:", formData);
-  }, [formData]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -64,8 +55,6 @@ const EditInformation = ({
       ...formData,
       [name]: value,
     });
-    console.log(`Changed field: ${name}, New value: ${value}`);
-    console.log("Current form data:", formData);
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -112,8 +101,6 @@ const EditInformation = ({
       updates.userMunicipality = formData.municipality;
     }
 
-    console.log("Updates before sending:", updates);
-
     try {
       const response = await updateUser(String(userData.userId), updates);
 
@@ -140,7 +127,6 @@ const EditInformation = ({
       ...formData,
       municipality: selectedValue,
     });
-    console.log("Selected municipality:", selectedValue);
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

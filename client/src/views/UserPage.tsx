@@ -11,6 +11,7 @@ import {
 } from "../services/userService";
 import { useAuth } from "../hooks/useAuth";
 import EditInformation from "../components/user-page/EditInformation";
+import UserMedals from "../components/user-page/UserMedals";
 
 const UserProfile = () => {
   const { userId } = useParams<{ userId: string }>();
@@ -53,9 +54,6 @@ const UserProfile = () => {
             fetchUserData(userId),
             fetchUserAvatar(userId),
           ]);
-
-          console.log("User Data Response:", userDataResponse);
-          console.log("Avatar URL:", avatarUrl);
 
           setUserData(userDataResponse);
           setProfileImage(avatarUrl);
@@ -149,6 +147,7 @@ const UserProfile = () => {
             <div className="userpage-medals-container">
               <h4>Medaljer</h4>
               <p>Plocka lupiner och vinn medaljer!</p>
+              <UserMedals userLupinsPicked={totalLupins} />
             </div>
 
             <div className="userpage-information-container">

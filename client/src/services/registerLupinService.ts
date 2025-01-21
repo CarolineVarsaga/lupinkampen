@@ -1,26 +1,41 @@
 import { postRequest } from "./baseService";
 
-interface IRegisterLupinsData {
-  lupinsPicked: number;
-}
-
 interface IRegisterLupinsResponse {
   message: string;
+  recentlyPickedLupins: number;
+  newTotal: number;
 }
-
 export const registerLupins = async (userId: string, lupinsPicked: number) => {
-  const data: IRegisterLupinsData = { lupinsPicked };
+  const data = { lupinsPicked };
 
   try {
-    const response = await postRequest<
-      IRegisterLupinsData,
-      IRegisterLupinsResponse
-    >(`/api/users/registerLupins/${userId}`, data, true);
+    const response = await postRequest<typeof data, IRegisterLupinsResponse>(
+      `/api/users/registerLupins/${userId}`,
+      data,
+      true
+    );
 
-    console.log("Meddelande:", response.message);
     alert("Lupiner registrerade!");
+    return response.newTotal;
   } catch (error) {
     console.error("Fel vid registrering av lupiner:", error);
     alert("Kunde inte registrera lupiner.");
+    throw error;
+  }
+};
+interface IAssignMedalToUserRequest {
+  name: string;
+}
+export const assignMedalToUser = async (userId: string, medal: string) => {
+  const data: IAssignMedalToUserRequest = { name: medal };
+  try {
+    const response = await postRequest(
+      `/api/users/medals/${userId}`,
+      data,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fel vid uppdatering av medaljer:", error);
   }
 };
