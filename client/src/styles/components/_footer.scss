@@ -52,7 +52,17 @@
 
   .copyright-text {
     @include heading(small, 200);
+    @include flex-center(row, center, center);
+    flex-wrap: wrap;
     border-top: none;
     border-bottom: none;
+
+    & a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
