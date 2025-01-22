@@ -1,6 +1,9 @@
+import BackButton from "../components/buttons/BackButton";
+
 const TermsOfServicePage = () => {
   return (
     <section className="user-terms">
+      <BackButton className="terms-back-button" />
       <div className="user-terms-container">
         <div className="user-terms-info">
           <h2>Användarvillkor</h2>
