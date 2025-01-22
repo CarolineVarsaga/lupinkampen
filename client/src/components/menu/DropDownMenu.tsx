@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
-import Button from "../Button";
+import Button from "../buttons/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import ConfirmationModal from "../ConfirmationModal";

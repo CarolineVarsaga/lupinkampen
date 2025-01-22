@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCookies } from "../hooks/useCookieBar";
-import Button from "./Button";
+import Button from "./buttons/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LiaCookieBiteSolid } from "react-icons/lia";
 
