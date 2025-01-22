@@ -1,7 +1,9 @@
 import { LiaCookieBiteSolid } from "react-icons/lia";
+import BackButton from "../components/buttons/BackButton";
 const CookiePolicy = () => {
   return (
     <section className="cookie-policy">
+      <BackButton className="cookie-back-button" />
       <div className="cookie-policy-container">
         <div className="cookie-policy-heading">
           <LiaCookieBiteSolid size={70} />

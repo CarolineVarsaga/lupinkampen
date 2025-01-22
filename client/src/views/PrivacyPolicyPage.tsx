@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import BackButton from "../components/buttons/BackButton";
 
 const PrivacyPolicyPage = () => {
   return (
     <section className="user-terms">
+      <BackButton className="terms-back-button" />
       <div className="user-terms-container">
         <div className="user-terms-info">
           <h2>Integritetspolicy</h2>
