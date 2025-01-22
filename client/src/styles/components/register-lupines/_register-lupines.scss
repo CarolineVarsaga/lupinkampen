@@ -1,14 +1,19 @@
 .register-lupines {
   @include padding-left-right;
-  padding-top: 2rem;
   padding-bottom: 2rem;
+  position: relative;
 
   @include lg {
     @include padding-left-right(10rem, 10rem);
     @include flex-center;
   }
 
+  .back-button {
+    align-self: start;
+  }
+
   .register-lupines-container {
+    margin-top: 4.5rem;
     @include flex-center-start;
     background-color: $secondary-color;
     gap: 2rem;

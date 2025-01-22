@@ -1,0 +1,16 @@
+.back-button {
+  @include flex-center;
+  flex-direction: row;
+  gap: 0.8rem;
+  background: #0000002e;
+  box-shadow: none;
+  //border: none;
+  width: 120px;
+  cursor: pointer;
+  top: 1.5rem;
+
+  &:hover {
+    text-decoration: underline;
+    background: #00000046;
+  }
+}

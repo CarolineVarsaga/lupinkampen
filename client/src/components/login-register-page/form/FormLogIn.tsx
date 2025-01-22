@@ -3,6 +3,7 @@ import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
 import { login as loginService } from "../../../services/auth";
 import { useAuth } from "../../../hooks/useAuth";
+import LogInButton from "../../buttons/LogInButton";
 
 interface IFormData {
   username: string;
@@ -81,9 +82,7 @@ const FormLogIn = () => {
         onChange={handleChange}
         required={true}
       />
-      <button type="submit" className="login-button">
-        Logga in
-      </button>
+      <LogInButton />
     </form>
   );
 };

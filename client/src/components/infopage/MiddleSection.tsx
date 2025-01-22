@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-import Button from "../Button";
 import LupinInformation from "./LupinInformation";
+import BeginHereButton from "../buttons/BeginHereButton";
 
 const MiddleSection = () => {
   const LupineImage = "/assets/lupines-field-1280.webp";
@@ -16,9 +15,7 @@ const MiddleSection = () => {
             className="middle-section-lupine-image"
           />
           <div className="button-container">
-            <Link to="/logga-in" className="infopage-begin-button">
-              <Button text="Börja här" className="infopage-begin-button" />
-            </Link>
+            <BeginHereButton />
           </div>
         </div>
       </section>

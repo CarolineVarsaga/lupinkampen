@@ -1,4 +1,5 @@
-import Button from "../Button";
+import BeginHereButton from "../buttons/BeginHereButton";
+import LeaderboardButton from "../buttons/LeaderboardButton";
 
 const MapSectionInfo = () => {
   return (
@@ -13,8 +14,8 @@ const MapSectionInfo = () => {
         <p>Kartan visar vilken kommun som leder kampen just nu.</p>
       </div>
       <div className="buttons-container">
-        <Button text="Börja här" className="begin-button" />
-        <Button text="Topplista" className="leaderboard-button" />
+        <BeginHereButton />
+        <LeaderboardButton />
       </div>
     </div>
   );

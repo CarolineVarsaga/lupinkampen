@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Button from "../components/Button";
 import { IUser } from "../models/IUser";
 import { fetchMunicipalityName } from "../services/municipalityService";
 import {
@@ -12,6 +11,9 @@ import {
 import { useAuth } from "../hooks/useAuth";
 import EditInformation from "../components/user-page/EditInformation";
 import UserMedals from "../components/user-page/UserMedals";
+import LeaderboardButton from "../components/buttons/LeaderboardButton";
+import RegisterLupinsButton from "../components/buttons/RegisterLupinsButton";
+import BackButton from "../components/buttons/BackButton";
 
 const UserProfile = () => {
   const { userId } = useParams<{ userId: string }>();
@@ -91,18 +93,11 @@ const UserProfile = () => {
     fetchUserDataDetails();
   }, [userId, navigate, loggedInUserId, isAuthenticated]);
 
-  const handleClickRegisterLupines = () => {
-    navigate(`/profil/${userId}/registrera-lupiner`);
-  };
-
-  const handleLeaderboard = () => {
-    navigate(`/topplista`);
-  };
-
   return (
-    <div>
+    <div className="userpage">
+      <BackButton />
       {userData ? (
-        <section className="userpage">
+        <section className="userpage-section">
           <div className="userpage-container">
             <div className="userpage-username-pic-container">
               <img
@@ -125,10 +120,7 @@ const UserProfile = () => {
               <p>Antal plockade lupiner: {totalLupins} st</p>
               <p>Senast plockade: {recentPickedLupins} st</p>
               <div className="userpage-activity-buttons-container">
-                <Button
-                  text="Registrera lupiner"
-                  onClick={handleClickRegisterLupines}
-                />
+                <RegisterLupinsButton userId={userId} />
               </div>
               <hr className="userpage-activity-line" />
               {userPlacementMunicipality !== null && (
@@ -137,11 +129,7 @@ const UserProfile = () => {
               {userPlacementSweden !== null && (
                 <p>Placering i Sverige: {userPlacementSweden}</p>
               )}
-              <Button
-                text="Topplista"
-                className="userpage-activity-button-leaderboard"
-                onClick={handleLeaderboard}
-              />
+              <LeaderboardButton className="userpage-activity-button-leaderboard" />
             </div>
 
             <div className="userpage-medals-container">

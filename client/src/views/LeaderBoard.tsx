@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
 import SwedenMap from "../components/SwedenMap";
 import Dropdown from "../components/login-register-page/form/InputDropDown";
 import { useFormContext } from "../hooks/useFormContext";
@@ -12,6 +11,9 @@ import {
 } from "../services/leaderboardService";
 import { IUser } from "../models/IUser";
 import { fetchMunicipalityLupins } from "../services/municipalityService";
+import RegisterLupinsButton from "../components/buttons/RegisterLupinsButton";
+import { useParams } from "react-router-dom";
+import BackButton from "../components/buttons/BackButton";
 
 interface IMunicipality {
   municipalityName: string;
@@ -19,6 +21,7 @@ interface IMunicipality {
 }
 
 const LeaderBoard = () => {
+  const { userId } = useParams<{ userId: string }>();
   const [topMunicipalities, setTopMunicipalities] = useState<IMunicipality[]>(
     []
   );
@@ -130,6 +133,7 @@ const LeaderBoard = () => {
   return (
     <section className="leaderboard">
       <div className="leaderboard-left-column">
+        <BackButton className="leaderboard-back" />
         <h3>Topplista</h3>
         {loading ? (
           <p>Laddar...</p>
@@ -180,7 +184,7 @@ const LeaderBoard = () => {
             </div>
           </div>
         )}
-        <Button text="Registrera lupiner" className="register-lupins-button" />
+        <RegisterLupinsButton userId={userId} />
       </div>
       <SwedenMap />
     </section>

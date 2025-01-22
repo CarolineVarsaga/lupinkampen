@@ -5,6 +5,7 @@
   padding-bottom: 4rem;
   gap: 2rem;
   min-height: 100svh;
+  position: relative;
 
   @include sm {
     @include flex-center-start;
@@ -23,6 +24,11 @@
     @include flex-center-start;
     gap: 2rem;
     width: 100%;
+    margin-top: 3rem;
+
+    .leaderboard-back {
+      position: absolute;
+    }
 
     .leaderboard-container {
       @include flex-center-start;

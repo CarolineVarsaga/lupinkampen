@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import Button from "../Button";
+import ReadMoreButton from "../buttons/ReadMoreButton";
 
 const InfoSection = () => {
   return (
@@ -19,9 +18,7 @@ const InfoSection = () => {
         från marker och naturreservat kan vi ge plats för inhemska växter att
         återhämta sig och bidra till att återställa balansen i vår natur.
       </p>
-      <Link to="/information">
-        <Button text="Läs mer" className="readmore-button" />
-      </Link>
+      <ReadMoreButton />
     </section>
   );
 };

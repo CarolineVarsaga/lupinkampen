@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
+import BackButton from "../buttons/BackButton";
 import SvgWave from "../SvgWave";
 
 const TopSection = () => {
   return (
     <>
       <section className="top-section">
-        <Link to="/" className="link-back">
-          <a className="link-back">Tillbaka till startsidan</a>
-        </Link>
+        <BackButton className="link-back" />
         <h3 className="top-section-heading">Ett hot mot den svenska floran</h3>
         <p className="top-section-text">
           Lupiner är en invasiv art som utgör ett allvarligt hot mot den svenska

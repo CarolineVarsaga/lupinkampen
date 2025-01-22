@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../components/Button";
+import Button from "../components/buttons/Button";
 import {
   assignMedalToUser,
   registerLupins,
@@ -8,6 +8,7 @@ import LupinPicker from "../components/register-lupins/LupinPicker";
 import { lupinesValue } from "../models/lupinesValue";
 import { medals } from "../models/Medals";
 import { useMedalContext } from "../hooks/useMedalContext";
+import BackButton from "../components/buttons/BackButton";
 
 const RegisterLupinesPage = () => {
   const { addNotifiedMedal, hasNotifiedMedal } = useMedalContext();
@@ -70,6 +71,7 @@ const RegisterLupinesPage = () => {
 
   return (
     <section className="register-lupines">
+      <BackButton />
       <div className="register-lupines-container">
         <div className="register-lupines-container-top">
           <h3>Registrera lupiner</h3>

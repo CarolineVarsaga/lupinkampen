@@ -8,6 +8,7 @@ import { useFormContext } from "../../../hooks/useFormContext";
 import { submitForm } from "../../../services/submitForm";
 import SuccessModal from "../SuccessModal";
 import { validateFormData } from "../../../utils/validationsUtils";
+import RegisterButton from "../../buttons/RegisterButton";
 
 const FormRegister = () => {
   const {
@@ -163,9 +164,7 @@ const FormRegister = () => {
             onChange={handleCheckboxChange}
             value=""
           />
-          <button type="submit" className="register-button">
-            Skapa konto
-          </button>
+          <RegisterButton />
         </form>
       )}
     </>
