@@ -6,7 +6,6 @@
   min-height: 1280px;
   position: relative;
   overflow: hidden;
-  //border: 1px solid hotpink;
 
   @include sm {
     min-height: 1100px;
@@ -15,7 +14,6 @@
 
   @include lg {
     @include padding-left-right(4rem, 4rem);
-    //margin-bottom: 4rem;
     margin-top: -6rem;
     height: 1400px;
   }
@@ -134,21 +132,6 @@
         height: auto;
       }
 
-    }
-  }
-
-  .highscore-button {
-    align-self: center;
-    position: absolute;
-    bottom: 3rem;
-
-    @include sm {
-      bottom: 0;
-      margin-bottom: 2rem;
-    }
-
-    @include lg {
-      margin-bottom: 0;
     }
   }
 }

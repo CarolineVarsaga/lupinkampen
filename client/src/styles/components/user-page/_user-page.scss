@@ -1,95 +1,99 @@
 .userpage {
   @include padding-left-right;
-  @include flex-center-start;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
   position: relative;
 
   @include lg {
     @include padding-left-right(10rem, 10rem);
   }
 
-  .link-back {
-    position: absolute;
-    width: 150px;
-    top: 1.5rem;
-    @include heading(small, 200)
-  }
-
-  .userpage-container {
-    width: 100%;
+  .userpage-section {
     @include flex-center-start;
-    gap: 1rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
 
-    @include lg {
-      align-self: center;
-      width: 720px;
+    .link-back {
+      position: absolute;
+      width: 150px;
+      top: 1.5rem;
+      @include heading(small, 200)
     }
 
-    .userpage-username-pic-container {
-      @include flex-center-start(row, flex-start, center);
-      gap: 1rem;
+    .userpage-container {
       width: 100%;
-      padding-top: 2rem;
+      @include flex-center-start;
+      gap: 1rem;
 
-      .userpage-username-container {
+      @include lg {
+        align-self: center;
+        width: 720px;
+      }
+
+      .userpage-username-pic-container {
+        @include flex-center-start(row, flex-start, center);
+        gap: 1rem;
+        width: 100%;
+        padding-top: 2rem;
+
+        .userpage-username-container {
+          @include flex-center-start;
+          gap: 0.5rem;
+
+          h3 {
+            @include heading;
+          }
+
+          .userpage-member-number {
+            @include heading(small, 200);
+            font-style: italic;
+          }
+        }
+      }
+
+
+      .userpage-activity-container,
+      .userpage-medals-container,
+      .userpage-information-container {
         @include flex-center-start;
-        gap: 0.5rem;
+        background-color: $secondary-color;
+        gap: 1rem;
+        border: 1px solid white;
+        border-radius: 12px;
+        padding: 1rem;
+        padding-top: 2rem;
+        padding-bottom: 1.5rem;
+        min-width: 325px;
+        width: 100%;
+      }
 
-        h3 {
-          @include heading;
+      .userpage-activity-container {
+        .userpage-activity-buttons-container {
+          align-self: center;
+          @include flex-center;
+          gap: 1rem;
+          padding-bottom: 0.5rem;
+          padding-top: 0.5rem;
         }
 
-        .userpage-member-number {
-          @include heading(small, 200);
+        .userpage-activity-line {
+          width: 90%;
+        }
+      }
+
+      .userpage-information-container {
+        @include flex-center-start;
+
+        &>p {
           font-style: italic;
         }
       }
-    }
 
-
-    .userpage-activity-container,
-    .userpage-medals-container,
-    .userpage-information-container {
-      @include flex-center-start;
-      background-color: $secondary-color;
-      gap: 1rem;
-      border: 1px solid white;
-      border-radius: 12px;
-      padding: 1rem;
-      padding-top: 2rem;
-      padding-bottom: 1.5rem;
-      min-width: 325px;
-      width: 100%;
-    }
-
-    .userpage-activity-container {
-      .userpage-activity-buttons-container {
+      .userpage-activity-button-leaderboard,
+      .userpage-information-button-edit {
         align-self: center;
-        @include flex-center;
-        gap: 1rem;
-        padding-bottom: 0.5rem;
-        padding-top: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
       }
-
-      .userpage-activity-line {
-        width: 90%;
-      }
-    }
-
-    .userpage-information-container {
-      @include flex-center-start;
-
-      &>p {
-        font-style: italic;
-      }
-    }
-
-    .userpage-activity-button-leaderboard,
-    .userpage-information-button-edit {
-      align-self: center;
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
     }
   }
 }
