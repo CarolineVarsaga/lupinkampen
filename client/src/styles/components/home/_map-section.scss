@@ -1,19 +1,28 @@
 .map-section {
-  @include flex-center-start(column, start, start);
+  @include flex-center-start(column, end, start);
   @include padding-left-right;
+  padding-bottom: 2rem;
   background: linear-gradient(180deg, rgb(187, 171, 199) 0%, rgba(72, 62, 115, 1) 100%);
-  min-height: 1000px;
+  min-height: 1280px;
   position: relative;
   overflow: hidden;
+  //border: 1px solid hotpink;
 
   @include sm {
-    min-height: 1050px;
+    min-height: 1100px;
+    margin-top: -3rem;
   }
 
   @include lg {
     @include padding-left-right(4rem, 4rem);
-    margin-bottom: 4rem;
-    min-height: 1200px;
+    //margin-bottom: 4rem;
+    margin-top: -6rem;
+    height: 1400px;
+  }
+
+  @include xl {
+    margin-top: -7rem;
+    height: 1300px;
   }
 
   .svg-wave-bottom {
@@ -63,7 +72,7 @@
 
     @include lg {
       top: 10rem;
-      margin-left: 7rem;
+      left: 7rem;
     }
 
     @include xl {
@@ -79,11 +88,12 @@
 
     @include lg {
       top: 13rem;
-      margin-left: 11rem;
+      left: 7.5rem;
     }
 
     @include xl {
       top: 17rem;
+      left: 7.5rem;
     }
   }
 
@@ -101,10 +111,30 @@
       width: auto;
     }
 
-    @include lg {
-      top: 57%;
+    @include md {
+      top: 45%;
     }
 
+    @include lg {
+      top: 40%;
+    }
+
+    @include xl {
+      top: 48%;
+    }
+
+    svg {
+      @include md {
+        width: 300px;
+        height: auto;
+      }
+
+      @include lg {
+        width: 400px;
+        height: auto;
+      }
+
+    }
   }
 
   .highscore-button {
