@@ -1,0 +1,43 @@
+.map-section-info {
+  @include padding-left-right;
+  @include flex-center-start;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border: 1px solid $text-white-shell;
+  border-radius: 25px;
+  //width: 320px;
+  width: 100%;
+  max-width: 685px;
+  background-color: $secondary-color;
+  // position: absolute;
+  bottom: 0;
+  align-self: center;
+
+
+  @include xl {
+    position: absolute;
+    right: 100px;
+    top: 0;
+    width: 500px;
+  }
+
+  .map-section-info-text-container {
+    @include flex-center-start;
+    gap: 1rem;
+  }
+
+  .buttons-container {
+    width: inherit;
+    @include flex-center;
+    gap: 1rem;
+
+    @include sm {
+      flex-direction: row;
+    }
+
+    @include xl {
+      @include flex-center-start(row, start, start);
+    }
+  }
+}
