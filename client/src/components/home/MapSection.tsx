@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchTopMunicipalities } from "../../services/leaderboardService";
-import Button from "../Button";
 import SvgWaveBottom from "../SvgWaveBottom";
 import SwedenMap from "../SwedenMap";
+import MapSectionInfo from "./MapSectionInfo";
 
 const MapSection = () => {
   const BackgroundPolygon = "/assets/leading-municipality-container-bg.svg";
@@ -34,28 +34,30 @@ const MapSection = () => {
   }, []);
 
   return (
-    <section className="map-section">
-      <SvgWaveBottom className="svg-wave-bottom" />
-      <div className="round-image-container"></div>
-      <img src={BackgroundPolygon} alt="" className="background-polygon" />
-      <div className="leading-municipality-container">
-        <h3>Just nu</h3>
-        <div>
-          <h4>Ledande kommun:</h4>
-          <p>{leadingMunicipality?.name || "Ingen data tillgänglig"}</p>
+    <>
+      <section className="map-section">
+        <SvgWaveBottom className="svg-wave-bottom" />
+        <div className="round-image-container"></div>
+        <img src={BackgroundPolygon} alt="" className="background-polygon" />
+        <div className="leading-municipality-container">
+          <h3>Just nu</h3>
+          <div>
+            <h4>Ledande kommun:</h4>
+            <p>{leadingMunicipality?.name || "Ingen data tillgänglig"}</p>
+          </div>
+          <div>
+            <h4>Antal plockade lupiner:</h4>
+            <p>
+              {leadingMunicipality
+                ? `${leadingMunicipality.lupins} st`
+                : "Ingen data tillgänglig"}
+            </p>
+          </div>
         </div>
-        <div>
-          <h4>Antal plockade lupiner:</h4>
-          <p>
-            {leadingMunicipality
-              ? `${leadingMunicipality.lupins} st`
-              : "Ingen data tillgänglig"}
-          </p>
-        </div>
-      </div>
-      <SwedenMap />
-      <Button text="Topplista" className="highscore-button" />
-    </section>
+        <SwedenMap />
+        <MapSectionInfo />
+      </section>
+    </>
   );
 };
 
