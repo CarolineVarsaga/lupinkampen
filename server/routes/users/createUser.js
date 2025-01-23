@@ -6,6 +6,23 @@ require("dotenv").config();
 
 const generateUserId = () => Math.floor(Math.random() * 1000000000000);
 
+const avatars = [
+  "/assets/avatar-bee.png",
+  "/assets/avatar-beeswax.png",
+  "/assets/avatar-cactus.png",
+  "/assets/avatar-cloud.png",
+  "/assets/avatar-glove.png",
+  "/assets/avatar-lupine.png",
+  "/assets/avatar-sun.png",
+  "/assets/avatar-sunflower.png",
+  "/assets/avatar-tulip.png",
+];
+
+const getRandomAvatar = () => {
+  const randomIndex = Math.floor(Math.random() * avatars.length);
+  return avatars[randomIndex];
+};
+
 const checkUniqueUserId = async () => {
   const userId = generateUserId();
   const { data, error } = await supabase
@@ -36,6 +53,7 @@ router.post("/", async (req, res) => {
 
     const encryptedPassword = CryptoJS.AES.encrypt(password, salt).toString();
     const userId = await checkUniqueUserId();
+    const avatar = getRandomAvatar();
 
     const { error } = await supabase.from("users").insert([
       {
@@ -45,6 +63,7 @@ router.post("/", async (req, res) => {
         email,
         userMunicipality,
         userAssociation: associationId,
+        avatar,
       },
     ]);
 
@@ -53,7 +72,7 @@ router.post("/", async (req, res) => {
       return res.status(500).json({ message: "Error saving user" });
     }
 
-    res.status(200).json({ message: "User saved successfully", userId });
+    res.status(200).json({ message: "User saved successfully", userId, avatar });
   } catch (err) {
     console.error("Error:", err);
     res.status(500).json({ message: "Internal server error" });

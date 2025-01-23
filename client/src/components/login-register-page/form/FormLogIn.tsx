@@ -12,8 +12,8 @@ interface IFormData {
 
 const FormLogIn = () => {
   const [formData, setFormData] = useState<IFormData>({
-    username: "Tittut22",
-    password: "test1234",
+    username: "",
+    password: "",
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
