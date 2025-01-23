@@ -11,6 +11,7 @@ router.get("/:userId", async (req, res) => {
       .from('users') 
       .select('avatar')
       .eq('userId', userId) 
+      .eq('userDeleted', 0)
       .single(); 
 
     if (error) {
