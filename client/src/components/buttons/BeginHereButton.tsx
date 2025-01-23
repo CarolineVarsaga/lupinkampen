@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { useAuth } from "../../hooks/useAuth";
 
 interface IBeginButtonProps {
   className?: string;
@@ -7,11 +8,15 @@ interface IBeginButtonProps {
 
 const BeginHereButton = ({ className }: IBeginButtonProps) => {
   const navigate = useNavigate();
-
+  const { isAuthenticated, userId: loggedInUserId } = useAuth();
   const combinedClassName = `begin-button ${className || ""}`.trim();
 
   const handleNavigation = () => {
-    navigate("/logga-in");
+    if (!isAuthenticated) {
+      navigate("/logga-in");
+    } else {
+      navigate(`/profil/${loggedInUserId}`);
+    }
   };
 
   return (

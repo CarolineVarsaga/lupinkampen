@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { useAuth } from "../../hooks/useAuth";
 
-interface IRegisterLupinsdButtonProps {
+interface IRegisterLupinsButtonProps {
   className?: string;
   userId: string | undefined;
 }
@@ -9,13 +10,20 @@ interface IRegisterLupinsdButtonProps {
 const RegisterLupinsButton = ({
   className,
   userId,
-}: IRegisterLupinsdButtonProps) => {
+}: IRegisterLupinsButtonProps) => {
   const navigate = useNavigate();
+  const { isAuthenticated, userId: loggedInUserId } = useAuth();
 
   const combinedClassName = `register-lupins-button ${className || ""}`.trim();
 
   const handleNavigation = () => {
-    navigate(`/profil/${userId}/registrera-lupiner`);
+    if (!isAuthenticated) {
+      navigate("/logga-in");
+    } else {
+      if (loggedInUserId) {
+        navigate(`/profil/${userId}/registrera-lupiner`);
+      }
+    }
   };
 
   return (
