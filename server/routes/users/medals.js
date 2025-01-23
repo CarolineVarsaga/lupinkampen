@@ -24,6 +24,7 @@ router.post("/:userId", verifyToken, async (req, res) => {
       .from("users")
       .select("medals")
       .eq("userId", userId)
+      .eq('userDeleted', 0)
       .single();
 
     if (error || !user) {

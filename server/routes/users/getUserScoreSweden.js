@@ -10,6 +10,7 @@ router.get("/:userId", async (req, res) => {
       .from('users') 
       .select('totalPickedLupins') 
       .eq('userId', userId) 
+      .eq('userDeleted', 0)
       .single(); 
 
     if (userError) {
