@@ -18,7 +18,6 @@ const registerLupins = require("./registerLupins.js");
 const getLupins = require("./getLupins.js");
 const getTotalLupins = require("./getTotalLupins.js");
 
-
 router.use("/create", createUser);
 router.use("/login", loginUser);
 router.use("/update", updateUser);
