@@ -2,12 +2,14 @@ import Button from "./buttons/Button";
 
 interface IConfirmationModalProps {
   message: string;
+  confirmButton: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
 const ConfirmationModal = ({
   message,
+  confirmButton,
   onConfirm,
   onCancel,
 }: IConfirmationModalProps) => {
@@ -24,7 +26,7 @@ const ConfirmationModal = ({
           <Button
             onClick={onConfirm}
             className="modal-button-confirm"
-            text="Logga ut"
+            text={confirmButton}
           />
         </div>
       </div>
