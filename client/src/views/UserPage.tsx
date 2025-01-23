@@ -104,7 +104,7 @@ const UserProfile = () => {
                 </div>
               </div>
 
-              <div className="userpage-activity-container">
+              <div className="userpage-content-container">
                 <h4>Aktivitet</h4>
                 <p>Antal plockade lupiner: {totalLupins} st</p>
                 <p>Senast plockade: {recentPickedLupins} st</p>
@@ -121,23 +121,25 @@ const UserProfile = () => {
                 <LeaderboardButton className="userpage-activity-button-leaderboard" />
               </div>
 
-              <div className="userpage-medals-container">
+              <div className="userpage-content-container">
                 <h4>Medaljer</h4>
                 <p>Plocka lupiner och vinn medaljer!</p>
                 <UserMedals userLupinsPicked={totalLupins} />
               </div>
 
-              <div className="userpage-information-container">
+              <div className="userpage-content-container">
                 <h4>Ändra dina uppgifter</h4>
-                <p>Fyll endast i dessa om du behöver ändra dina uppgifter.</p>
+                <p className="userpage-content-paragraph">
+                  Fyll endast i dessa om du behöver ändra dina uppgifter.
+                </p>
                 <EditInformation
                   userData={userData}
                   municipalityName={municipalityName || "Välj en kommun"}
                 />
               </div>
-              <div className="userpage-information-container userpage-delete-user">
+              <div className="userpage-content-container userpage-delete-user">
                 <h4>Radera konto</h4>
-                <p>
+                <p className="userpage-content-paragraph">
                   Klicka endast på knappen om du vill avsluta ditt konto. Går ej
                   att ångra!
                 </p>
