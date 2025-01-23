@@ -1,0 +1,12 @@
+.notfound-container {
+  @include flex-center;
+  @include padding-left-right;
+  gap: 2rem;
+  height: 100svh;
+
+  .notfound-heading {
+    @include flex-center(row, center, center);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
