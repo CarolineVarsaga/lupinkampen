@@ -8,7 +8,7 @@ router.get("/:municipalityId", async (req, res) => {
   try {
     const { data: leaderboard, error } = await supabase
       .from("users")
-      .select("userId, userName, totalPickedLupins")
+      .select("userId, userName, totalPickedLupins, avatar")
       .eq("userMunicipality", municipalityId)
       .order("totalPickedLupins", { ascending: false })
       .limit(10); 
