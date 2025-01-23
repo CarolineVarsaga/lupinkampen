@@ -10,12 +10,13 @@ import LeaderBoard from "./views/LeaderBoard";
 import CookiePolicy from "./views/CookiePolicy";
 import TermsOfServicePage from "./views/TermsOfServicePage";
 import PrivacyPolicyPage from "./views/PrivacyPolicyPage";
+import NotFound from "./views/NotFound";
 
 export const router = createHashRouter([
   {
     path: "/",
     element: <Layout />,
-    // errorElement: <NotFound />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
