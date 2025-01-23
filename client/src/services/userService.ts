@@ -1,5 +1,5 @@
 import { IUser, IUserWithPlacement } from "../models/IUser";
-import { getRequest, postRequest } from "./baseService";
+import { deleteRequest, getRequest, postRequest } from "./baseService";
 
 //================================================================
 
@@ -118,3 +118,23 @@ export const updateUser = async (
 };
 
 //================================================================
+//=======================   DELETE USER   ========================
+//================================================================
+
+interface IDeletePayload {
+  userId: string;
+}
+
+interface IDeleteResponse {
+  success: boolean;
+  message: string;
+}
+
+export const deleteUserService = async (
+  userId: string
+): Promise<IDeleteResponse> => {
+  const url = `api/users/delete/${userId}`;
+  const payload: IDeletePayload = { userId };
+
+  return await deleteRequest<IDeletePayload, IDeleteResponse>(url, payload);
+};

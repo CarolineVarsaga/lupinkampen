@@ -1,0 +1,30 @@
+.userpage-delete-user {
+  .delete-user-label {
+    @include flex-center-start(row, start, center);
+    gap: 1rem;
+    width: 100%;
+
+    input[type=checkbox] {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      accent-color: $hover-button-red;
+    }
+  }
+
+  .delete-user-button {
+    background-color: $button-red;
+
+    &:hover {
+      background-color: $hover-button-red;
+    }
+
+    &:disabled {
+      background-color: #8a8989;
+      border-color: #a6a6a6;
+      color: #1e1e1e;
+      box-shadow: none;
+      cursor: auto;
+    }
+  }
+}

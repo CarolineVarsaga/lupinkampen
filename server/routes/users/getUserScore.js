@@ -27,6 +27,7 @@ router.get("/:userId", async (req, res) => {
       .from('users') 
       .select('userId, userName, totalPickedLupins')
       .eq('userMunicipality', userMunicipality) 
+      .eq('userDeleted', 0)
       .order('totalPickedLupins', { ascending: false });
 
     if (leaderboardError) {

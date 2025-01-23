@@ -113,6 +113,7 @@ const DropDownMenu = () => {
       {isModalOpen && (
         <ConfirmationModal
           message="Vill du logga ut?"
+          confirmButton="Logga ut"
           onConfirm={handleConfirmLogout}
           onCancel={handleCancelLogout}
         />

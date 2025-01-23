@@ -8,6 +8,7 @@ router.get("/:userId", async (req, res) => {
       .from('users')
       .select('userName, email, userMunicipality, userId, medals')
       .eq('userId', req.params.userId)
+      .eq('userDeleted', 0)
       .single(); 
 
     if (error) {

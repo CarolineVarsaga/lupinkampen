@@ -29,6 +29,10 @@ router.post("/", async (req, res) => {
     if (data) {
       const user = data;
       
+      if (user.userDeleted === 1) {
+        return res.status(403).json({ message: "This account is no longer active." });
+      }
+
       const decryptedPassword = CryptoJS.AES.decrypt(user.password, salt).toString(CryptoJS.enc.Utf8);
 
       if (decryptedPassword === password) {
