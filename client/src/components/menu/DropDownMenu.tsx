@@ -77,7 +77,10 @@ const DropDownMenu = () => {
                       <Link to="/topplista" onClick={toggleMenu}>
                         <li className="dropdown-item">Topplista</li>
                       </Link>
-                      <Link to="/registrera-lupiner" onClick={toggleMenu}>
+                      <Link
+                        to="/profil/:userId/registrera-lupiner"
+                        onClick={toggleMenu}
+                      >
                         <li className="dropdown-item">Registrera lupiner</li>
                       </Link>
                       <Link to="/om-lupinkampen" onClick={toggleMenu}>
