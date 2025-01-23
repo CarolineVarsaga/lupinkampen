@@ -12,9 +12,20 @@
     align-self: start;
   }
 
+  .register-lupines-container,
+  .register-lupines-container-top,
+  .register-lupines-container-bottom {
+    @include flex-center-start;
+  }
+
+  .register-lupines-container,
+  .register-lupines-container-top,
+  .register-lupines-container-bottom {
+    width: 100%;
+  }
+
   .register-lupines-container {
     margin-top: 4.5rem;
-    @include flex-center-start;
     background-color: $secondary-color;
     gap: 2rem;
     border: 1px solid white;
@@ -23,7 +34,6 @@
     padding-top: 2rem;
     padding-bottom: 1.5rem;
     min-width: 325px;
-    width: 100%;
 
     @include lg {
       @include flex-center;
@@ -32,9 +42,7 @@
 
     .register-lupines-container-top,
     .register-lupines-container-bottom {
-      @include flex-center-start;
       gap: 1rem;
-      width: 100%;
       max-width: 700px;
     }
 
@@ -88,7 +96,7 @@
 
   .register-lupines-add-container,
   .register-lupines-total-container {
-    @include flex-center-start(row, space-between, flex-start);
+    @include flex-center-start(row, space-between, start);
     @include padding-left-right;
     background-color: $tertiary-color;
     padding-top: 0.5rem;
@@ -100,20 +108,22 @@
 
   .register-lupines-total-container {
     @include flex-center-start(column, space-between, start);
-    width: 100%;
     padding-bottom: 1rem;
     padding-top: 1rem;
     min-height: 220px;
 
-    .lupines-list {
+    .lupines-list,
+    .lupines-total {
       width: inherit;
+    }
+
+    .lupines-list {
       display: flex;
       flex-direction: column-reverse;
       gap: 0.5rem;
     }
 
     .lupines-total {
-      width: inherit;
       margin-top: auto;
     }
 

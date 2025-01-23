@@ -6,8 +6,27 @@
     @include padding-left-right(10rem, 10rem);
   }
 
-  .userpage-section {
+  .userpage-section,
+  .userpage-container,
+  .userpage-username-container,
+  .userpage-content-container {
     @include flex-center-start;
+  }
+
+  .userpage-container,
+  .userpage-username-pic-container,
+  .userpage-content-container,
+  .userpage-activity-buttons-container {
+    gap: 1rem;
+  }
+
+  .userpage-container,
+  .userpage-username-pic-container,
+  .userpage-content-container {
+    width: 100%;
+  }
+
+  .userpage-section {
     padding-top: 4rem;
     padding-bottom: 4rem;
     position: relative;
@@ -20,10 +39,6 @@
     }
 
     .userpage-container {
-      width: 100%;
-      @include flex-center-start;
-      gap: 1rem;
-
       @include lg {
         align-self: center;
         width: 720px;
@@ -31,12 +46,9 @@
 
       .userpage-username-pic-container {
         @include flex-center-start(row, flex-start, center);
-        gap: 1rem;
-        width: 100%;
         padding-top: 2rem;
 
         .userpage-username-container {
-          @include flex-center-start;
           gap: 0.5rem;
 
           h3 {
@@ -50,41 +62,30 @@
         }
       }
 
-
-      .userpage-activity-container,
-      .userpage-medals-container,
-      .userpage-information-container {
-        @include flex-center-start;
+      .userpage-content-container {
         background-color: $secondary-color;
-        gap: 1rem;
         border: 1px solid white;
         border-radius: 12px;
         padding: 1rem;
         padding-top: 2rem;
         padding-bottom: 1.5rem;
         min-width: 325px;
-        width: 100%;
+
+        .userpage-content-paragraph {
+          font-style: italic;
+        }
       }
 
-      .userpage-activity-container {
+      .userpage-content-container {
         .userpage-activity-buttons-container {
           align-self: center;
           @include flex-center;
-          gap: 1rem;
           padding-bottom: 0.5rem;
           padding-top: 0.5rem;
         }
 
         .userpage-activity-line {
           width: 90%;
-        }
-      }
-
-      .userpage-information-container {
-        @include flex-center-start;
-
-        &>p {
-          font-style: italic;
         }
       }
 
