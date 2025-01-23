@@ -56,3 +56,25 @@ export const getRequest = async <T>(
     throw error;
   }
 };
+
+//======================================================
+
+export const deleteRequest = async <T, U>(
+  url: string,
+  data: T,
+  withToken: boolean = true
+): Promise<U> => {
+  try {
+    const headers = withToken
+      ? {
+          Authorization: `Bearer ${token || ""}`,
+        }
+      : {};
+
+    const response = await customAxios.delete(url, { headers, data });
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching data from ${url}:`, error);
+    throw error;
+  }
+};
