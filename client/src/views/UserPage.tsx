@@ -1,97 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { IUser } from "../models/IUser";
-import { fetchMunicipalityName } from "../services/municipalityService";
-import {
-  fetchTotalLupins,
-  fetchUserData,
-  fetchUserPlacement,
-  fetchUserAvatar,
-} from "../services/userService";
 import { useAuth } from "../hooks/useAuth";
 import EditInformation from "../components/user-page/EditInformation";
 import UserMedals from "../components/user-page/UserMedals";
 import LeaderboardButton from "../components/buttons/LeaderboardButton";
 import RegisterLupinsButton from "../components/buttons/RegisterLupinsButton";
 import BackButton from "../components/buttons/BackButton";
+import useUserDetails from "../hooks/useUserDetails";
 
 const UserProfile = () => {
-  const { userId } = useParams<{ userId: string }>();
-  const [userData, setUserData] = useState<IUser | null>(null);
-  const [municipalityName, setMunicipalityName] = useState<string | null>(null);
-  const [totalLupins, setTotalLupins] = useState<number | null>(null);
-  const [recentPickedLupins, setRecentPickedLupins] = useState<number | null>(
-    null
-  );
-  const [userPlacementMunicipality, setUserPlacementMunicipality] = useState<
-    number | null
-  >(null);
-  const [userPlacementSweden, setUserPlacementSweden] = useState<number | null>(
-    null
-  );
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-
-  const navigate = useNavigate();
+  const userId = useParams<{ userId: string | undefined }>().userId;
   const { isAuthenticated, userId: loggedInUserId } = useAuth();
+  const navigate = useNavigate();
+  const {
+    userData,
+    profileImage,
+    municipalityName,
+    totalLupins,
+    recentPickedLupins,
+    userPlacementMunicipality,
+    userPlacementSweden,
+    loading,
+    error,
+  } = useUserDetails(userId!);
 
   useEffect(() => {
-    const stringLoggedInUserId = String(loggedInUserId);
-
     if (!isAuthenticated) {
       navigate("/logga-in");
       return;
     }
 
+    const stringLoggedInUserId = String(loggedInUserId);
     if (userId !== stringLoggedInUserId) {
       navigate("/logga-in");
-      return;
     }
+  }, [userId, isAuthenticated, loggedInUserId, navigate]);
 
-    const fetchUserDataDetails = async () => {
-      const token = localStorage.getItem("token");
-
-      if (token) {
-        try {
-          const [userDataResponse, avatarUrl] = await Promise.all([
-            fetchUserData(userId),
-            fetchUserAvatar(userId),
-          ]);
-
-          setUserData(userDataResponse);
-          setProfileImage(avatarUrl);
-
-          const municipalityNameResponse = await fetchMunicipalityName(
-            userDataResponse.userMunicipality
-          );
-          setMunicipalityName(municipalityNameResponse);
-
-          const lupinsResponse = await fetchTotalLupins(userId);
-          setTotalLupins(lupinsResponse.totalPickedLupins);
-          setRecentPickedLupins(lupinsResponse.recentlyPickedLupins);
-
-          const municipalityPlacementResponse = await fetchUserPlacement(
-            userId,
-            "municipality"
-          );
-          setUserPlacementMunicipality(
-            municipalityPlacementResponse.userPlacement
-          );
-
-          const swedenPlacementResponse = await fetchUserPlacement(
-            userId,
-            "sweden"
-          );
-          setUserPlacementSweden(swedenPlacementResponse.userPlacement);
-        } catch (error) {
-          console.error("Error fetching user profile data:", error);
-        }
-      } else {
-        console.log("No token found");
-      }
-    };
-
-    fetchUserDataDetails();
-  }, [userId, navigate, loggedInUserId, isAuthenticated]);
+  if (loading) return <p>Laddar användardata...</p>;
+  if (error) return <p>Det gick inte att hämta användardata.</p>;
 
   return (
     <div className="userpage">
