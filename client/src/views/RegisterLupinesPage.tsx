@@ -1,14 +1,12 @@
 import { useState } from "react";
 import Button from "../components/buttons/Button";
-import {
-  assignMedalToUser,
-  registerLupins,
-} from "../services/registerLupinService";
+import { registerLupins } from "../services/registerLupinService";
 import LupinPicker from "../components/register-lupins/LupinPicker";
 import { lupinesValue } from "../models/lupinesValue";
 import { medals } from "../models/Medals";
 import { useMedalContext } from "../hooks/useMedalContext";
 import BackButton from "../components/buttons/BackButton";
+import { assignMedalToUser } from "../services/userService";
 
 const RegisterLupinesPage = () => {
   const { addNotifiedMedal, hasNotifiedMedal } = useMedalContext();

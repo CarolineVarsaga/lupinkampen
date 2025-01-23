@@ -1,0 +1,111 @@
+.user-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $primary-color;
+  z-index: 900;
+  width: 100%;
+  min-height: 100%;
+  @include padding-left-right;
+  @include flex-center(column, start, start);
+
+  @include sm {
+    @include flex-center;
+  }
+
+  @include lg {
+    @include padding-left-right(10rem, 10rem);
+  }
+
+  .user-popup-content {
+    text-align: center;
+    @include flex-center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
+
+    @include sm {
+      @include padding-left-right;
+      border: 1px solid $text-white-shell;
+      border-radius: 12px;
+      padding-top: 2rem;
+    }
+
+    .medals-container-popup {
+      display: flex;
+      align-self: center;
+      gap: 1.2rem;
+      max-width: 400px;
+      width: 100%;
+      min-width: 200px;
+
+      @include sm {
+        width: 100%;
+      }
+
+      .medal-icon-popup {
+        svg {
+          gap: 2px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    h3 {
+      align-self: center;
+    }
+
+    .user-popup-top {
+      align-self: center;
+      @include flex-center;
+      gap: 1rem;
+      width: inherit;
+
+      .user-popup-top-left {
+        @include flex-center;
+        gap: 0.5rem;
+
+        .user-avatar-popup {
+          width: 60px;
+          height: auto;
+        }
+      }
+
+      .user-popup-top-right {
+        @include flex-center-start;
+        gap: 1rem;
+        width: inherit;
+
+        div {
+          @include flex-center-start;
+          align-self: start;
+          width: inherit;
+        }
+
+        h4 {
+          align-self: center;
+        }
+      }
+    }
+
+    .line {
+      width: 100%;
+      margin: 0;
+    }
+
+    .close-button {
+      border: 1px solid white;
+      background: none;
+      background-color: $button-red;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $hover-button-red;
+      }
+    }
+  }
+}

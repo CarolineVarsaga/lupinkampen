@@ -6,7 +6,7 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   position: fixed;
-  z-index: 20;
+  z-index: 99999;
   width: 100%;
 
   @include lg {
@@ -25,5 +25,9 @@
 
   .user-menu-container {
     gap: 2rem;
+
+    .dropdown-button {
+      @include flex-center;
+    }
   }
 }

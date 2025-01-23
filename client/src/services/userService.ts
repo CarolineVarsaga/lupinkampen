@@ -67,6 +67,25 @@ export const fetchUserPlacement = async (
 };
 
 //================================================================
+
+interface IAssignMedalToUserRequest {
+  name: string;
+}
+export const assignMedalToUser = async (userId: string, medal: string) => {
+  const data: IAssignMedalToUserRequest = { name: medal };
+  try {
+    const response = await postRequest(
+      `/api/users/medals/${userId}`,
+      data,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fel vid uppdatering av medaljer:", error);
+  }
+};
+
+//================================================================
 //=======================   UPDATE USER   ========================
 //================================================================
 

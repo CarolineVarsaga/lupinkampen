@@ -14,6 +14,7 @@ import { fetchMunicipalityLupins } from "../services/municipalityService";
 import RegisterLupinsButton from "../components/buttons/RegisterLupinsButton";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/buttons/BackButton";
+import UserDetailsModal from "../components/leaderboard/UserDetailsModal";
 
 interface IMunicipality {
   municipalityName: string;
@@ -28,7 +29,7 @@ const LeaderBoard = () => {
   const [topUsers, setTopUsers] = useState<IUser[]>([]);
   const [totalLupins, setTotalLupins] = useState<number>(0);
   const [municipalityLupins, setMunicipalityLupins] = useState<number>(0);
-
+  const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { selectedOption, setSelectedOption, formData, setFormData } =
@@ -55,6 +56,7 @@ const LeaderBoard = () => {
     const getTopUsers = async () => {
       try {
         const data = await fetchTopUsers();
+        console.log("Fetched users from API:", data);
         setTopUsers(data);
       } catch (err) {
         setError("Kunde inte hämta topplistan över användare.");
@@ -174,10 +176,27 @@ const LeaderBoard = () => {
                   <p>{error}</p>
                 ) : (
                   topUsers.map((user, index) => (
-                    <p key={index} className="result-list-line">
-                      {index + 1}. {user.userName}{" "}
-                      <span>{user.totalPickedLupins} st</span>
-                    </p>
+                    <>
+                      <div className="result-list-line-container">
+                        {index + 1}.
+                        <img
+                          src={user.avatar}
+                          alt={`${user.userName}'s avatar`}
+                          width="25"
+                          className="user-avatar"
+                        />
+                        <p
+                          key={index}
+                          className="result-list-name"
+                          onClick={() => setSelectedUser(user)}
+                        >
+                          {user.userName}{" "}
+                          <span className="result-list-amount">
+                            {user.totalPickedLupins} st
+                          </span>
+                        </p>
+                      </div>
+                    </>
                   ))
                 )}
               </div>
@@ -187,6 +206,12 @@ const LeaderBoard = () => {
         <RegisterLupinsButton userId={userId} />
       </div>
       <SwedenMap />
+      {selectedUser && (
+        <UserDetailsModal
+          user={selectedUser}
+          onClose={() => setSelectedUser(null)}
+        />
+      )}
     </section>
   );
 };
