@@ -9,7 +9,7 @@ export interface IUser {
   recentlyPickedLupins: number;
   totalPickedLupins: number;
   avatar: string;
-  medals: string;
+  medals: string[];
   userDeleted: number;
 }
 
