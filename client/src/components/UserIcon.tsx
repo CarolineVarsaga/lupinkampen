@@ -9,23 +9,6 @@ const UserIcon = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (isAuthenticated && userId) {
-  //     const loadAvatar = async () => {
-  //       try {
-  //         const avatarUrl = await fetchUserAvatar(userId);
-  //         setProfileImage(avatarUrl);
-  //       } catch (error) {
-  //         console.error("Failed to fetch avatar", error);
-  //         setProfileImage(null);
-  //       }
-  //     };
-
-  //     loadAvatar();
-  //   } else {
-  //     setProfileImage(null);
-  //   }
-  // }, [isAuthenticated, userId]);
   useEffect(() => {
     const loadAvatar = async () => {
       if (!userId) {
