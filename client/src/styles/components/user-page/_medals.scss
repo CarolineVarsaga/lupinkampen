@@ -3,12 +3,14 @@
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-
+  z-index: 9999;
+  position: relative;
 
   .medal {
     cursor: pointer;
     position: relative;
     color: #f43afe;
+    z-index: 9999;
 
     &.newbee {
       color: white;
@@ -45,6 +47,7 @@
     &:hover .tooltip {
       visibility: visible;
       opacity: 1;
+      z-index: 9999;
     }
 
     .tooltip {
@@ -56,23 +59,25 @@
       left: 50%;
       transform: translateX(-50%);
       background-color: #555;
-      color: #fff;
+      color: $text-white-shell;
       text-align: center;
       border-radius: 5px;
       padding: 5px;
       width: 250px;
       max-width: 200px;
-      font-size: 14px;
       opacity: 0;
       transition: opacity 0.3s;
+      z-index: 9999;
 
       .tooltip-text {
-        font-size: 14px;
+        z-index: 9999;
 
         &.amount {
+          z-index: 9999;
           font-weight: 500;
         }
       }
     }
+
   }
 }

@@ -61,15 +61,49 @@
           @include flex-center-start(column, space-between, flex-start);
           width: inherit;
 
-          .result-list-line {
-            width: inherit;
-            @include flex-center-start(row, space-between, flex-start);
+          .result-list-line,
+          .result-list-line-container {
             @include padding-left-right(0.3rem, 0.3rem);
+            width: inherit;
             padding-top: 0.3rem;
             padding-bottom: 0.3rem;
+            font-weight: 200;
 
             &:nth-child(odd) {
               background-color: $primary-color;
+            }
+          }
+
+          .result-list-line {
+            @include flex-center-start(row, space-between, flex-start);
+          }
+
+          .result-list-line-container {
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            cursor: pointer;
+
+            &:hover {
+              background-color: #3f3665;
+            }
+
+            &:nth-child(odd) {
+              background-color: $primary-color;
+
+              &:hover {
+                background-color: #3f3665;
+              }
+            }
+
+            .user-avatar {
+              grid-column: 2 / span 1;
+              margin-left: 0.5rem;
+              margin-right: 0.5rem;
+            }
+
+            .result-list-name {
+              grid-column: 3 / span 18;
+              @include flex-center-start(row, space-between, flex-start);
             }
           }
         }
