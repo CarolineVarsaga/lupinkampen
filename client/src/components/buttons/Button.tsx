@@ -1,12 +1,13 @@
 interface IButton {
   text: string;
   className?: string;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
-const Button = ({ text, className, onClick }: IButton) => {
+const Button = ({ text, className, onClick, disabled }: IButton) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );
