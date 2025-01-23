@@ -22,14 +22,16 @@ const UserMedals = ({ userLupinsPicked }: IUserMedals) => {
   );
 
   return (
-    <div className="medals-container">
+    <div className="medals-container medals-container-popup">
       {userMedals.length > 0 ? (
         userMedals.map((medal) => (
           <div
             key={medal.name}
             className={`medal ${getMedalColorClass(medal.threshold)}`}
           >
-            {medal.icon && <div>{medal.icon}</div>}
+            {medal.icon && (
+              <div className="medal-icon medal-icon-popup">{medal.icon}</div>
+            )}
             <div className="tooltip">
               <h4 className="tooltip-text">{`${medal.name}`}</h4>
               <p className="tooltip-text amount">{`${medal.threshold} st plockade lupiner`}</p>
