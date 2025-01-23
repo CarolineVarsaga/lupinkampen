@@ -1,16 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { verifyToken } = require("../../middleware/authMiddleware.js");
 const supabase = require("../../config/supabase.js"); 
 
-router.get("/:userId", verifyToken, async (req, res) => {
-  const userIdFromToken = String(req.user.id);
-  const userIdFromParams = String(req.params.userId);
-
-  if (userIdFromToken !== userIdFromParams) {
-    return res.status(403).json({ message: "You are not authorized to access this data." });
-  }
-
+router.get("/:userId", async (req, res) => {  
   try {
     const { data, error } = await supabase
       .from('users')
