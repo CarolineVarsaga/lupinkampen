@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { login as loginService } from "../../../services/auth";
 import { useAuth } from "../../../hooks/useAuth";
 import LogInButton from "../../buttons/LogInButton";
+import axios from "axios";
 
 interface IFormData {
   username: string;
@@ -23,15 +24,17 @@ const FormLogIn = () => {
   useEffect(() => {
     const checkNewUser = async () => {
       try {
-        const response = await fetch(`/api/users/check/${formData.username}`);
-        const data = await response.json();
-        if (data.user) {
+        const response = await axios.get(
+          `/api/users/check/${formData.username}`
+        );
+        if (response.data.user) {
           setSuccessMessage("Ny användare hittad!");
         }
       } catch (error) {
         console.log("Error checking user:", error);
       }
     };
+
     if (formData.username) {
       checkNewUser();
     }
@@ -50,7 +53,7 @@ const FormLogIn = () => {
         setErrorMessage(null);
 
         console.log("Navigating to profile...");
-        navigate(`/profil/${user}`);
+        navigate(`/profil/${user}`, { replace: true });
       } else {
         throw new Error("Inloggning misslyckades. Försök igen.");
       }
