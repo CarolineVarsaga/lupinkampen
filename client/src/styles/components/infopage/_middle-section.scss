@@ -10,6 +10,7 @@
   @include lg {
     @include padding-left-right(10rem, 10rem);
     grid-template-columns: 1fr;
+    padding-bottom: 4rem;
   }
 
   @include xl {
