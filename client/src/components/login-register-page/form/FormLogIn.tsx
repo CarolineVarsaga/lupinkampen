@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
 import { login as loginService } from "../../../services/auth";
@@ -19,6 +19,23 @@ const FormLogIn = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  useEffect(() => {
+    const checkNewUser = async () => {
+      try {
+        const response = await fetch(`/api/users/check/${formData.username}`);
+        const data = await response.json();
+        if (data.user) {
+          setSuccessMessage("Ny användare hittad!");
+        }
+      } catch (error) {
+        console.log("Error checking user:", error);
+      }
+    };
+    if (formData.username) {
+      checkNewUser();
+    }
+  }, [formData.username]);
 
   const loginUser = async () => {
     try {
