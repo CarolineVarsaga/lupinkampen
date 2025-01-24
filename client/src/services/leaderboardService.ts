@@ -34,3 +34,13 @@ export const fetchTopMunicipalityUsers = async (
 export const fetchTotalLupins = async (): Promise<ITotalLupins> => {
   return await getRequest<ITotalLupins>("api/users/getTotalLupins");
 };
+
+export const fetchLeaderboardUserInfo = async (userId: string) => {
+  try {
+    const response = await getRequest<IUser>(`/api/users/score/${userId}`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};

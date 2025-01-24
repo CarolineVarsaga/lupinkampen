@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import ProtectedLink from "../components/ProtectedLink";
 
 const Footer = () => {
   return (
@@ -12,9 +13,11 @@ const Footer = () => {
             <Link to="/">Startsida</Link>
             <Link to="/information">Information om lupiner</Link>
             <Link to="/topplista">Topplista</Link>
-            <Link to="/profil/:userId/registrera-lupiner">
-              Registrera lupiner
-            </Link>
+            <ProtectedLink
+              to="/profil/:userId/registrera-lupiner"
+              text="Registrera lupiner"
+              className="footer-link"
+            />
             <Link to="/">Om Lupinkampen</Link>
             <Link to="/">FAQ - Frågor och svar</Link>
           </div>

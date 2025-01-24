@@ -8,7 +8,7 @@
   width: 100%;
   min-height: 100%;
   @include padding-left-right;
-  @include flex-center(column, start, start);
+  @include flex-center(column, center, start);
 
   @include sm {
     @include flex-center;
@@ -21,7 +21,7 @@
   .user-popup-content {
     text-align: center;
     @include flex-center;
-    padding-top: 2rem;
+    padding-top: 5rem;
     padding-bottom: 2rem;
     gap: 1rem;
     width: 100%;

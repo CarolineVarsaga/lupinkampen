@@ -1,21 +1,11 @@
 import { useState, useEffect } from "react";
-import {
-  fetchUserData,
-  fetchUserAvatar,
-  fetchTotalLupins,
-  fetchUserPlacement,
-} from "../services/userService";
+import { fetchUserData, fetchUserPlacement } from "../services/userService";
 import { fetchMunicipalityName } from "../services/municipalityService";
 import { IUser } from "../models/IUser";
 
 const useUserDetails = (userId: string) => {
   const [userData, setUserData] = useState<IUser | null>(null);
-  const [profileImage, setProfileImage] = useState<string | null>(null);
   const [municipalityName, setMunicipalityName] = useState<string | null>(null);
-  const [totalLupins, setTotalLupins] = useState<number | null>(null);
-  const [recentPickedLupins, setRecentPickedLupins] = useState<number | null>(
-    null
-  );
   const [userPlacementMunicipality, setUserPlacementMunicipality] = useState<
     number | null
   >(null);
@@ -30,24 +20,22 @@ const useUserDetails = (userId: string) => {
       setLoading(true);
       setError(null);
 
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("Ingen giltig token hittades. Vänligen logga in igen.");
+        setLoading(false);
+        return;
+      }
+
       try {
-        const [userDataResponse, avatarUrl] = await Promise.all([
-          fetchUserData(userId),
-          fetchUserAvatar(userId),
-        ]);
+        const userDataResponse = await fetchUserData(userId);
 
         setUserData(userDataResponse);
-        setProfileImage(avatarUrl);
 
         const municipalityNameResponse = await fetchMunicipalityName(
           userDataResponse.userMunicipality
         );
         setMunicipalityName(municipalityNameResponse);
-
-        const lupinsResponse = await fetchTotalLupins(userId);
-        setTotalLupins(lupinsResponse.totalPickedLupins);
-        setRecentPickedLupins(lupinsResponse.recentlyPickedLupins);
-
         const municipalityPlacementResponse = await fetchUserPlacement(
           userId,
           "municipality"
@@ -62,8 +50,8 @@ const useUserDetails = (userId: string) => {
         );
         setUserPlacementSweden(swedenPlacementResponse.userPlacement);
       } catch (error) {
-        setError("Failed to fetch user details");
-        console.error("Error fetching user profile data:", error);
+        setError("Kunde inte hämta användardetaljer.");
+        console.error("Fel vid hämtning av användarprofil:", error);
       } finally {
         setLoading(false);
       }
@@ -72,12 +60,26 @@ const useUserDetails = (userId: string) => {
     fetchUserDataDetails();
   }, [userId]);
 
+  if (!userData) {
+    return {
+      userData: null,
+      municipalityName: null,
+      profileImage: "/assets/avatar-lupine.png",
+      totalLupins: 0,
+      recentPickedLupins: 0,
+      userPlacementMunicipality: 0,
+      userPlacementSweden: 0,
+      loading,
+      error,
+    };
+  }
+
   return {
     userData,
-    profileImage,
     municipalityName,
-    totalLupins,
-    recentPickedLupins,
+    profileImage: userData.avatar,
+    totalLupins: userData.totalPickedLupins,
+    recentPickedLupins: userData.recentlyPickedLupins,
     userPlacementMunicipality,
     userPlacementSweden,
     loading,

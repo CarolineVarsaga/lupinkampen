@@ -62,7 +62,8 @@
           width: inherit;
 
           .result-list-line,
-          .result-list-line-container {
+          .result-list-line-container,
+          .result-list-line-container-municipality {
             @include padding-left-right(0.3rem, 0.3rem);
             width: inherit;
             padding-top: 0.3rem;
@@ -74,12 +75,10 @@
             }
           }
 
-          .result-list-line {
-            @include flex-center-start(row, space-between, flex-start);
-          }
-
-          .result-list-line-container {
+          .result-list-line-container,
+          .result-list-line-container-municipality {
             display: grid;
+            align-items: center;
             grid-template-columns: repeat(20, 1fr);
             cursor: pointer;
 
@@ -95,15 +94,36 @@
               }
             }
 
+            .result-list-number,
+            .user-avatar {
+              margin-right: 0.5rem;
+            }
+
+            .result-list-number {
+              width: 20px;
+            }
+
             .user-avatar {
               grid-column: 2 / span 1;
-              margin-left: 0.5rem;
-              margin-right: 0.5rem;
             }
 
             .result-list-name {
               grid-column: 3 / span 18;
-              @include flex-center-start(row, space-between, flex-start);
+              @include flex-center-start(row, space-between, center);
+            }
+          }
+
+          .result-list-line-container-municipality {
+            cursor: auto;
+
+            &:hover {
+              background-color: transparent;
+            }
+
+            &:nth-child(odd) {
+              &:hover {
+                background-color: $primary-color;
+              }
             }
           }
         }

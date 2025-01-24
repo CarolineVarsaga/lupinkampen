@@ -18,36 +18,6 @@ export const fetchUserData = async (userId: string) => {
 
 //================================================================
 
-export const fetchUserAvatar = async (userId: string) => {
-  try {
-    const response = await getRequest<IUser>(
-      `/api/users/avatar/${userId}`,
-      true
-    );
-    return response.avatar;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw error;
-  }
-};
-
-//================================================================
-
-export const fetchTotalLupins = async (userId: string) => {
-  try {
-    const response = await getRequest<IUser>(
-      `/api/users/getLupins/${userId}`,
-      true
-    );
-    return response;
-  } catch (error) {
-    console.error("Error fetching total lupins:", error);
-    throw error;
-  }
-};
-
-//================================================================
-
 export const fetchUserPlacement = async (
   userId: string,
   scope: "municipality" | "sweden"
