@@ -36,6 +36,10 @@
         flex-direction: row;
       }
 
+      .footer-link {
+        cursor: pointer;
+      }
+
       .footer-terms-policy,
       .footer-page-links {
         @include flex-center-start;
