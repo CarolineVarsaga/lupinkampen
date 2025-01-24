@@ -8,13 +8,13 @@ interface IBackButtonProps {
 
 const BackButton = ({ className }: IBackButtonProps) => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userId } = useAuth();
 
   const combinedClassName = `back-button ${className || ""}`.trim();
 
   const handleBack = () => {
-    if (!isAuthenticated) {
-      navigate("/");
+    if (!isAuthenticated && window.location.pathname === "/logga-in") {
+      navigate(`/profil/${userId}`, { replace: true });
     } else {
       navigate(-1);
     }

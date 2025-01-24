@@ -21,7 +21,7 @@ const UserDetailsModal = ({ user, onClose }: IUserDetailsModalProps) => {
     null
   );
 
-  const selectedUser = topUsers.find((u) => u.userId === user.userId);
+  const selectedUser = topUsers.find((u) => u.userId === user.userId) || user;
 
   useEffect(() => {
     const fetchAdditionalData = async () => {

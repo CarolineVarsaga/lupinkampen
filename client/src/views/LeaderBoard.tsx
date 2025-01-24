@@ -413,7 +413,7 @@ const LeaderBoard = () => {
                 {error && topUsers.length === 0 ? (
                   <p>{error}</p>
                 ) : (
-                  topUsers.map((user, index) => (
+                  topUsers.slice(0, 10).map((user, index) => (
                     <div className="result-list-line-container" key={index}>
                       <span className="result-list-number">{index + 1}.</span>
                       <img
