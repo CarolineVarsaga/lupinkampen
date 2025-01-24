@@ -8,15 +8,13 @@ const deleteUser = require("./deleteUser.js");
 const getUser = require("./getUser.js");
 const getUserScore = require("./getUserScore.js");
 const getUserScoreSweden = require("./getUserScoreSweden.js");
-const getTopUsers = require("./getLeadingUsers.js");
+const getTopUsers = require("./getLeadingUsersSweden.js");
 const getUsersScoreMunicipality = require("./getUsersScoreMunicipality.js");
 
-const getUserImage = require("./getUserImage.js");
 const medals = require("./medals.js");
  
 const registerLupins = require("./registerLupins.js");
-const getLupins = require("./getLupins.js");
-const getTotalLupins = require("./getTotalLupins.js");
+const getTotalLupins = require("./getTotalLupinsSweden.js");
 
 router.use("/create", createUser);
 router.use("/login", loginUser);
@@ -28,11 +26,9 @@ router.use("/scoreSweden", getUserScoreSweden);
 router.use("/topUsers", getTopUsers); 
 router.use("/getUsersScoreMunicipality", getUsersScoreMunicipality);
 
-router.use("/avatar", getUserImage)
 router.use("/medals", medals);
 
 router.use("/registerLupins", registerLupins); 
-router.use("/getLupins", getLupins); 
 router.use("/getTotalLupins", getTotalLupins); 
 
 module.exports = router;
