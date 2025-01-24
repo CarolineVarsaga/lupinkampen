@@ -11,6 +11,8 @@ const getUserScoreSweden = require("./getUserScoreSweden.js");
 const getTopUsers = require("./getLeadingUsersSweden.js");
 const getUsersScoreMunicipality = require("./getUsersScoreMunicipality.js");
 
+const checkUser = require("./checkUser.js");
+
 const medals = require("./medals.js");
  
 const registerLupins = require("./registerLupins.js");
@@ -25,6 +27,8 @@ router.use("/score", getUserScore);
 router.use("/scoreSweden", getUserScoreSweden); 
 router.use("/topUsers", getTopUsers); 
 router.use("/getUsersScoreMunicipality", getUsersScoreMunicipality);
+
+router.use("/check", checkUser);
 
 router.use("/medals", medals);
 
