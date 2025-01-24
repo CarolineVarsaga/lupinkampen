@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
     const userId = await checkUniqueUserId();
     const avatar = getRandomAvatar();
 
-    const { error } = await supabase.from("users").insert([
+    const { data: newUser, error } = await supabase.from("users").insert([
       {
         userId,
         userName,
@@ -65,9 +65,9 @@ router.post("/", async (req, res) => {
         userAssociation: associationId,
         avatar,
       },
-    ]);
-
-    if (error) {
+    ]).select("*").single(); 
+    
+    if (error || !newUser) {
       console.error("Error saving user:", error);
       return res.status(500).json({ message: "Error saving user" });
     }
