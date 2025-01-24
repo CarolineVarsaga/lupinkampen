@@ -1,31 +1,13 @@
-import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { fetchUserAvatar } from "../services/userService";
+import useUserDetails from "../hooks/useUserDetails";
 
 const UserIcon = () => {
   const { isAuthenticated, userId } = useAuth();
-  const [profileImage, setProfileImage] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const loadAvatar = async () => {
-      if (!userId) {
-        setProfileImage(null);
-        return;
-      }
-
-      try {
-        const avatarUrl = await fetchUserAvatar(userId);
-        setProfileImage(avatarUrl);
-      } catch (error) {
-        console.error("Failed to fetch avatar", error);
-        setProfileImage(null);
-      }
-    };
-    loadAvatar();
-  }, [userId]);
+  const { profileImage } = useUserDetails(userId!);
 
   const handleIconClick = () => {
     if (isAuthenticated) {
@@ -37,7 +19,7 @@ const UserIcon = () => {
 
   return (
     <div onClick={handleIconClick} className="user-icon-container">
-      {profileImage ? (
+      {isAuthenticated && profileImage ? (
         <img
           src={profileImage}
           alt="User avatar"
