@@ -24,7 +24,7 @@ const UserPage = () => {
     municipalityName,
     setMunicipalityName,
     totalLupins,
-    recentPickedLupins,
+    recentlyPickedLupins,
     userPlacementMunicipality,
     userPlacementSweden,
     error,
@@ -105,7 +105,7 @@ const UserPage = () => {
 
               <UserActivitySection
                 totalLupins={totalLupins}
-                recentPickedLupins={recentPickedLupins}
+                recentlyPickedLupins={recentlyPickedLupins}
                 userPlacementMunicipality={userPlacementMunicipality}
                 userPlacementSweden={userPlacementSweden}
                 userId={userId!.toString()}
