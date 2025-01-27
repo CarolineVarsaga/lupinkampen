@@ -34,6 +34,7 @@ const CookiePolicy = () => {
             Syfte: Ett autentiseringstoken som låter användaren förbli inloggad.
             Detta är nödvändig lagring.
           </p>
+          <p>Utgår: 1 timme, eller när användaren loggar ut.</p>
         </div>
         <div>
           <h4>Nyckel: userId</h4>
@@ -41,6 +42,7 @@ const CookiePolicy = () => {
             Syfte: Lagrar användarens unika ID för att koppla dem till rätt data
             under inloggningen. Detta är nödvändig lagring.
           </p>
+          <p>Utgår: 1 timme, eller när användaren loggar ut.</p>
         </div>
         <div>
           <h4>Nyckel: cookiesAccepted</h4>
@@ -64,6 +66,7 @@ const CookiePolicy = () => {
             som är tillåtet enligt våra säkerhetsprinciper. Detta är nödvändig
             lagring.
           </p>
+          <p>Utgår: 1 timme, eller när användaren loggar ut.</p>
         </div>
       </div>
     </section>
