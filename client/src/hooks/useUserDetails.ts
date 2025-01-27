@@ -29,6 +29,13 @@ const useUserDetails = (userId: string) => {
 
       try {
         const userDataResponse = await fetchUserData(userId);
+        setUserData(userDataResponse);
+
+        if (!userDataResponse) {
+          setError("Inget användardata hittades.");
+          setLoading(false);
+          return;
+        }
 
         setUserData(userDataResponse);
 
@@ -57,7 +64,9 @@ const useUserDetails = (userId: string) => {
       }
     };
 
-    fetchUserDataDetails();
+    if (userId) {
+      fetchUserDataDetails();
+    }
   }, [userId]);
 
   if (!userData) {
