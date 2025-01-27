@@ -3,7 +3,7 @@ import LeaderboardButton from "../buttons/LeaderboardButton";
 
 interface IUserActivitySectionProps {
   totalLupins: number;
-  recentPickedLupins: number;
+  recentlyPickedLupins: number;
   userPlacementMunicipality: number | null;
   userPlacementSweden: number | null;
   userId: string;
@@ -12,7 +12,7 @@ interface IUserActivitySectionProps {
 
 const UserActivitySection = ({
   totalLupins,
-  recentPickedLupins,
+  recentlyPickedLupins,
   userPlacementMunicipality,
   userPlacementSweden,
   userId,
@@ -20,7 +20,7 @@ const UserActivitySection = ({
   <div className="userpage-content-container">
     <h4>Aktivitet</h4>
     <p>Antal plockade lupiner: {totalLupins} st</p>
-    <p>Senast plockade: {recentPickedLupins} st</p>
+    <p>Senast plockade: {recentlyPickedLupins} st</p>
     <div className="userpage-activity-buttons-container">
       <RegisterLupinsButton userId={userId} />
     </div>

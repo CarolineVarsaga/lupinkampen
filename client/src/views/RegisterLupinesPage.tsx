@@ -49,15 +49,14 @@ const RegisterLupinesPage = () => {
       const userData = cachedUserData ? JSON.parse(cachedUserData) : {};
 
       userData.totalPickedLupins = newTotal;
+      userData.recentlyPickedLupins = totalPickedLupins;
 
       const earnedMedals = medals.filter(
         (medal) => newTotal >= medal.threshold
       );
-
       const sortedEarnedMedals = earnedMedals.sort(
         (a, b) => b.threshold - a.threshold
       );
-
       const latestMedal = sortedEarnedMedals[0];
 
       if (latestMedal && !hasNotifiedMedal(latestMedal.name)) {
@@ -72,14 +71,16 @@ const RegisterLupinesPage = () => {
           userData.medals.push(latestMedal.name);
         }
 
-        localStorage.setItem("userData", JSON.stringify(userData));
-
         addNotifiedMedal(latestMedal.name);
       }
 
-      if (!latestMedal) {
-        localStorage.setItem("userData", JSON.stringify(userData));
-      }
+      localStorage.setItem("userData", JSON.stringify(userData));
+
+      const resetLupines: { [key: number]: number } = {};
+      lupinesValue.forEach((option) => {
+        resetLupines[option.id] = 0;
+      });
+      setLupinesPerOption(resetLupines);
     } catch (error) {
       console.error("Det gick inte att registrera lupiner:", error);
       alert("Ett fel inträffade vid registrering av lupiner.");
@@ -101,6 +102,7 @@ const RegisterLupinesPage = () => {
               incrementValue={1}
               min={0}
               max={100}
+              value={lupinesPerOption[option.id]}
               onLupinsChange={handleLupinsChange}
             />
           ))}

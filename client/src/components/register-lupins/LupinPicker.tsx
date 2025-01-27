@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ILupinPickerProps {
   name: string;
@@ -6,6 +6,7 @@ interface ILupinPickerProps {
   incrementValue: number;
   min: number;
   max: number;
+  value: number;
   onLupinsChange: (newValue: number, id: number) => void;
 }
 
@@ -15,9 +16,14 @@ const LupinPicker = ({
   incrementValue,
   min,
   max,
+  value,
   onLupinsChange,
 }: ILupinPickerProps) => {
   const [lupinsPicked, setLupinsPicked] = useState(min);
+
+  useEffect(() => {
+    setLupinsPicked(value);
+  }, [value]);
 
   const handleIncrease = () => {
     if (lupinsPicked + incrementValue <= max) {
