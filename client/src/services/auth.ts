@@ -3,6 +3,7 @@ import { customAxios } from "./baseService";
 interface ILoginResponse {
   token: string;
   user: string;
+  expiresIn: number;
 }
 
 export const login = async (username: string, password: string) => {
@@ -16,9 +17,9 @@ export const login = async (username: string, password: string) => {
     );
 
     if (response.status === 200) {
-      const { token, user } = response.data;
+      const { token, user, expiresIn } = response.data;
 
-      return { token, user };
+      return { token, user, expiresIn };
     }
   } catch (error) {
     console.error("Login error:", error);
