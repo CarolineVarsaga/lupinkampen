@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
           { expiresIn: "1h" }
         );
 
-        res.status(200).json({ user: user.userId, message: "Logged in", token });
+        res.status(200).json({ user: user.userId, message: "Logged in", token, expiresIn: 3600 });
       } else {
         res.status(401).json({ message: "Wrong username or password" });
       }
