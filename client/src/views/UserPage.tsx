@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import EditInformation from "../components/user-page/EditInformation";
-import UserMedals from "../components/user-page/UserMedals";
-import LeaderboardButton from "../components/buttons/LeaderboardButton";
-import RegisterLupinsButton from "../components/buttons/RegisterLupinsButton";
-import BackButton from "../components/buttons/BackButton";
 import useUserDetails from "../hooks/useUserDetails";
-import Button from "../components/buttons/Button";
 import ConfirmationModal from "../components/ConfirmationModal";
 import { deleteUserService } from "../services/userService";
+import UserProfileSection from "../components/user-page/UserProfileSection";
+import UserActivitySection from "../components/user-page/UserActivitySection";
+import UserMedalsSection from "../components/user-page/UserMedalsSection";
+import UserEditSection from "../components/user-page/UserEditSection";
+import UserDeleteSection from "../components/user-page/UserDeleteSection";
+import BackButton from "../components/buttons/BackButton";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-const UserProfile = () => {
+const UserPage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,37 +21,44 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const {
     userData,
-    profileImage,
     municipalityName,
+    setMunicipalityName,
     totalLupins,
     recentPickedLupins,
     userPlacementMunicipality,
     userPlacementSweden,
     error,
-  } = useUserDetails(userId!);
+  } = useUserDetails(userId);
+
   useEffect(() => {
     if (!isAuthenticated || !userId) {
       navigate("/logga-in");
       return;
     }
-
     if (!userData) {
       setLoading(true);
       return;
     }
-
     setLoading(false);
-
-    const stringLoggedInUserId = String(userId);
-    const loggedInUserId = stringLoggedInUserId;
-
-    if (loggedInUserId !== stringLoggedInUserId) {
-      navigate("/logga-in");
-    }
   }, [userId, isAuthenticated, navigate, userData]);
 
+  useEffect(() => {
+    const cachedMunicipalityName = localStorage.getItem("municipalityName");
+
+    if (cachedMunicipalityName) {
+      try {
+        setMunicipalityName(JSON.parse(cachedMunicipalityName));
+      } catch (e) {
+        console.error(
+          "Fel vid parsing av municipalityName från localStorage:",
+          e
+        );
+      }
+    }
+  }, [setMunicipalityName]);
+
   if (loading) {
-    return <p>Laddar användardata...</p>;
+    return <LoadingSpinner />;
   }
 
   if (error) {
@@ -73,26 +81,12 @@ const UserProfile = () => {
 
   const deleteUser = async (userId: string) => {
     try {
-      const response = await deleteUserService(userId);
-      console.log(response.message);
-
+      await deleteUserService(userId);
       logout();
     } catch (error) {
       console.error("Något gick fel vid radering av användaren:", error);
       alert("Kunde inte radera kontot. Försök igen senare.");
     }
-  };
-
-  const handleClickDelete = () => {
-    setIsModalOpen(true);
-  };
-  const handleConfirm = () => {
-    deleteUser(userId!);
-    navigate("/logga-in");
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
   };
 
   return (
@@ -102,96 +96,49 @@ const UserProfile = () => {
         {userData ? (
           <section className="userpage-section">
             <div className="userpage-container">
-              <div className="userpage-username-pic-container">
-                <img
-                  src={profileImage || "/assets/profile-pic.png"}
-                  width={96}
-                  height={96}
-                  alt="profilbild"
-                />
-                <div className="userpage-username-container">
-                  <h3>{userData.userName}</h3>
-                  <p className="userpage-member-number">
-                    Medlemsnummer: {userData.userId}
-                  </p>
-                  <p>Kommun: {municipalityName}</p>
-                </div>
-              </div>
+              <UserProfileSection
+                userName={userData.userName}
+                userId={userData.userId.toString()}
+                profileImage={userData.avatar}
+                municipalityName={municipalityName}
+              />
 
-              <div className="userpage-content-container">
-                <h4>Aktivitet</h4>
-                <p>Antal plockade lupiner: {totalLupins} st</p>
-                <p>Senast plockade: {recentPickedLupins} st</p>
-                <div className="userpage-activity-buttons-container">
-                  <RegisterLupinsButton userId={userId?.toString()} />
-                </div>
-                <hr className="userpage-activity-line" />
-                {userPlacementMunicipality !== null && (
-                  <p>Placering i kommunen: {userPlacementMunicipality}</p>
-                )}
-                {userPlacementSweden !== null && (
-                  <p>Placering i Sverige: {userPlacementSweden}</p>
-                )}
-                <LeaderboardButton className="userpage-activity-button-leaderboard" />
-              </div>
-
-              <div className="userpage-content-container">
-                <h4>Medaljer</h4>
-                <p>Plocka lupiner och vinn medaljer!</p>
-                <UserMedals userLupinsPicked={totalLupins} />
-              </div>
-
-              <div className="userpage-content-container">
-                <h4>Ändra dina uppgifter</h4>
-                <p className="userpage-content-paragraph">
-                  Fyll endast i dessa om du behöver ändra dina uppgifter.
-                </p>
-                <EditInformation
-                  userData={userData}
-                  municipalityName={municipalityName || "Välj en kommun"}
-                />
-              </div>
-              <div className="userpage-content-container userpage-delete-user">
-                <h4>Radera konto</h4>
-                <p className="userpage-content-paragraph">
-                  Klicka endast på knappen om du vill avsluta ditt konto. Går ej
-                  att ångra!
-                </p>
-                <label htmlFor="checkbox" className="delete-user-label">
-                  <input
-                    type="checkbox"
-                    id="deleteUserCheckbox"
-                    name="deleteUserCheckbox"
-                    className="delete-user-checkbox"
-                    value=""
-                    checked={isChecked}
-                    onChange={handleCheckboxChange}
-                  />
-                  <span>Ja, jag vill radera mitt konto</span>
-                </label>
-                <Button
-                  text="Radera konto"
-                  className="delete-user-button"
-                  disabled={isDisabled}
-                  onClick={handleClickDelete}
-                />
-              </div>
+              <UserActivitySection
+                totalLupins={totalLupins}
+                recentPickedLupins={recentPickedLupins}
+                userPlacementMunicipality={userPlacementMunicipality}
+                userPlacementSweden={userPlacementSweden}
+                userId={userId!.toString()}
+                loading={loading}
+              />
+              <UserMedalsSection totalLupins={totalLupins} />
+              <UserEditSection
+                userData={userData}
+                municipalityName={municipalityName || "Välj en kommun"}
+                setMunicipalityName={setMunicipalityName}
+              />
+              <UserDeleteSection
+                isChecked={isChecked}
+                isDisabled={isDisabled}
+                handleCheckboxChange={handleCheckboxChange}
+                handleClickDelete={() => setIsModalOpen(true)}
+              />
             </div>
           </section>
         ) : (
-          <p>Laddar användardata...</p>
+          <LoadingSpinner />
         )}
       </div>
       {isModalOpen && (
         <ConfirmationModal
           message="Vill du radera kontot?"
           confirmButton="Radera konto"
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
+          onConfirm={() => deleteUser(userId)}
+          onCancel={() => setIsModalOpen(false)}
         />
       )}
     </>
   );
 };
 
-export default UserProfile;
+export default UserPage;
