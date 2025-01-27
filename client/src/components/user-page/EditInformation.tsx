@@ -6,10 +6,12 @@ import { FormEvent } from "react";
 import { IUser } from "../../models/IUser";
 import Dropdown from "../login-register-page/form/InputDropDown";
 import { municipalities } from "../../models/IMunicipality";
+import { fetchMunicipalityName } from "../../services/municipalityService";
 
 interface IEditInformationProps {
   userData: IUser;
   municipalityName: string;
+  setMunicipalityName: (name: string) => void;
 }
 
 interface IUpdateFields {
@@ -26,6 +28,7 @@ interface IDropdownOption {
 const EditInformation = ({
   userData,
   municipalityName,
+  setMunicipalityName,
 }: IEditInformationProps) => {
   const { formData, setFormData, selectedOption, setSelectedOption } =
     useFormContext();
@@ -55,6 +58,31 @@ const EditInformation = ({
       ...formData,
       [name]: value,
     });
+  };
+
+  const updateMunicipalityInLocalStorage = async (
+    newMunicipalityId: string
+  ) => {
+    const cachedUserData = localStorage.getItem("userData");
+
+    if (cachedUserData) {
+      const userData = JSON.parse(cachedUserData);
+      userData.userMunicipality = newMunicipalityId;
+
+      try {
+        const municipalityNameResponse = await fetchMunicipalityName(
+          Number(newMunicipalityId)
+        );
+        localStorage.setItem(
+          "municipalityName",
+          JSON.stringify(municipalityNameResponse)
+        );
+        userData.municipalityName = municipalityNameResponse;
+        localStorage.setItem("userData", JSON.stringify(userData));
+      } catch (error) {
+        console.error("Fel vid hämtning av kommunenamn:", error);
+      }
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -99,6 +127,16 @@ const EditInformation = ({
       Number(formData.municipality) !== userData.userMunicipality
     ) {
       updates.userMunicipality = formData.municipality;
+
+      updateMunicipalityInLocalStorage(formData.municipality);
+
+      const selectedMunicipality = municipalities.find(
+        (muni) => muni.municipalityId.toString() === formData.municipality
+      );
+
+      if (selectedMunicipality && setMunicipalityName) {
+        setMunicipalityName(selectedMunicipality.municipalityName);
+      }
     }
 
     try {
