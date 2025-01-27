@@ -19,7 +19,7 @@ const SvgWaveBottom = ({ className }: ISvg) => {
           d="M-5.64,113.98 C190.18,31.09 452.03,142.61 500.00,49.98"
           fill="none"
           stroke="white"
-          stroke-width="1"
+          strokeWidth="1"
         ></path>
       </svg>
     </>
