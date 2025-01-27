@@ -10,7 +10,6 @@ const useSpeciesData = () => {
 
   const getData = async () => {
     try {
-      console.log("Fetching data from API...");
       const data = await getSpeciesData();
       setLupinsInfo(data);
       saveToLocalStorage("lupins", data);
@@ -26,7 +25,6 @@ const useSpeciesData = () => {
     if (storedLupins) {
       try {
         const parsedLupins = JSON.parse(storedLupins) as ISpeciesData[];
-        console.log("Loaded data from localStorage:", parsedLupins);
         setLupinsInfo(parsedLupins);
         setFetched(true);
       } catch (error) {
@@ -34,7 +32,6 @@ const useSpeciesData = () => {
         getData();
       }
     } else {
-      console.log("No data in localStorage, fetching from API...");
       getData();
     }
   }, []);
