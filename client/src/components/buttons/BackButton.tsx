@@ -1,5 +1,5 @@
 import { FaArrowLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 interface IBackButtonProps {
@@ -8,14 +8,15 @@ interface IBackButtonProps {
 
 const BackButton = ({ className }: IBackButtonProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isAuthenticated, userId } = useAuth();
 
   const combinedClassName = `back-button ${className || ""}`.trim();
 
   const handleBack = () => {
-    if (!isAuthenticated && window.location.pathname === "/logga-in") {
+    if (!isAuthenticated && location.pathname === "/logga-in") {
       navigate(`/profil/${userId}`, { replace: true });
-    } else {
+    } else if (location.pathname !== "/logga-in") {
       navigate(-1);
     }
   };

@@ -10,7 +10,7 @@ const LogInPage = () => {
         <h3>Logga in</h3>
         <FormLogIn />
         <Link to="/registrera" className="register-link">
-          <a className="register-link">Inte medlem? Registrera ett konto</a>
+          Inte medlem? Registrera ett konto
         </Link>
       </div>
     </section>

@@ -16,7 +16,6 @@ const SwedenMap = () => {
         const response = await fetch("/assets/sweden.svg");
         const svgText = await response.text();
         setSvgContent(svgText);
-        console.log("SVG fetched successfully");
       } catch (error) {
         console.error("Error loading SVG", error);
       }
@@ -32,7 +31,6 @@ const SwedenMap = () => {
           `${baseURL}/api/municipalities/topMunicipalities`
         );
         const data = await response.json();
-        console.log("Fetched leading municipality data:", data);
 
         const leadingMunicipality = data[0];
         setLeadingMunicipalityId(leadingMunicipality.municipalityId);

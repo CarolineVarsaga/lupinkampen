@@ -12,7 +12,6 @@ const useLeaderboardUserInfo = () => {
     setError(null);
     try {
       const data: IUser[] = await fetchTopUsers();
-      console.log("Fetched top users from API:", data);
       setTopUsers(data);
     } catch (err) {
       setError("Kunde inte hämta topplistan över användare.");

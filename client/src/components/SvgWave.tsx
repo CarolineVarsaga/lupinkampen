@@ -15,7 +15,7 @@ const SvgWave = ({ className }: ISvg) => {
         d="M-3.38,57.73 C210.50,230.44 361.17,69.58 500.56,148.53"
         fill="none"
         stroke="white"
-        stroke-width="1"
+        strokeWidth="1"
       ></path>
     </svg>
   );

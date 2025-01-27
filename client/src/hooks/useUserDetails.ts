@@ -19,7 +19,7 @@ const useUserDetails = (userId: string) => {
     const fetchUserDataDetails = async () => {
       setLoading(true);
       setError(null);
-
+      const userDataResponse = await fetchUserData(userId);
       const token = localStorage.getItem("token");
       if (!token) {
         setError("Ingen giltig token hittades. Vänligen logga in igen.");
@@ -28,21 +28,53 @@ const useUserDetails = (userId: string) => {
       }
 
       try {
-        const userDataResponse = await fetchUserData(userId);
-        setUserData(userDataResponse);
+        const cachedUserData = localStorage.getItem("userData");
+        if (cachedUserData) {
+          try {
+            setUserData(JSON.parse(cachedUserData));
+          } catch (e) {
+            console.error(
+              "Fel vid parsing av användardata från localStorage:",
+              e
+            );
 
-        if (!userDataResponse) {
-          setError("Inget användardata hittades.");
-          setLoading(false);
-          return;
+            setUserData(userDataResponse);
+            localStorage.setItem("userData", JSON.stringify(userDataResponse));
+          }
+        } else {
+          const userDataResponse = await fetchUserData(userId);
+          setUserData(userDataResponse);
+          localStorage.setItem("userData", JSON.stringify(userDataResponse));
         }
 
-        setUserData(userDataResponse);
-
-        const municipalityNameResponse = await fetchMunicipalityName(
-          userDataResponse.userMunicipality
-        );
-        setMunicipalityName(municipalityNameResponse);
+        const cachedMunicipalityName = localStorage.getItem("municipalityName");
+        if (!cachedMunicipalityName) {
+          const municipalityNameResponse = await fetchMunicipalityName(
+            userDataResponse.userMunicipality
+          );
+          setMunicipalityName(municipalityNameResponse);
+          localStorage.setItem(
+            "municipalityName",
+            JSON.stringify(municipalityNameResponse)
+          );
+        } else {
+          try {
+            setMunicipalityName(JSON.parse(cachedMunicipalityName));
+          } catch (e) {
+            console.error(
+              "Fel vid parsing av municipalityName från localStorage:",
+              e
+            );
+            const municipalityNameResponse = await fetchMunicipalityName(
+              userDataResponse.userMunicipality
+            );
+            setMunicipalityName(municipalityNameResponse);
+            localStorage.setItem(
+              "municipalityName",
+              JSON.stringify(municipalityNameResponse)
+            );
+          }
+        }
         const municipalityPlacementResponse = await fetchUserPlacement(
           userId,
           "municipality"
@@ -78,6 +110,7 @@ const useUserDetails = (userId: string) => {
       recentPickedLupins: 0,
       userPlacementMunicipality: 0,
       userPlacementSweden: 0,
+      setMunicipalityName,
       loading,
       error,
     };
@@ -91,6 +124,7 @@ const useUserDetails = (userId: string) => {
     recentPickedLupins: userData.recentlyPickedLupins,
     userPlacementMunicipality,
     userPlacementSweden,
+    setMunicipalityName,
     loading,
     error,
   };

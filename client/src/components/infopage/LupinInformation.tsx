@@ -3,7 +3,6 @@ import useSpeciesData from "../../hooks/useSpeciesData";
 const LupinInformation = () => {
   const { lupinsInfo, error, fetched } = useSpeciesData();
 
-  console.log("lupinsInfo:", lupinsInfo);
   if (!fetched) return <p>Hämtar lupininformation...</p>;
   if (error) return <p>Fel vid hämtning av lupininformation: {error}</p>;
   if (lupinsInfo.length === 0) {

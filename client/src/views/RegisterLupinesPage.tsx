@@ -34,7 +34,7 @@ const RegisterLupinesPage = () => {
       return;
     }
 
-    const totalLupinesPicked = Object.entries(lupinesPerOption).reduce(
+    const totalPickedLupins = Object.entries(lupinesPerOption).reduce(
       (sum, [optionId, count]) => {
         const option = lupinesValue.find((s) => s.id === Number(optionId));
         return option ? sum + option.lupinesAmount * count : sum;
@@ -43,7 +43,13 @@ const RegisterLupinesPage = () => {
     );
 
     try {
-      const newTotal = await registerLupins(userId, totalLupinesPicked);
+      const newTotal = await registerLupins(userId, totalPickedLupins);
+
+      const cachedUserData = localStorage.getItem("userData");
+      const userData = cachedUserData ? JSON.parse(cachedUserData) : {};
+
+      userData.totalPickedLupins = newTotal;
+
       const earnedMedals = medals.filter(
         (medal) => newTotal >= medal.threshold
       );
@@ -59,7 +65,20 @@ const RegisterLupinesPage = () => {
 
         alert(`Grattis! Du har just fått medaljen ${latestMedal.name}!`);
 
+        if (!userData.medals) {
+          userData.medals = [];
+        }
+        if (!userData.medals.includes(latestMedal.name)) {
+          userData.medals.push(latestMedal.name);
+        }
+
+        localStorage.setItem("userData", JSON.stringify(userData));
+
         addNotifiedMedal(latestMedal.name);
+      }
+
+      if (!latestMedal) {
+        localStorage.setItem("userData", JSON.stringify(userData));
       }
     } catch (error) {
       console.error("Det gick inte att registrera lupiner:", error);

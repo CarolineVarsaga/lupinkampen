@@ -60,6 +60,7 @@
         .result-list {
           @include flex-center-start(column, space-between, flex-start);
           width: inherit;
+          min-width: 621px;
 
           .result-list-line,
           .result-list-line-container,

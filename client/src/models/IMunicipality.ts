@@ -1,7 +1,7 @@
 export interface IMunicipality {
   municipalityName: string;
   municipalityId: number;
-  municipalityTotalPickedLupins?: number | undefined;
+  municipalityTotalPickedLupins?: number;
 }
 
 export const municipalities: IMunicipality[] = [
