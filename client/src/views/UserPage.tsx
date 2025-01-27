@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import EditInformation from "../components/user-page/EditInformation";
 import UserMedals from "../components/user-page/UserMedals";
@@ -15,8 +15,8 @@ const UserProfile = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const userId = useParams<{ userId: string | undefined }>().userId;
-  const { isAuthenticated, userId: loggedInUserId, logout } = useAuth();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { isAuthenticated, logout, userId } = useAuth();
   const navigate = useNavigate();
   const {
     userData,
@@ -26,24 +26,40 @@ const UserProfile = () => {
     recentPickedLupins,
     userPlacementMunicipality,
     userPlacementSweden,
-    loading,
     error,
   } = useUserDetails(userId!);
-
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !userId) {
       navigate("/logga-in");
       return;
     }
 
-    const stringLoggedInUserId = String(loggedInUserId);
-    if (userId !== stringLoggedInUserId) {
+    if (!userData) {
+      setLoading(true);
+      return;
+    }
+
+    setLoading(false);
+
+    const stringLoggedInUserId = String(userId);
+    const loggedInUserId = stringLoggedInUserId;
+
+    if (loggedInUserId !== stringLoggedInUserId) {
       navigate("/logga-in");
     }
-  }, [userId, isAuthenticated, loggedInUserId, navigate]);
+  }, [userId, isAuthenticated, navigate, userData]);
 
-  if (loading) return <p>Laddar användardata...</p>;
-  if (error) return <p>Det gick inte att hämta användardata.</p>;
+  if (loading) {
+    return <p>Laddar användardata...</p>;
+  }
+
+  if (error) {
+    return <p>Det gick inte att hämta användardata.</p>;
+  }
+
+  if (!userData) {
+    return <p>Inget användardata hittades.</p>;
+  }
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -56,8 +72,6 @@ const UserProfile = () => {
   };
 
   const deleteUser = async (userId: string) => {
-    console.log("Raderar konto...");
-
     try {
       const response = await deleteUserService(userId);
       console.log(response.message);
@@ -109,7 +123,7 @@ const UserProfile = () => {
                 <p>Antal plockade lupiner: {totalLupins} st</p>
                 <p>Senast plockade: {recentPickedLupins} st</p>
                 <div className="userpage-activity-buttons-container">
-                  <RegisterLupinsButton userId={userId} />
+                  <RegisterLupinsButton userId={userId?.toString()} />
                 </div>
                 <hr className="userpage-activity-line" />
                 {userPlacementMunicipality !== null && (
