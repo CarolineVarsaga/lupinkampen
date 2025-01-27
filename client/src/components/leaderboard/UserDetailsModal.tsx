@@ -5,6 +5,7 @@ import Button from "../buttons/Button";
 import useLeaderboardUserInfo from "../../hooks/useLeaderboardUserInfo";
 import { fetchMunicipalityName } from "../../services/municipalityService";
 import { fetchUserPlacement } from "../../services/userService";
+import LoadingSpinner from "../LoadingSpinner";
 
 interface IUserDetailsModalProps {
   user: IUser;
@@ -54,7 +55,7 @@ const UserDetailsModal = ({ user, onClose }: IUserDetailsModalProps) => {
     fetchAdditionalData();
   }, [selectedUser]);
 
-  if (loading) return <p>Laddar...</p>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <p>Error: {error}</p>;
 
   if (!selectedUser) {
@@ -81,10 +82,24 @@ const UserDetailsModal = ({ user, onClose }: IUserDetailsModalProps) => {
             <h4>Aktivitet</h4>
             <div>
               <p>Antal plockade lupiner: {selectedUser.totalPickedLupins}</p>
-              <p>
-                Placering i kommunen: {userPlacementMunicipality ?? "Hämtas..."}
-              </p>
-              <p>Placering i Sverige: {userPlacementSweden ?? "Hämtas..."}</p>
+              <div>
+                <p>
+                  Placering i kommunen:{" "}
+                  {userPlacementMunicipality ? (
+                    userPlacementMunicipality
+                  ) : (
+                    <LoadingSpinner />
+                  )}
+                </p>
+                <p>
+                  Placering i Sverige:{" "}
+                  {userPlacementSweden ? (
+                    userPlacementSweden
+                  ) : (
+                    <LoadingSpinner />
+                  )}
+                </p>
+              </div>
             </div>
           </div>
         </div>
