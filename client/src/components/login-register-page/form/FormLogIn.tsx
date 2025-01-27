@@ -1,10 +1,9 @@
-import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
 import { login as loginService } from "../../../services/auth";
 import { useAuth } from "../../../hooks/useAuth";
 import LogInButton from "../../buttons/LogInButton";
-import axios from "axios";
 
 interface IFormData {
   username: string;
@@ -21,33 +20,14 @@ const FormLogIn = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  useEffect(() => {
-    const checkNewUser = async () => {
-      try {
-        const response = await axios.get(
-          `/api/users/check/${formData.username}`
-        );
-        if (response.data.user) {
-          setSuccessMessage("Ny användare hittad!");
-        }
-      } catch (error) {
-        console.log("Error checking user:", error);
-      }
-    };
-
-    if (formData.username) {
-      checkNewUser();
-    }
-  }, [formData.username]);
-
   const loginUser = async () => {
     try {
       const response = await loginService(formData.username, formData.password);
 
-      if (response && response.token && response.user) {
-        const { token, user } = response;
+      if (response && response.token && response.user && response.expiresIn) {
+        const { token, user, expiresIn } = response;
 
-        login(user, token);
+        login(user, token, expiresIn);
 
         setSuccessMessage("Inloggad!");
         setErrorMessage(null);
