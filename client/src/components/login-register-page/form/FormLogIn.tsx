@@ -32,7 +32,6 @@ const FormLogIn = () => {
         setSuccessMessage("Inloggad!");
         setErrorMessage(null);
 
-        console.log("Navigating to profile...");
         navigate(`/profil/${user}`, { replace: true });
       } else {
         throw new Error("Inloggning misslyckades. Försök igen.");
