@@ -1,8 +1,6 @@
 import axios from "axios";
 import { baseURL } from "../utils/baseUrl";
 
-const token = localStorage.getItem("token");
-
 //=======================================================
 //===================   EXPORTS   =======================
 //=======================================================
@@ -22,6 +20,10 @@ export const postRequest = async <T, U>(
   withToken: boolean = false
 ): Promise<U> => {
   try {
+    const token = localStorage.getItem("token");
+    if (withToken && !token) {
+      throw new Error("Ingen giltig token hittades. Vänligen logga in.");
+    }
     const headers = withToken
       ? {
           Authorization: `Bearer ${token || ""}`,
@@ -43,6 +45,11 @@ export const getRequest = async <T>(
   withToken: boolean = false
 ): Promise<T> => {
   try {
+    const token = localStorage.getItem("token");
+    if (withToken && !token) {
+      throw new Error("Ingen giltig token hittades. Vänligen logga in.");
+    }
+
     const headers = withToken
       ? {
           Authorization: `Bearer ${token || ""}`,
@@ -65,6 +72,10 @@ export const deleteRequest = async <T, U>(
   withToken: boolean = true
 ): Promise<U> => {
   try {
+    const token = localStorage.getItem("token");
+    if (withToken && !token) {
+      throw new Error("Ingen giltig token hittades. Vänligen logga in.");
+    }
     const headers = withToken
       ? {
           Authorization: `Bearer ${token || ""}`,

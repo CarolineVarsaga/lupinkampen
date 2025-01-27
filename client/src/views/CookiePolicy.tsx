@@ -50,6 +50,21 @@ const CookiePolicy = () => {
             lagring.
           </p>
         </div>
+        <div>
+          <h4>Nyckel: expiresAt</h4>
+          <p>
+            Syfte: Används för att lagra den tidpunkt när användarens session,
+            inklusive userId och token, ska tas bort. Detta gör att vi kan
+            hantera användarens autentisering och säkerställa att deras
+            inloggning endast är giltig under en specifik tidsperiod. När
+            expiresAt tiden har passerat, raderas användarens userId och token
+            automatiskt, vilket innebär att användaren behöver logga in på nytt.
+            Denna lagring är nödvändig för att skydda användarens information
+            och säkerställa att användarens session inte är aktiv längre än vad
+            som är tillåtet enligt våra säkerhetsprinciper. Detta är nödvändig
+            lagring.
+          </p>
+        </div>
       </div>
     </section>
   );
