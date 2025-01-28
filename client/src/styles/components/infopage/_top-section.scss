@@ -37,7 +37,6 @@
   .top-section-heading {
     position: relative;
     z-index: 1;
-    @include heading;
 
     @include lg {
       @include heading(4rem)

@@ -40,6 +40,10 @@
       width: 720px;
     }
 
+    h2 {
+      @include heading(x-large);
+    }
+
     .register-lupines-container-top,
     .register-lupines-container-bottom {
       gap: 1rem;
