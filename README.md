@@ -281,6 +281,15 @@ It turned out the token needed to be included in the fetch request. I had set it
 >
 > I gained a deeper understanding of working with databases and how critical it is to have a well-thought-out structure before starting development.
 
+> #### Notes for future development
+>
+> - Add a dynamic list under the header that displays recently picked lupins from other players.
+> - Add an avatar picker. (Currently, the avatar is randomized upon registration).
+> - Add a page that displays all the lupins picked by the user, along with the date.
+> - Add a page for associations.
+> - Add a leaderboard for associations.
+> - Make the competition seasonal, with different challenges and rewards for each season.
+
 ## AUTHOR
 
 _Caroline Vårsaga -2025_
