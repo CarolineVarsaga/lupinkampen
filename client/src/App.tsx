@@ -1,9 +1,9 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router";
-import { FormProvider } from "./contexts/FormContext";
-import { AuthProvider } from "./contexts/AuthContext";
-import { MedalProvider } from "./contexts/MedalContext";
-import { CookieProvider } from "./contexts/CookieBarContext";
+import { CookieProvider } from "./contexts/CookieBarProvider";
+import { AuthProvider } from "./contexts/AuthProvider";
+import { FormProvider } from "./contexts/FormProvider";
+import { MedalProvider } from "./contexts/MedalProvider";
 
 function App() {
   return (

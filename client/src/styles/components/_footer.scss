@@ -3,7 +3,7 @@
 
   .footer-container,
   .copyright-text {
-    @include flex-center(column, top, center);
+    @include flex-center(column, start, center);
     width: 100%;
     border-top: 1px solid $text-white-shell;
     border-bottom: 1px solid $text-white-shell;
