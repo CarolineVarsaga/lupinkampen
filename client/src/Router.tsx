@@ -11,6 +11,7 @@ import CookiePolicy from "./views/CookiePolicy";
 import TermsOfServicePage from "./views/TermsOfServicePage";
 import PrivacyPolicyPage from "./views/PrivacyPolicyPage";
 import NotFound from "./views/NotFound";
+import AboutPage from "./views/AboutPage";
 
 export const router = createHashRouter([
   {
@@ -25,6 +26,10 @@ export const router = createHashRouter([
       {
         path: "/information",
         element: <LupinesInformation />,
+      },
+      {
+        path: "/om-lupinkampen",
+        element: <AboutPage />,
       },
       {
         path: "/logga-in",
