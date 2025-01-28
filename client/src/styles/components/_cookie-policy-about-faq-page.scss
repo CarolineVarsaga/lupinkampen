@@ -1,4 +1,6 @@
-.cookie-policy {
+.cookie-policy,
+.about-page,
+.faq-page {
   @include flex-center;
   @include padding-left-right;
   padding-bottom: 4rem;
@@ -35,11 +37,13 @@
     @include padding-left-right(10rem, 10rem)
   }
 
-  .cookie-back-button {
+  .cookie-back-button, .about-back-button, .faq-back-button {
     align-self: start;
   }
 
-  .cookie-policy-container {
+  .cookie-policy-container,
+  .about-container,
+  .faq-container {
     @include padding-left-right;
     @include flex-center-start;
     background-color: $secondary-color;
@@ -58,10 +62,18 @@
       @include padding-left-right(4rem, 4rem);
     }
 
-    .cookie-policy-heading {
+    .cookie-policy-heading,
+    .about-heading,
+    .faq-heading {
       @include flex-center-start(row, start, center);
       flex-direction: row;
       gap: 1rem;
+    }
+
+    .about-begin-here-button,
+    .faq-begin-here-button {
+      margin-top: 2rem;
+      align-self: center;
     }
   }
 }
