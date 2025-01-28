@@ -12,7 +12,16 @@ const useSpeciesData = () => {
     try {
       const data = await getSpeciesData();
       setLupinsInfo(data);
-      saveToLocalStorage("lupins", data);
+
+      const expirationDate = new Date();
+      expirationDate.setMonth(expirationDate.getMonth() + 1);
+
+      const storedData = {
+        data,
+        expiration: expirationDate.toISOString(),
+      };
+
+      saveToLocalStorage("lupins", storedData);
       setFetched(true);
     } catch (error) {
       console.error("Error fetching lupin data:", error);
@@ -24,9 +33,19 @@ const useSpeciesData = () => {
     const storedLupins = localStorage.getItem("lupins");
     if (storedLupins) {
       try {
-        const parsedLupins = JSON.parse(storedLupins) as ISpeciesData[];
-        setLupinsInfo(parsedLupins);
-        setFetched(true);
+        const parsedData = JSON.parse(storedLupins);
+        const { data, expiration } = parsedData;
+
+        const currentDate = new Date();
+        const expirationDate = new Date(expiration);
+
+        if (currentDate <= expirationDate) {
+          setLupinsInfo(data);
+          setFetched(true);
+        } else {
+          localStorage.removeItem("lupins");
+          getData();
+        }
       } catch (error) {
         console.error("Error parsing localStorage lupin data:", error);
         getData();
