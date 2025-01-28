@@ -30,6 +30,11 @@ const LeaderboardContainer = ({
   const [error, setError] = useState<string | null>(null);
   const { selectedOption, setSelectedOption, formData, setFormData } =
     useFormContext();
+
+  useEffect(() => {
+    setSelectedOption("");
+  }, [setSelectedOption]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
