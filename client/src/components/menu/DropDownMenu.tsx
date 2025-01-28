@@ -43,8 +43,12 @@ const DropDownMenu = () => {
   };
 
   return (
-    <div className="dropdown" aria-label="menu">
-      <button onClick={toggleMenu} className="dropdown-button">
+    <div className="dropdown">
+      <button
+        onClick={toggleMenu}
+        className="dropdown-button"
+        aria-label="Öppna meny"
+      >
         <IoIosMenu size={40} className="menu" />
       </button>
       <AnimatePresence>
@@ -66,6 +70,7 @@ const DropDownMenu = () => {
                       size={40}
                       onClick={toggleMenu}
                       className="close-x"
+                      aria-label="Stäng meny"
                     />
                   </div>
                   <div className="dropdown-navigation-container">
