@@ -37,7 +37,7 @@ _Course: Degree project_
 > <br> npm run dev
 
 - The server is running on "http://localhost:3001".
-- Database is Postgres, depoloyed on Supabase.
+- Database is Supabase (Postgres).
 
 ## WHAT I USED
 
