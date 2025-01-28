@@ -12,6 +12,7 @@ import TermsOfServicePage from "./views/TermsOfServicePage";
 import PrivacyPolicyPage from "./views/PrivacyPolicyPage";
 import NotFound from "./views/NotFound";
 import AboutPage from "./views/AboutPage";
+import FAQ from "./views/FAQ";
 
 export const router = createHashRouter([
   {
@@ -30,6 +31,10 @@ export const router = createHashRouter([
       {
         path: "/om-lupinkampen",
         element: <AboutPage />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
       },
       {
         path: "/logga-in",

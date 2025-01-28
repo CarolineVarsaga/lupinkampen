@@ -18,8 +18,8 @@ const Footer = () => {
               text="Registrera lupiner"
               className="footer-link"
             />
-            <Link to="/">Om Lupinkampen</Link>
-            <Link to="/">FAQ - Frågor och svar</Link>
+            <Link to="/om-lupinkampen">Om Lupinkampen</Link>
+            <Link to="/FAQ">FAQ - Frågor och svar</Link>
           </div>
           <div className="footer-terms-policy">
             <Link to="/villkor" className="footer-user-terms">
