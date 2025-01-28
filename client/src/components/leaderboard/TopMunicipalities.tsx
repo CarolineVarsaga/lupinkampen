@@ -10,7 +10,7 @@ interface ITopMunicipalitiesProps {
 const TopMunicipalities = ({ topMunicipalities }: ITopMunicipalitiesProps) => {
   return (
     <div className="leaderboard-container-top">
-      <h4>Kommuner</h4>
+      <h3>Kommuner</h3>
       <div className="result-list">
         {topMunicipalities.map((municipality, index) => (
           <div key={index} className="result-list-line-container-municipality">

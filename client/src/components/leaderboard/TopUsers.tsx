@@ -28,7 +28,7 @@ const TopUsers = ({
 
   return (
     <div className="leaderboard-container-top">
-      <h4>Användare</h4>
+      <h3>Användare</h3>
       <Dropdown
         label="Visa användare för:"
         className="leaderboard-users-dropdown"

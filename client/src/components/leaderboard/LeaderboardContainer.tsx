@@ -100,8 +100,9 @@ const LeaderboardContainer = ({
   };
 
   return (
-    <div>
+    <>
       <TopMunicipalities topMunicipalities={topMunicipalities} />
+      <hr />
       <TopUsers
         selectedOption={selectedOption}
         setSelectedOption={handleDropdownChange}
@@ -111,7 +112,7 @@ const LeaderboardContainer = ({
         municipalityLupins={municipalityLupins}
         handleUserClick={handleUserClick}
       />
-    </div>
+    </>
   );
 };
 

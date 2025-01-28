@@ -23,7 +23,7 @@ const LeaderBoard = () => {
       <section className="leaderboard">
         <div className="leaderboard-left-column">
           <BackButton className="leaderboard-back" />
-          <h3>Topplista</h3>
+          <h2>Topplista</h2>
           <div className="leaderboard-container">
             <LeaderboardContainer setSelectedUser={handleSetSelectedUser} />
           </div>

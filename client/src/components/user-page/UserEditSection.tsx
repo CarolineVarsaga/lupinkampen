@@ -13,7 +13,7 @@ const UserEditSection = ({
   setMunicipalityName,
 }: IUserEditSectionProps) => (
   <div className="userpage-content-container">
-    <h4>Ändra dina uppgifter</h4>
+    <h3>Ändra dina uppgifter</h3>
     <p className="userpage-content-paragraph">
       Fyll endast i dessa om du behöver ändra dina uppgifter.
     </p>
