@@ -99,7 +99,7 @@ const RegisterLupinesPage = () => {
         <BackButton />
         <div className="register-lupines-container">
           <div className="register-lupines-container-top">
-            <h3>Registrera lupiner</h3>
+            <h2>Registrera lupiner</h2>
 
             {lupinesValue.map((option) => (
               <LupinPicker
