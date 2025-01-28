@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 interface IProtectedLinkProps {
   to: string;
@@ -30,9 +31,13 @@ const ProtectedLink = ({
   };
 
   return (
-    <a onClick={handleClick} className={className}>
+    <Link
+      to={isAuthenticated ? to : "/logga-in"}
+      onClick={handleClick}
+      className={className}
+    >
       {text}
-    </a>
+    </Link>
   );
 };
 
