@@ -1,46 +1,46 @@
-const express = require("express");
-const router = express.Router();
-const supabase = require("../../config/supabase.js"); 
+// const express = require("express");
+// const router = express.Router();
+// const supabase = require("../../config/supabase.js"); 
 
-router.post("/", async (req, res) => {
-  const { userId, additionalLupins } = req.body;
+// router.post("/", async (req, res) => {
+//   const { userId, additionalLupins } = req.body;
 
-  if (!userId || !additionalLupins) {
-    return res.status(400).json({ message: "userId och additionalLupins krävs." });
-  }
+//   if (!userId || !additionalLupins) {
+//     return res.status(400).json({ message: "userId och additionalLupins krävs." });
+//   }
 
-  try {
-    const { data: user, error: fetchError } = await supabase
-      .from("users")
-      .select("totalPickedLupins")
-      .eq("userId", userId)
-      .single(); 
+//   try {
+//     const { data: user, error: fetchError } = await supabase
+//       .from("users")
+//       .select("totalPickedLupins")
+//       .eq("userId", userId)
+//       .single(); 
 
-    if (fetchError) {
-      console.error("Error fetching user data:", fetchError);
-      return res.status(500).json({ message: "Internal server error" });
-    }
+//     if (fetchError) {
+//       console.error("Error fetching user data:", fetchError);
+//       return res.status(500).json({ message: "Internal server error" });
+//     }
 
-    const { error: updateError } = await supabase
-      .from("users")
-      .update({
-        totalPickedLupins: user.totalPickedLupins + additionalLupins,
-      })
-      .eq("userId", userId);
+//     const { error: updateError } = await supabase
+//       .from("users")
+//       .update({
+//         totalPickedLupins: user.totalPickedLupins + additionalLupins,
+//       })
+//       .eq("userId", userId);
 
-    if (updateError) {
-      console.error("Error updating user lupins:", updateError);
-      return res.status(500).json({ message: "Internal server error" });
-    }
+//     if (updateError) {
+//       console.error("Error updating user lupins:", updateError);
+//       return res.status(500).json({ message: "Internal server error" });
+//     }
 
-    res.status(200).json({ message: "Lupiner uppdaterade för användaren." });
-  } catch (err) {
-    console.error("Error:", err);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+//     res.status(200).json({ message: "Lupiner uppdaterade för användaren." });
+//   } catch (err) {
+//     console.error("Error:", err);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
 
-module.exports = router;
+// module.exports = router;
 
 
 
