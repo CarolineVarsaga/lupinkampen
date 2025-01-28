@@ -181,6 +181,7 @@ To incentivize participation, users will earn digital medals for picking lupines
 ### _Database_
 
 ![database structure](client/public/assets/documentation/database.png)
+
 _userAssociation and associationId have a foregin key between each other, it's just not displaying here._
 
 ### _REST API_
