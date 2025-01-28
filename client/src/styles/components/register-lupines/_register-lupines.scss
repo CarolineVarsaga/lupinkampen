@@ -69,11 +69,11 @@
           }
         }
 
-        // .lupins-input::-webkit-outer-spin-button,
-        // .lupins-input::-webkit-inner-spin-button {
-        //   -webkit-appearance: none;
-        //   margin: 0;
-        // }
+        .lupins-input::-webkit-outer-spin-button,
+        .lupins-input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
 
         .amount-button {
           width: 32px;
