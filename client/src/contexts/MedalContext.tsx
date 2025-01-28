@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from "react";
+import { createContext } from "react";
 
 export interface IMedalContextType {
   notifiedMedals: string[];
@@ -9,25 +9,3 @@ export interface IMedalContextType {
 export const MedalContext = createContext<IMedalContextType | undefined>(
   undefined
 );
-
-export const MedalProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [notifiedMedals, setNotifiedMedals] = useState<string[]>([]);
-
-  const addNotifiedMedal = (medal: string) => {
-    setNotifiedMedals((prev) => [...prev, medal]);
-  };
-
-  const hasNotifiedMedal = (medal: string) => {
-    return notifiedMedals.includes(medal);
-  };
-
-  return (
-    <MedalContext.Provider
-      value={{ notifiedMedals, addNotifiedMedal, hasNotifiedMedal }}
-    >
-      {children}
-    </MedalContext.Provider>
-  );
-};
