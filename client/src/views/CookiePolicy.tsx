@@ -34,6 +34,7 @@ const CookiePolicy = () => {
               antalet API-anrop och förbättra prestandan. Detta är en
               funktionsrelaterad lagring.
             </p>
+            <p>Utgår: 1 månad.</p>
           </div>
           <div>
             <h4>Nyckel: token</h4>
@@ -52,26 +53,53 @@ const CookiePolicy = () => {
             <p>Utgår: 1 timme, eller när användaren loggar ut.</p>
           </div>
           <div>
+            <h4>Nyckel: userData</h4>
+            <p>
+              Syfte: Lagrar användarens uppgifter på användarens profilsida. För
+              att minska antalet API-anrop och förbättra prestandan. Detta är
+              nödvändig lagring.
+            </p>
+            <p>Utgår: 1 timme, eller när användaren loggar ut</p>
+          </div>
+          <div>
+            <h4>Nyckel: municipalityName</h4>
+            <p>
+              Syfte: Lagrar användarens kommun på användarens profilsida. För
+              att minska antalet API-anrop och förbättra prestandan. Detta är
+              nödvändig lagring.
+            </p>
+            <p>Utgår: 1 timme, eller när användaren loggar ut</p>
+          </div>
+          <div>
             <h4>Nyckel: cookiesAccepted</h4>
             <p>
               Syfte: För att komma ihåg användarens knapptryck på
               cookie-bannern, så den inte behöver fråga om cookies varje gång.
               Detta är nödvändig lagring.
             </p>
+            <p>Utgår: 1 månad.</p>
+          </div>
+          <div>
+            <h4>Nyckel: cookiesExpiration</h4>
+            <p>
+              Syfte: För att radera cookiesAccepted efter 1 månad. Detta är
+              nödvändig lagring.
+            </p>
+            <p>Utgår: 1 månad.</p>
           </div>
           <div>
             <h4>Nyckel: expiresAt</h4>
             <p>
               Syfte: Används för att lagra den tidpunkt när användarens session,
-              inklusive userId och token, ska tas bort. Detta gör att vi kan
-              hantera användarens autentisering och säkerställa att deras
-              inloggning endast är giltig under en specifik tidsperiod. När
-              expiresAt tiden har passerat, raderas användarens userId och token
-              automatiskt, vilket innebär att användaren behöver logga in på
-              nytt. Denna lagring är nödvändig för att skydda användarens
-              information och säkerställa att användarens session inte är aktiv
-              längre än vad som är tillåtet enligt våra säkerhetsprinciper.
-              Detta är nödvändig lagring.
+              inklusive userId, userData, municipalityName och token, ska tas
+              bort. Detta gör att vi kan hantera användarens autentisering och
+              säkerställa att deras inloggning endast är giltig under en
+              specifik tidsperiod. När expiresAt tiden har passerat, raderas
+              användarens userId och token automatiskt, vilket innebär att
+              användaren behöver logga in på nytt. Denna lagring är nödvändig
+              för att skydda användarens information och säkerställa att
+              användarens session inte är aktiv längre än vad som är tillåtet
+              enligt våra säkerhetsprinciper. Detta är nödvändig lagring.
             </p>
             <p>Utgår: 1 timme, eller när användaren loggar ut.</p>
           </div>
