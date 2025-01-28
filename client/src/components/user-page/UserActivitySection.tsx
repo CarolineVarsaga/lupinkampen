@@ -18,7 +18,7 @@ const UserActivitySection = ({
   userId,
 }: IUserActivitySectionProps) => (
   <div className="userpage-content-container">
-    <h4>Aktivitet</h4>
+    <h3>Aktivitet</h3>
     <p>Antal plockade lupiner: {totalLupins} st</p>
     <p>Senast plockade: {recentlyPickedLupins} st</p>
     <div className="userpage-activity-buttons-container">

@@ -6,7 +6,7 @@ const TopSection = () => {
     <>
       <section className="top-section">
         <BackButton className="link-back" />
-        <h3 className="top-section-heading">Ett hot mot den svenska floran</h3>
+        <h2 className="top-section-heading">Ett hot mot den svenska floran</h2>
         <p className="top-section-text">
           Lupiner är en invasiv art som utgör ett allvarligt hot mot den svenska
           naturen. De tränger undan inhemska växter genom att konkurrera om

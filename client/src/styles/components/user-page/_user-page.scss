@@ -51,10 +51,6 @@
         .userpage-username-container {
           gap: 0.5rem;
 
-          h3 {
-            @include heading;
-          }
-
           .userpage-member-number {
             @include heading(small, 200);
             font-style: italic;
@@ -70,6 +66,10 @@
         padding-top: 2rem;
         padding-bottom: 1.5rem;
         min-width: 325px;
+
+        h3 {
+          @include heading(large, 500);
+        }
 
         .userpage-content-paragraph {
           font-style: italic;

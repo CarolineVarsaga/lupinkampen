@@ -19,7 +19,7 @@ const UserProfileSection = ({
       alt="profilbild"
     />
     <div className="userpage-username-container">
-      <h3>{userName}</h3>
+      <h2>{userName}</h2>
       <p className="userpage-member-number">Medlemsnummer: {userId}</p>
       <p>Kommun: {municipalityName}</p>
     </div>

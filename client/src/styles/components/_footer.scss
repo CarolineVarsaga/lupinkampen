@@ -40,6 +40,10 @@
         cursor: pointer;
       }
 
+      h2 {
+        @include heading(x-large, 500);
+      }
+
       .footer-terms-policy,
       .footer-page-links {
         @include flex-center-start;

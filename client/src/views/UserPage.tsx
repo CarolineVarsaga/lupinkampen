@@ -11,6 +11,7 @@ import UserEditSection from "../components/user-page/UserEditSection";
 import UserDeleteSection from "../components/user-page/UserDeleteSection";
 import BackButton from "../components/buttons/BackButton";
 import LoadingSpinner from "../components/LoadingSpinner";
+import SEO from "../components/SEO";
 
 const UserPage = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -91,6 +92,11 @@ const UserPage = () => {
 
   return (
     <>
+      <SEO
+        title="Profilsida - Lupinkampen"
+        description="Se din profilsida med antal plockade lupiner. Registrera lupiner i Lupinkampen."
+        url={`https://lupinkampen.vercel.app/#/${userId}`}
+      />
       <div className="userpage">
         <BackButton />
         {userData ? (

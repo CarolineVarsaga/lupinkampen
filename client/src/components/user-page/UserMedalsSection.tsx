@@ -6,7 +6,7 @@ interface IUserMedalsSectionProps {
 
 const UserMedalsSection = ({ totalLupins }: IUserMedalsSectionProps) => (
   <div className="userpage-content-container">
-    <h4>Medaljer</h4>
+    <h3>Medaljer</h3>
     <p>Plocka lupiner och vinn medaljer!</p>
     <UserMedals userLupinsPicked={totalLupins} />
   </div>

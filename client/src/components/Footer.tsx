@@ -9,7 +9,7 @@ const Footer = () => {
         <Logo />
         <div className="footer-page-links-container">
           <div className="footer-page-links">
-            <h4>Navigering</h4>
+            <h2>Navigering</h2>
             <Link to="/">Startsida</Link>
             <Link to="/information">Information om lupiner</Link>
             <Link to="/topplista">Topplista</Link>

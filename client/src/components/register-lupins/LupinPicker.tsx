@@ -64,6 +64,7 @@ const LupinPicker = ({
           min={min}
           max={max}
           className="lupins-input"
+          aria-label="Ange kvantitet"
         />
         <button
           onClick={handleIncrease}

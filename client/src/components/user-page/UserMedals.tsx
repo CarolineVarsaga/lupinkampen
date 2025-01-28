@@ -33,7 +33,7 @@ const UserMedals = ({ userLupinsPicked }: IUserMedals) => {
               <div className="medal-icon medal-icon-popup">{medal.icon}</div>
             )}
             <div className="tooltip">
-              <h4 className="tooltip-text">{`${medal.name}`}</h4>
+              <h3 className="tooltip-text">{`${medal.name}`}</h3>
               <p className="tooltip-text amount">{`${medal.threshold} st plockade lupiner`}</p>
               <p className="tooltip-text">{`${medal.message}`} </p>
             </div>

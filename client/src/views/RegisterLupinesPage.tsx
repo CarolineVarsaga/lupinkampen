@@ -7,6 +7,7 @@ import { medals } from "../models/Medals";
 import { useMedalContext } from "../hooks/useMedalContext";
 import BackButton from "../components/buttons/BackButton";
 import { assignMedalToUser } from "../services/userService";
+import SEO from "../components/SEO";
 
 const RegisterLupinesPage = () => {
   const { addNotifiedMedal, hasNotifiedMedal } = useMedalContext();
@@ -88,67 +89,74 @@ const RegisterLupinesPage = () => {
   };
 
   return (
-    <section className="register-lupines">
-      <BackButton />
-      <div className="register-lupines-container">
-        <div className="register-lupines-container-top">
-          <h3>Registrera lupiner</h3>
+    <>
+      <SEO
+        title="Registrera lupiner - Lupinkampen"
+        description="Registrera antal plockade lupiner och delta i Lupinkampen."
+        url={`https://lupinkampen.vercel.app/#/${userId}/registrera-lupiner`}
+      />
+      <section className="register-lupines">
+        <BackButton />
+        <div className="register-lupines-container">
+          <div className="register-lupines-container-top">
+            <h2>Registrera lupiner</h2>
 
-          {lupinesValue.map((option) => (
-            <LupinPicker
-              key={option.id}
-              name={option.name}
-              id={option.id}
-              incrementValue={1}
-              min={0}
-              max={100}
-              value={lupinesPerOption[option.id]}
-              onLupinsChange={handleLupinsChange}
-            />
-          ))}
-        </div>
+            {lupinesValue.map((option) => (
+              <LupinPicker
+                key={option.id}
+                name={option.name}
+                id={option.id}
+                incrementValue={1}
+                min={0}
+                max={100}
+                value={lupinesPerOption[option.id]}
+                onLupinsChange={handleLupinsChange}
+              />
+            ))}
+          </div>
 
-        <div className="register-lupines-container-bottom">
-          <h3>Antal plockade lupiner</h3>
-          <div className="register-lupines-total-container">
-            <div className="lupines-list">
-              {Object.entries(lupinesPerOption)
-                .filter(([, count]) => count > 0)
-                .map(([optionId, count]) => {
-                  const option = lupinesValue.find(
-                    (s) => s.id === Number(optionId)
-                  );
-                  return (
-                    <p key={optionId}>
-                      {count}x {option?.name}
-                    </p>
-                  );
-                })}
-            </div>
-            <div className="lupines-total">
-              <hr />
-              <p>
-                Totalt:{" "}
-                {Object.entries(lupinesPerOption).reduce(
-                  (sum, [id, amount]) =>
-                    sum +
-                    lupinesValue.find((option) => option.id === Number(id))!
-                      .lupinesAmount *
-                      amount,
-                  0
-                )}{" "}
-                plockade lupiner
-              </p>
+          <div className="register-lupines-container-bottom">
+            <h3>Antal plockade lupiner</h3>
+            <div className="register-lupines-total-container">
+              <div className="lupines-list">
+                {Object.entries(lupinesPerOption)
+                  .filter(([, count]) => count > 0)
+                  .map(([optionId, count]) => {
+                    const option = lupinesValue.find(
+                      (s) => s.id === Number(optionId)
+                    );
+                    return (
+                      <p key={optionId}>
+                        {count}x {option?.name}
+                      </p>
+                    );
+                  })}
+              </div>
+              <div className="lupines-total">
+                <hr />
+                <p>
+                  Totalt:{" "}
+                  {Object.entries(lupinesPerOption).reduce(
+                    (sum, [id, amount]) =>
+                      sum +
+                      lupinesValue.find((option) => option.id === Number(id))!
+                        .lupinesAmount *
+                        amount,
+                    0
+                  )}{" "}
+                  plockade lupiner
+                </p>
+              </div>
             </div>
           </div>
+          <Button
+            text="Spara"
+            className="register-lupines-button-save"
+            onClick={handleRegisterLupins}
+          />
         </div>
-        <Button
-          text="Spara"
-          className="register-lupines-button-save"
-          onClick={handleRegisterLupins}
-        />
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 export default RegisterLupinesPage;

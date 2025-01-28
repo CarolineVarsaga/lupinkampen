@@ -15,7 +15,7 @@ const UserDeleteSection = ({
   handleClickDelete,
 }: IUserDeleteSectionProps) => (
   <div className="userpage-content-container userpage-delete-user">
-    <h4>Radera konto</h4>
+    <h3>Radera konto</h3>
     <p className="userpage-content-paragraph">
       Klicka endast på knappen om du vill avsluta ditt konto. Går ej att ångra!
     </p>
