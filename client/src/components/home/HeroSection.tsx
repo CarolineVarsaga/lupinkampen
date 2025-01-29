@@ -1,4 +1,6 @@
 import SvgWave from "../SvgWave";
+import AnimatedH2 from "../animations/AnimatedH2";
+import AnimatedText from "../animations/AnimatedText";
 import BeginHereButton from "../buttons/BeginHereButton";
 
 const HeroSection = () => {
@@ -6,13 +8,18 @@ const HeroSection = () => {
     <>
       <section className="hero-section">
         <div className="hero-texts-container">
-          <h2 className="hero-heading">
-            <span className="word-to-uppercase">Nu</span> ska lupinerna bort!
-          </h2>
-          <p className="hero-text">
-            Var med i kampen du också! Registrera antal plockade lupiner. Tjäna
-            poäng och tävla mot andra! Helt kostnadsfritt.
-          </p>
+          <AnimatedH2
+            textSpan="Nu"
+            text=" ska lupinerna bort!"
+            classNameSpan="word-to-uppercase"
+            className="hero-heading"
+          />
+
+          <AnimatedText
+            text="Var med i kampen du också! Registrera antal plockade lupiner. Tjäna
+            poäng och tävla mot andra! Helt kostnadsfritt."
+            className="hero-text"
+          />
         </div>
         <BeginHereButton />
       </section>
