@@ -1,38 +1,6 @@
 .top-section {
-  @include flex-center-start;
-  @include padding-left-right;
-  background-image: url('/assets/lupines-field-1280.webp');
-  background-size: cover;
-  height: 90svh;
-  position: relative;
+  @include section-common-styles('/assets/lupines-field-1280.webp');
   gap: 2rem;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/assets/lupines-field-1280.webp');
-    background-size: cover;
-    filter: blur(1px);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #3d3d3d79;
-    z-index: 0;
-  }
-
-  @include lg {
-    @include padding-left-right(10rem, 10rem);
-  }
 
   .top-section-heading {
     position: relative;
@@ -41,13 +9,6 @@
     @include lg {
       @include heading(4rem)
     }
-  }
-
-  .top-section-text,
-  .link-back,
-  .top-section-wave {
-    position: relative;
-    z-index: 1;
   }
 
   .top-section-text {
@@ -62,8 +23,6 @@
 
   .link-back {
     position: absolute;
-    // top: 1.5rem;
-    // @include heading(small, 200)
   }
 }
 

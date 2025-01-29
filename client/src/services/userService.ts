@@ -78,7 +78,6 @@ export const updateUser = async (
       },
       IUser
     >(`/api/users/update/${userId}`, updates, true);
-    console.log("update user response:", response);
 
     return response;
   } catch (error) {

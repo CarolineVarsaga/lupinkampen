@@ -19,6 +19,7 @@ const FormRegister = () => {
     errorMessage,
     setErrorMessage,
   } = useFormContext();
+
   const [isChecked, setIsChecked] = useState(false);
   const [showConfirmDetails, setShowConfirmDetails] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -48,9 +49,9 @@ const FormRegister = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      return newData;
     });
   };
 

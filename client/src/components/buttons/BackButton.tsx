@@ -15,7 +15,11 @@ const BackButton = ({ className }: IBackButtonProps) => {
 
   const handleBack = () => {
     if (!isAuthenticated && location.pathname === "/logga-in") {
-      navigate(`/profil/${userId}`, { replace: true });
+      if (userId) {
+        navigate(`/profil/${userId}`, { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
     } else if (location.pathname !== "/logga-in") {
       navigate(-1);
     }

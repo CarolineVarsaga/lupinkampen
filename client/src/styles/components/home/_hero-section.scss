@@ -1,21 +1,10 @@
 .hero-section {
-  @include flex-center-start;
-  @include padding-left-right;
-  background-image: url('/assets/lupine-field-1280.webp');
-  background-size: cover;
-  height: 90svh;
-  position: relative;
+  @include section-common-styles('/assets/lupine-field-1280.webp');
   gap: 4rem;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #3D3D3D66;
-    z-index: 0;
+  @include md {
+    @include flex-center;
+    min-height: 85svh;
   }
 
   .hero-texts-container {
@@ -45,22 +34,7 @@
         @include heading(1.2rem, 300);
         max-width: 300px;
       }
-
     }
-  }
-
-  .begin-button {
-    align-self: center;
-    z-index: 2;
-  }
-
-  @include md {
-    @include flex-center;
-    min-height: 85vh;
-  }
-
-  @include xl {
-    @include padding-left-right(10rem, 10rem);
   }
 }
 

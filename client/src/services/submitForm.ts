@@ -9,13 +9,19 @@ export const submitForm = async ({
   setErrorMessage,
 }: IForm) => {
   try {
-    const response = await postRequest<
-      { userName: string; password: string; userMunicipality: string },
+    await postRequest<
+      {
+        userName: string;
+        password: string;
+        userMunicipality: string;
+        email: string;
+      },
       { message: string }
     >("/api/users/create", {
       userName: formData.username,
       password: formData.password,
       userMunicipality: selectedOption,
+      email: formData.email,
     });
     setFormData({
       username: "",
@@ -25,8 +31,6 @@ export const submitForm = async ({
       municipality: "",
     });
     setSelectedOption("");
-
-    console.log("User created successfully:", response.message);
   } catch (error) {
     console.error("Error creating user:", error);
     setErrorMessage("Det gick inte att skapa användaren. Försök igen.");

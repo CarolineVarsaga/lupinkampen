@@ -96,13 +96,6 @@ const EditInformation = ({
       setLoading(false);
       return;
     }
-    console.log("Checking updates for fields: ", {
-      email: formData.email,
-      password: formData.password,
-      confirmpassword: formData.confirmpassword,
-      municipality: formData.municipality,
-      username: formData.username,
-    });
 
     if (formData.password && formData.password !== formData.confirmpassword) {
       setError("Lösenorden matchar inte.");
