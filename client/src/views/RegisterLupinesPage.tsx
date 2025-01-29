@@ -99,11 +99,20 @@ const RegisterLupinesPage = () => {
         <BackButton />
         <div className="register-lupines-container">
           <div className="register-lupines-container-top">
-            <h2>Registrera lupiner</h2>
-
+            <div className="register-lupines-heading">
+              <img
+                src="/assets/register-lupine-icon.svg"
+                alt="Ikon av ett bi med krona"
+                width={40}
+                height={40}
+                className="leaderboard-icon"
+              />
+              <h2>Registrera lupiner</h2>
+            </div>
             {lupinesValue.map((option) => (
               <LupinPicker
                 key={option.id}
+                img={option.img}
                 name={option.name}
                 id={option.id}
                 incrementValue={1}
