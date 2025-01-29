@@ -8,11 +8,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import useLockScroll from "../../hooks/useLockScroll";
 
 import ProtectedLink from "../ProtectedLink";
+import { useFormContext } from "../../hooks/useFormContext";
 
 const DropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { logout, isAuthenticated, userId: loggedInUserId } = useAuth();
+  const { setFormData, setSelectedOption } = useFormContext();
   const navigate = useNavigate();
 
   useLockScroll(isOpen);
@@ -26,6 +28,14 @@ const DropDownMenu = () => {
   };
 
   const handleConfirmLogout = () => {
+    setFormData({
+      username: "",
+      password: "",
+      email: "",
+      confirmpassword: "",
+      municipality: "",
+    });
+    setSelectedOption("");
     logout();
     navigate("/logga-in");
     setIsModalOpen(false);
