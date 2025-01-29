@@ -1,31 +1,25 @@
-import { useState } from "react";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
-import Button from "../buttons/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { useModal } from "../../hooks/useModal";
 import ConfirmationModal from "../ConfirmationModal";
 import { AnimatePresence, motion } from "framer-motion";
 import useLockScroll from "../../hooks/useLockScroll";
-
-import ProtectedLink from "../ProtectedLink";
 import { useFormContext } from "../../hooks/useFormContext";
+import Menu from "./Menu";
+import { useState } from "react";
 
 const DropDownMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { logout, isAuthenticated, userId: loggedInUserId } = useAuth();
   const { setFormData, setSelectedOption } = useFormContext();
   const navigate = useNavigate();
-
+  const { isOpen, setIsOpen } = useModal();
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   useLockScroll(isOpen);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
-  const handleLogout = () => {
-    setIsModalOpen(true);
-  };
+  const handleLogout = () => setIsConfirmationModalOpen(true);
 
   const handleConfirmLogout = () => {
     setFormData({
@@ -38,13 +32,11 @@ const DropDownMenu = () => {
     setSelectedOption("");
     logout();
     navigate("/logga-in");
-    setIsModalOpen(false);
-    toggleMenu();
+    setIsConfirmationModalOpen(false);
+    setIsOpen(false);
   };
 
-  const handleCancelLogout = () => {
-    setIsModalOpen(false);
-  };
+  const handleCancelLogout = () => setIsConfirmationModalOpen(false);
 
   const menuVariants = {
     hidden: { x: "100%" },
@@ -61,79 +53,41 @@ const DropDownMenu = () => {
       >
         <IoIosMenu size={40} className="menu" />
       </button>
+
       <AnimatePresence>
         {isOpen && (
-          <>
-            <div className="dropdown-menu-overlay">
-              <div className="dropdown-menu-relative-parent">
-                <motion.div
-                  className="dropdown-menu"
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={menuVariants}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                >
-                  <div className="heading-and-close">
-                    <h3 className="menu-heading">Meny</h3>
-                    <IoMdClose
-                      size={40}
-                      onClick={toggleMenu}
-                      className="close-x"
-                      aria-label="Stäng meny"
-                    />
-                  </div>
-                  <div className="dropdown-navigation-container">
-                    <ul>
-                      <Link to="/" onClick={toggleMenu}>
-                        <li className="dropdown-item">Startsida</li>
-                      </Link>
-                      <Link to="/information" onClick={toggleMenu}>
-                        <li className="dropdown-item">
-                          Information om lupiner
-                        </li>
-                      </Link>
-                      <Link to="/topplista" onClick={toggleMenu}>
-                        <li className="dropdown-item">Topplista</li>
-                      </Link>
-                      <li className="dropdown-item">
-                        <ProtectedLink
-                          to={`/profil/${loggedInUserId}/registrera-lupiner`}
-                          text="Registrera lupiner"
-                          toggleMenu={toggleMenu}
-                        />
-                      </li>
-                      <Link to="/om-lupinkampen" onClick={toggleMenu}>
-                        <li className="dropdown-item">Om Lupinkampen</li>
-                      </Link>
-                      <Link to="/faq" onClick={toggleMenu}>
-                        <li className="dropdown-item">FAQ - Frågor och svar</li>
-                      </Link>
-                      <Link to="/villkor" onClick={toggleMenu}>
-                        <li className="dropdown-item">Användarvillkor</li>
-                      </Link>
-                      {isAuthenticated && (
-                        <li
-                          className="dropdown-item log-out"
-                          onClick={handleLogout}
-                        >
-                          Logga ut
-                        </li>
-                      )}
-                    </ul>
-                    <Button
-                      text="Stäng"
-                      className="close-button"
-                      onClick={toggleMenu}
-                    />
-                  </div>
-                </motion.div>
-              </div>
+          <div className="dropdown-menu-overlay">
+            <div className="dropdown-menu-relative-parent">
+              <motion.div
+                className="dropdown-menu"
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={menuVariants}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              >
+                <div className="heading-and-close">
+                  <h3 className="menu-heading">Meny</h3>
+                  <IoMdClose
+                    size={40}
+                    onClick={toggleMenu}
+                    className="close-x"
+                    aria-label="Stäng meny"
+                  />
+                </div>
+                <Menu
+                  toggleMenu={toggleMenu}
+                  isAuthenticated={isAuthenticated}
+                  loggedInUserId={loggedInUserId}
+                  handleLogout={handleLogout}
+                />
+              </motion.div>
             </div>
-          </>
+          </div>
         )}
       </AnimatePresence>
-      {isModalOpen && (
+
+      {isConfirmationModalOpen && (
         <ConfirmationModal
           message="Vill du logga ut?"
           confirmButton="Logga ut"
