@@ -7,7 +7,7 @@ _Course: Degree project_
 ## TABLE OF CONTENTS
 
 1. [INSTALLATION INSTRUCTIONS](#installation-instructions)
-2. [WHAT I USED](#what-i-used)
+2. [TECH STACK](#tech-stack)
 3. [SCREENSHOTS](#screenshots)  
    3.1 [Application Desktop](#application-desktop)  
    3.2 [Application Mobile](#application-mobile)  
@@ -39,7 +39,7 @@ _Course: Degree project_
 - The server is running on "http://localhost:3001".
 - Database is Supabase (Postgres).
 
-## WHAT I USED
+## TECH STACK
 
 ### Back-end:
 
