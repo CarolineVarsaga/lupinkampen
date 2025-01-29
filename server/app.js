@@ -5,13 +5,12 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const usersRouter = require("./routes/users");
-// const associationsRouter = require("./routes/associations");
 const municipalitiesRouter = require("./routes/municipalities");
 
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'https://lupinkampen.vercel.app', 'https://lupin-server.vercel.app/'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'https://lupinkampen.vercel.app'],
   methods: 'GET,POST,UPDATE,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
 };
@@ -24,7 +23,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/users", usersRouter);
-// app.use("/associations", associationsRouter); 
 app.use("/api/municipalities", municipalitiesRouter);
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
