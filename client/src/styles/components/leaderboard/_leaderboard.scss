@@ -30,6 +30,11 @@
       position: absolute;
     }
 
+    .leaderboard-heading {
+      @include flex-center(row, space-between, center);
+      width: 200px;
+    }
+
     .leaderboard-container {
       @include flex-center-start;
       background-color: $secondary-color;

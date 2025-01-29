@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface ILupinPickerProps {
+  img: string;
   name: string;
   id: number;
   incrementValue: number;
@@ -11,6 +12,7 @@ interface ILupinPickerProps {
 }
 
 const LupinPicker = ({
+  img,
   name,
   id,
   incrementValue,
@@ -49,7 +51,16 @@ const LupinPicker = ({
 
   return (
     <div className="register-lupines-add-container">
-      <p>{name}</p>
+      <div className="register-lupines-icon-name">
+        <img
+          src={img}
+          alt="Ikon av ett bi med krona"
+          width={40}
+          height={40}
+          className="leaderboard-icon"
+        />
+        <p>{name}</p>
+      </div>
       <div className="lupins-picker-container">
         <button
           onClick={handleDecrease}

@@ -23,7 +23,16 @@ const LeaderBoard = () => {
       <section className="leaderboard">
         <div className="leaderboard-left-column">
           <BackButton className="leaderboard-back" />
-          <h2>Topplista</h2>
+          <div className="leaderboard-heading">
+            <h2>Topplista</h2>
+            <img
+              src="/assets/leaderboard-bee.svg"
+              alt="Ikon av ett bi med krona"
+              width={40}
+              height={40}
+              className="leaderboard-icon"
+            />
+          </div>
           <div className="leaderboard-container">
             <LeaderboardContainer setSelectedUser={handleSetSelectedUser} />
           </div>
