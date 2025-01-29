@@ -1,8 +1,7 @@
 .medals-container {
-  display: flex;
+  @include flex-center(row, center, center);
   flex-wrap: wrap;
   gap: 2rem;
-  justify-content: center;
   z-index: 9999;
   position: relative;
 
@@ -37,7 +36,7 @@
     }
 
     &.intermediate {
-      color: rgb(108, 230, 230);
+      color: #6ce6e6;
     }
 
     &.queen-bee {
@@ -51,8 +50,7 @@
     }
 
     .tooltip {
-      display: flex;
-      flex-direction: column;
+      @include flex-center;
       visibility: hidden;
       position: absolute;
       bottom: 125%;
