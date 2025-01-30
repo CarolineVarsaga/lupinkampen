@@ -37,10 +37,12 @@ const SwedenMap = () => {
 
   useEffect(() => {
     if (leadingMunicipalityId && svgContent) {
-      const parser = new DOMParser(); // turns the svgContent string into a manipulable DOM
-      const svgDoc = parser.parseFromString(svgContent, "image/svg+xml");
-      const leadingPath = svgDoc.getElementById(String(leadingMunicipalityId));
-      const leadingPathClass = svgDoc.getElementsByClassName(
+      const parser = new DOMParser();
+      const svgDocument = parser.parseFromString(svgContent, "image/svg+xml");
+      const leadingPath = svgDocument.getElementById(
+        String(leadingMunicipalityId)
+      );
+      const leadingPathClass = svgDocument.getElementsByClassName(
         String(leadingMunicipalityId)
       );
 
@@ -57,7 +59,7 @@ const SwedenMap = () => {
           `Path with ID or Class ${leadingMunicipalityId} not found`
         );
       }
-      setSvgContent(svgDoc.documentElement.outerHTML); // turns back to svg
+      setSvgContent(svgDocument.documentElement.outerHTML);
     }
   }, [leadingMunicipalityId, svgContent]);
 
@@ -69,3 +71,11 @@ const SwedenMap = () => {
 };
 
 export default SwedenMap;
+
+/*
+///   Some comments on this code   ///
+* 14. fetch / axios = makes it possible to manipulate the svg
+* 40. creates a DOMParser instance to parse XML/HTML strings and convert them into a DOM document
+* 41. turns the svgContent string into a manipulable DOM
+* 62. turns back to svg
+*/
