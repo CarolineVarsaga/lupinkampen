@@ -27,26 +27,33 @@
   .image-container {
     max-width: 100%;
     margin-bottom: 1rem;
+    @include flex-center(column, start, start);
+    gap: 1rem;
 
-    .middle-section-lupine-image {
+    .youtube {
       width: 100%;
-      height: auto;
+      height: 20rem;
+      border-radius: 20px;
       border: 1px solid white;
-      border-radius: 50px;
+
+      @include xl {
+        height: 400px;
+      }
     }
   }
-}
 
-.button-container {
-  @include flex-center;
-  @include padding-left-right;
-  gap: 1rem;
-  font-weight: 200;
-  height: 150px;
-  padding-bottom: 1rem;
-  margin-top: 1rem;
+  .button-container {
+    @include flex-center;
+    @include padding-left-right;
+    gap: 1rem;
+    font-weight: 200;
+    height: 150px;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+    width: 100%;
 
-  @include lg {
-    @include padding-left-right(10rem, 10rem);
+    @include lg {
+      @include padding-left-right(10rem, 10rem);
+    }
   }
 }
