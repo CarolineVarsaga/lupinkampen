@@ -3,7 +3,7 @@
 _Course: Degree project_
 
 > Visit my project: https://lupinkampen.vercel.app/
-> </br> (The code in the "examen"-branch is how the project code looked during the degree assignment.) 
+> </br> (_The code in the "examen"-branch is how the project code looked during the degree assignment._) 
 
 ## TABLE OF CONTENTS
 
