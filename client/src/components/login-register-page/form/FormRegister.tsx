@@ -9,6 +9,7 @@ import { submitForm } from "../../../services/submitForm";
 import SuccessModal from "../SuccessModal";
 import { validateFormData } from "../../../utils/validationsUtils";
 import RegisterButton from "../../buttons/RegisterButton";
+import { checkAvailability } from "../../../services/userService";
 
 const FormRegister = () => {
   const {
@@ -23,6 +24,14 @@ const FormRegister = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [showConfirmDetails, setShowConfirmDetails] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
+  const [isEmailAvailable, setIsEmailAvailable] = useState(true);
+  const [email, setEmail] = useState(formData.email);
+  const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(
+    null
+  );
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorUsername, setErrorUsername] = useState(false);
 
   const options = municipalities.map((muni) => ({
     value: muni.municipalityId.toString(),
@@ -32,6 +41,42 @@ const FormRegister = () => {
   const defaultOption = {
     value: "",
     label: "Välj kommun",
+  };
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    setFormData({ ...formData, email: value });
+
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+    const newTimer = setTimeout(async () => {
+      if (value.includes("@") && value.includes(".")) {
+        const available = await checkAvailability("email", value);
+        setIsEmailAvailable(available);
+        setErrorEmail(!available);
+      } else {
+        setErrorEmail(true);
+      }
+    }, 500);
+
+    setDebounceTimer(newTimer);
+    setErrorEmail(false);
+  };
+
+  const handleUsernameChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setFormData({ ...formData, username: value });
+
+    if (value) {
+      const available = await checkAvailability("username", value);
+      setIsUsernameAvailable(available);
+      setErrorUsername(!available);
+    } else {
+      setIsUsernameAvailable(true);
+      setErrorUsername(true);
+    }
   };
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -47,16 +92,13 @@ const FormRegister = () => {
     setIsChecked(e.target.checked);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => {
-      const newData = { ...prevData, [name]: value };
-      return newData;
-    });
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isUsernameAvailable || !isEmailAvailable) {
+      setErrorMessage("Rackarns bananer! Ändra följande och försök igen:");
+      return;
+    }
 
     const validationError = validateFormData(
       formData,
@@ -111,6 +153,12 @@ const FormRegister = () => {
       ) : (
         <form className="register-form" onSubmit={handleSubmit}>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {!isEmailAvailable && (
+            <p className="error-message">E-posten är redan registrerad.</p>
+          )}
+          {!isUsernameAvailable && (
+            <p className="error-message">Användarnamnet är upptaget.</p>
+          )}
 
           <InputField
             forLabel="email"
@@ -118,9 +166,10 @@ const FormRegister = () => {
             type="text"
             id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={handleEmailChange}
             required={true}
+            error={errorEmail}
           />
           <InputField
             forLabel="username"
@@ -129,8 +178,9 @@ const FormRegister = () => {
             id="username"
             name="username"
             value={formData.username}
-            onChange={handleChange}
+            onChange={handleUsernameChange}
             required={true}
+            error={errorUsername}
           />
           <InputField
             forLabel="password"
@@ -139,7 +189,9 @@ const FormRegister = () => {
             id="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
             required={true}
           />
           <InputField
@@ -149,7 +201,9 @@ const FormRegister = () => {
             id="confirmPassword"
             name="confirmpassword"
             value={formData.confirmpassword}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, confirmpassword: e.target.value })
+            }
             required={true}
           />
           <Dropdown
