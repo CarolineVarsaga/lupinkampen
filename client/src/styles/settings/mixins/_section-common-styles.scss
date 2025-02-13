@@ -3,7 +3,8 @@
   @include padding-left-right;
   background-image: url($bg-image);
   background-size: cover;
-  height: 90svh;
+  height: 92svh;
+  max-height: 100svh;
   position: relative;
   gap: 2rem;
 
