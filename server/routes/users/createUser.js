@@ -23,11 +23,31 @@ const getRandomAvatar = () => {
   return avatars[randomIndex];
 };
 
-const checkUniqueUserId = async () => {
+// const checkUniqueUserId = async () => {
+//   const userId = generateUserId();
+//   const { data, error } = await supabase
+//     .from("users")
+//     .select("userId", { count: "exact" })
+//     .eq("userId", userId);
+
+//   if (error) {
+//     console.log("Database error:", error);
+//     throw error;
+//   }
+
+//   if (data.length > 0) {
+//     return checkUniqueUserId();
+//   }
+
+//   return userId;
+// };
+const checkUniqueUserId = async (retry = 0) => {
+  if (retry > 5) throw new Error("Kunde inte generera unikt userId");
+
   const userId = generateUserId();
   const { data, error } = await supabase
     .from("users")
-    .select("userId", { count: "exact" })
+    .select("userId")
     .eq("userId", userId);
 
   if (error) {
@@ -35,11 +55,34 @@ const checkUniqueUserId = async () => {
     throw error;
   }
 
-  if (data.length > 0) {
-    return checkUniqueUserId();
-  }
+  return data.length > 0 ? checkUniqueUserId(retry + 1) : userId;
+};
 
-  return userId;
+
+const checkUniqueUserName = async (userName) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("userId")
+    .eq("userName", userName);
+
+  if (error) {
+    console.log("Database error:", error);
+    throw error;
+  }
+  return data.length === 0;
+};
+
+const checkUniqueEmail = async (email) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("userId")
+    .eq("email", email);
+
+  if (error) {
+    console.log("Database error:", error);
+    throw error;
+  }
+  return data.length === 0;
 };
 
 router.post("/", async (req, res) => {
@@ -50,6 +93,17 @@ router.post("/", async (req, res) => {
     if (/\s/.test(userName)) {
       return res.status(400).json({ message: "Invalid username" });
     }
+
+    const isUserNameUnique = await checkUniqueUserName(userName);
+    if (!isUserNameUnique) {
+      return res.status(400).json({ message: "Användarnamn upptaget, välj ett annat." });
+    }
+    
+    const isEmailUnique = await checkUniqueEmail(email);
+    if (!isEmailUnique) {
+      return res.status(400).json({ message: "E-postadressen finns redan registrerad." });
+    }
+    
 
     const encryptedPassword = CryptoJS.AES.encrypt(password, salt).toString();
     const userId = await checkUniqueUserId();
