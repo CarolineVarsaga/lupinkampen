@@ -26,8 +26,8 @@ app.use("/api/users", usersRouter);
 app.use("/api/municipalities", municipalitiesRouter);
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
-app.listen(3001, () => {
-  console.log("Server is running on port 3001");
+app.listen(3002, () => {
+  console.log("Server is running on port 3002");
 });
 
 module.exports = app;
