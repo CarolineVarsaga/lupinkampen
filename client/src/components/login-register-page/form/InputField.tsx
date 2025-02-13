@@ -6,6 +6,7 @@ interface IInputTextProps {
   name: string;
   value: string;
   required: boolean;
+  error?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -18,6 +19,7 @@ const InputField = ({
   value,
   onChange,
   required,
+  error,
 }: IInputTextProps) => {
   return (
     <label htmlFor={forLabel}>
@@ -29,6 +31,7 @@ const InputField = ({
         value={value}
         onChange={onChange}
         required={required}
+        className={`${error ? "input-error" : ""}`}
       />
     </label>
   );
