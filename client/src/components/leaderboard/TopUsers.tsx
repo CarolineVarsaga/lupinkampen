@@ -57,11 +57,20 @@ const TopUsers = ({
                 width="25"
                 className="user-avatar"
               />
-              <p
+              {/* <p
                 className="result-list-name"
                 onClick={() => handleUserClick(user)}
               >
                 {user.userName}{" "}
+                <span className="result-list-amount">
+                  {user.totalPickedLupins} st
+                </span>
+              </p> */}
+              <p
+                className="result-list-name"
+                onClick={() => handleUserClick(user)}
+              >
+                <span className="name-text">{user.userName}</span>
                 <span className="result-list-amount">
                   {user.totalPickedLupins} st
                 </span>

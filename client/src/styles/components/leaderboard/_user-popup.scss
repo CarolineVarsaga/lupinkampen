@@ -68,6 +68,9 @@
       .user-popup-top-left {
         @include flex-center;
         gap: 0.5rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
 
         .user-avatar-popup {
           width: 60px;

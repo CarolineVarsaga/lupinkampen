@@ -45,8 +45,11 @@
       }
 
       .userpage-username-pic-container {
-        @include flex-center-start(row, flex-start, center);
         padding-top: 2rem;
+
+        @include sm {
+          @include flex-center-start(row, flex-start, center);
+        }
 
         .userpage-username-container {
           gap: 0.5rem;
