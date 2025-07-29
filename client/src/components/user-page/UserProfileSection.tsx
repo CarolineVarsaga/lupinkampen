@@ -5,6 +5,19 @@ interface IUserProfileSectionProps {
   municipalityName: string | null;
 }
 
+const breakTextEveryNChars = (text: string, n: number) => {
+  const result = [];
+  for (let i = 0; i < text.length; i += n) {
+    result.push(text.slice(i, i + n));
+  }
+  return result.map((chunk, idx) => (
+    <span key={idx}>
+      {chunk}
+      {idx < result.length - 1 && <wbr />}
+    </span>
+  ));
+};
+
 const UserProfileSection = ({
   userName,
   userId,
@@ -19,7 +32,7 @@ const UserProfileSection = ({
       alt="profilbild"
     />
     <div className="userpage-username-container">
-      <h2>{userName}</h2>
+      <h2 className="username">{breakTextEveryNChars(userName, 12)}</h2>
       <p className="userpage-member-number">Medlemsnummer: {userId}</p>
       <p>Kommun: {municipalityName}</p>
     </div>

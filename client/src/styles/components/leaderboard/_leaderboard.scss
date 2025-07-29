@@ -124,6 +124,28 @@
             .result-list-name {
               grid-column: 3 / span 18;
               @include flex-center-start(row, space-between, center);
+              gap: 0.5rem;
+
+              .name-text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+                display: inline-block;
+              }
+
+              .result-list-amount {
+                flex-shrink: 0;
+                margin-left: auto;
+                padding-left: 0.5rem;
+                white-space: nowrap;
+              }
+
+              @media (max-width: 463px) {
+                .name-text {
+                  max-width: 230px;
+                }
+              }
             }
           }
 
