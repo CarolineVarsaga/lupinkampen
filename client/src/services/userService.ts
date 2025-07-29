@@ -15,6 +15,22 @@ export const fetchUserData = async (userId: string) => {
     throw error;
   }
 };
+//================================================================
+
+export const checkAvailability = async (
+  field: "username" | "email",
+  value: string
+) => {
+  try {
+    const response = await getRequest<{ available: boolean }>(
+      `/api/users/check/${field}?value=${value}`
+    );
+    return response.available;
+  } catch (error) {
+    console.error(`Error checking ${field} availability:`, error);
+    return false;
+  }
+};
 
 //================================================================
 

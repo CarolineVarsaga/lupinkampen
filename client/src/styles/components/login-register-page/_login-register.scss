@@ -79,6 +79,11 @@
         }
       }
 
+      .input-error {
+        border: 2px solid rgb(189, 12, 12) !important;
+        background-color: #dab0b0;
+      }
+
       .checkbox-label {
         display: flex;
         flex-direction: row;

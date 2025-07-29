@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const checkUsernameEmail = require("./checkUsernameEmail.js");
 const createUser = require("./createUser.js");
 const loginUser = require("./loginUser.js");
 const updateUser = require("./updateUser.js");
@@ -16,6 +17,7 @@ const medals = require("./medals.js");
 const registerLupins = require("./registerLupins.js");
 const getTotalLupins = require("./getTotalLupinsSweden.js");
 
+router.use("/check", checkUsernameEmail)
 router.use("/create", createUser);
 router.use("/login", loginUser);
 router.use("/update", updateUser);

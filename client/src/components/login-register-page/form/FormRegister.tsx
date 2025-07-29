@@ -9,6 +9,7 @@ import { submitForm } from "../../../services/submitForm";
 import SuccessModal from "../SuccessModal";
 import { validateFormData } from "../../../utils/validationsUtils";
 import RegisterButton from "../../buttons/RegisterButton";
+import { checkAvailability } from "../../../services/userService";
 
 const FormRegister = () => {
   const {
@@ -23,6 +24,20 @@ const FormRegister = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [showConfirmDetails, setShowConfirmDetails] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
+  const [isEmailAvailable, setIsEmailAvailable] = useState(true);
+  const [email, setEmail] = useState(formData.email);
+  const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(
+    null
+  );
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorUsername, setErrorUsername] = useState(false);
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState<
+    string | null
+  >(null);
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  );
 
   const options = municipalities.map((muni) => ({
     value: muni.municipalityId.toString(),
@@ -32,6 +47,113 @@ const FormRegister = () => {
   const defaultOption = {
     value: "",
     label: "Välj kommun",
+  };
+
+  // const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
+  //   setEmail(value);
+  //   setFormData({ ...formData, email: value });
+
+  //   if (debounceTimer) {
+  //     clearTimeout(debounceTimer);
+  //   }
+  //   const newTimer = setTimeout(async () => {
+  //     if (value.includes("@") && value.includes(".")) {
+  //       const available = await checkAvailability("email", value);
+  //       setIsEmailAvailable(available);
+  //       setErrorEmail(!available);
+  //     } else {
+  //       setErrorEmail(true);
+  //     }
+  //   }, 500);
+
+  //   setDebounceTimer(newTimer);
+  //   setErrorEmail(false);
+  // };
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    setFormData({ ...formData, email: value });
+
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+
+    const newTimer = setTimeout(async () => {
+      if (!value.includes("@") || !value.includes(".")) {
+        setEmailErrorMessage("Ogiltig e-postadress.");
+        setErrorEmail(true);
+        return;
+      }
+
+      try {
+        const available = await checkAvailability("email", value);
+        setIsEmailAvailable(available);
+        setErrorEmail(!available);
+        setEmailErrorMessage(
+          available ? null : "E-posten är redan registrerad."
+        );
+      } catch (error) {
+        console.error("Fel vid kontroll av e-post:", error);
+        setEmailErrorMessage("Tekniskt fel vid kontroll av e-post.");
+        setErrorEmail(true);
+      }
+    }, 500);
+
+    setDebounceTimer(newTimer);
+    setEmailErrorMessage(null);
+  };
+
+  // const handleUsernameChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
+  //   setFormData({ ...formData, username: value });
+
+  //   if (value) {
+  //     const available = await checkAvailability("username", value);
+  //     setIsUsernameAvailable(available);
+  //     setErrorUsername(!available);
+  //   } else {
+  //     setIsUsernameAvailable(true);
+  //     setErrorUsername(true);
+  //   }
+  // };
+
+  const handleUsernameChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setFormData((prev) => ({ ...prev, username: value }));
+
+    const validations = [
+      {
+        condition: /\s/.test(value),
+        message: "Användarnamn får inte innehålla mellanslag.",
+      },
+      {
+        condition: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        message: "Användarnamn får inte vara en e-postadress.",
+      },
+    ];
+
+    const failedValidation = validations.find((v) => v.condition);
+
+    if (failedValidation) {
+      setIsUsernameAvailable(false);
+      setErrorUsername(true);
+      setUsernameErrorMessage(failedValidation.message);
+      return;
+    }
+
+    try {
+      const available = await checkAvailability("username", value);
+      setIsUsernameAvailable(available);
+      setErrorUsername(!available);
+      setUsernameErrorMessage(available ? null : "Användarnamnet är upptaget.");
+    } catch (err) {
+      console.error("Fel vid tillgänglighetskontroll:", err);
+      setIsUsernameAvailable(false);
+      setErrorUsername(true);
+      setUsernameErrorMessage("Ett fel uppstod, försök igen.");
+    }
   };
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -47,16 +169,13 @@ const FormRegister = () => {
     setIsChecked(e.target.checked);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => {
-      const newData = { ...prevData, [name]: value };
-      return newData;
-    });
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isUsernameAvailable || !isEmailAvailable) {
+      setErrorMessage("Rackarns bananer! Ändra följande och försök igen:");
+      return;
+    }
 
     const validationError = validateFormData(
       formData,
@@ -110,7 +229,22 @@ const FormRegister = () => {
         <SuccessModal onClose={handleCloseSuccessModal} />
       ) : (
         <form className="register-form" onSubmit={handleSubmit}>
+          {/* {errorMessage && <p className="error-message">{errorMessage}</p>}
+           {!isEmailAvailable && (
+            <p className="error-message">E-posten är redan registrerad.</p>
+          )}
+          {!isUsernameAvailable && (
+            <p className="error-message">Användarnamnet är upptaget.</p>
+          )} */}
           {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+          {!isEmailAvailable && (
+            <p className="error-message">{emailErrorMessage}</p>
+          )}
+
+          {usernameErrorMessage && (
+            <p className="error-message">{usernameErrorMessage}</p>
+          )}
 
           <InputField
             forLabel="email"
@@ -118,9 +252,10 @@ const FormRegister = () => {
             type="text"
             id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={handleEmailChange}
             required={true}
+            error={errorEmail}
           />
           <InputField
             forLabel="username"
@@ -129,8 +264,9 @@ const FormRegister = () => {
             id="username"
             name="username"
             value={formData.username}
-            onChange={handleChange}
+            onChange={handleUsernameChange}
             required={true}
+            error={errorUsername}
           />
           <InputField
             forLabel="password"
@@ -139,7 +275,9 @@ const FormRegister = () => {
             id="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
             required={true}
           />
           <InputField
@@ -149,7 +287,9 @@ const FormRegister = () => {
             id="confirmPassword"
             name="confirmpassword"
             value={formData.confirmpassword}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, confirmpassword: e.target.value })
+            }
             required={true}
           />
           <Dropdown
