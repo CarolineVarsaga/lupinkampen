@@ -32,6 +32,12 @@ const FormRegister = () => {
   );
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorUsername, setErrorUsername] = useState(false);
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState<
+    string | null
+  >(null);
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(
+    null
+  );
 
   const options = municipalities.map((muni) => ({
     value: muni.municipalityId.toString(),
@@ -43,6 +49,28 @@ const FormRegister = () => {
     label: "Välj kommun",
   };
 
+  // const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
+  //   setEmail(value);
+  //   setFormData({ ...formData, email: value });
+
+  //   if (debounceTimer) {
+  //     clearTimeout(debounceTimer);
+  //   }
+  //   const newTimer = setTimeout(async () => {
+  //     if (value.includes("@") && value.includes(".")) {
+  //       const available = await checkAvailability("email", value);
+  //       setIsEmailAvailable(available);
+  //       setErrorEmail(!available);
+  //     } else {
+  //       setErrorEmail(true);
+  //     }
+  //   }, 500);
+
+  //   setDebounceTimer(newTimer);
+  //   setErrorEmail(false);
+  // };
+
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
@@ -51,31 +79,80 @@ const FormRegister = () => {
     if (debounceTimer) {
       clearTimeout(debounceTimer);
     }
+
     const newTimer = setTimeout(async () => {
-      if (value.includes("@") && value.includes(".")) {
+      if (!value.includes("@") || !value.includes(".")) {
+        setEmailErrorMessage("Ogiltig e-postadress.");
+        setErrorEmail(true);
+        return;
+      }
+
+      try {
         const available = await checkAvailability("email", value);
         setIsEmailAvailable(available);
         setErrorEmail(!available);
-      } else {
+        setEmailErrorMessage(
+          available ? null : "E-posten är redan registrerad."
+        );
+      } catch (error) {
+        console.error("Fel vid kontroll av e-post:", error);
+        setEmailErrorMessage("Tekniskt fel vid kontroll av e-post.");
         setErrorEmail(true);
       }
     }, 500);
 
     setDebounceTimer(newTimer);
-    setErrorEmail(false);
+    setEmailErrorMessage(null);
   };
+
+  // const handleUsernameChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
+  //   setFormData({ ...formData, username: value });
+
+  //   if (value) {
+  //     const available = await checkAvailability("username", value);
+  //     setIsUsernameAvailable(available);
+  //     setErrorUsername(!available);
+  //   } else {
+  //     setIsUsernameAvailable(true);
+  //     setErrorUsername(true);
+  //   }
+  // };
 
   const handleUsernameChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFormData({ ...formData, username: value });
+    setFormData((prev) => ({ ...prev, username: value }));
 
-    if (value) {
+    const validations = [
+      {
+        condition: /\s/.test(value),
+        message: "Användarnamn får inte innehålla mellanslag.",
+      },
+      {
+        condition: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        message: "Användarnamn får inte vara en e-postadress.",
+      },
+    ];
+
+    const failedValidation = validations.find((v) => v.condition);
+
+    if (failedValidation) {
+      setIsUsernameAvailable(false);
+      setErrorUsername(true);
+      setUsernameErrorMessage(failedValidation.message);
+      return;
+    }
+
+    try {
       const available = await checkAvailability("username", value);
       setIsUsernameAvailable(available);
       setErrorUsername(!available);
-    } else {
-      setIsUsernameAvailable(true);
+      setUsernameErrorMessage(available ? null : "Användarnamnet är upptaget.");
+    } catch (err) {
+      console.error("Fel vid tillgänglighetskontroll:", err);
+      setIsUsernameAvailable(false);
       setErrorUsername(true);
+      setUsernameErrorMessage("Ett fel uppstod, försök igen.");
     }
   };
 
@@ -152,12 +229,21 @@ const FormRegister = () => {
         <SuccessModal onClose={handleCloseSuccessModal} />
       ) : (
         <form className="register-form" onSubmit={handleSubmit}>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-          {!isEmailAvailable && (
+          {/* {errorMessage && <p className="error-message">{errorMessage}</p>}
+           {!isEmailAvailable && (
             <p className="error-message">E-posten är redan registrerad.</p>
           )}
           {!isUsernameAvailable && (
             <p className="error-message">Användarnamnet är upptaget.</p>
+          )} */}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+          {!isEmailAvailable && (
+            <p className="error-message">{emailErrorMessage}</p>
+          )}
+
+          {usernameErrorMessage && (
+            <p className="error-message">{usernameErrorMessage}</p>
           )}
 
           <InputField

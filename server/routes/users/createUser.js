@@ -91,7 +91,12 @@ router.post("/", async (req, res) => {
     const { userName, email, password, userMunicipality, associationId } = req.body;
 
     if (/\s/.test(userName)) {
-      return res.status(400).json({ message: "Invalid username" });
+      return res.status(400).json({ message: "Ta bort mellanslaget." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(userName)) {
+      return res.status(400).json({ message: "Användarnamn får inte vara en e-postadress." });
     }
 
     const isUserNameUnique = await checkUniqueUserName(userName);
